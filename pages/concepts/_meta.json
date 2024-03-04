@@ -1,0 +1,14 @@
+{
+  "market_making": {
+    "title": "Market Making",
+    "theme": { "breadcrumb": true }
+  },
+  "lending": {
+    "title": "Credit Facility",
+    "theme": { "breadcrumb": true }
+  },
+  "fees": {
+    "title": "Fees",
+    "theme": { "breadcrumb": false }
+  }
+}

@@ -1,0 +1,21 @@
+## Primer on Uniswap V3
+
+To understand Uniswap V3, it’s important to understand the concept of “price space” and “liquidity space”. When we say “price space”, we’re referring to a typical price chart with time on the x-axis and price on the y-axis. When we say “liquidity space”, we’re referring to the liquidity concentration with price on the x-axis, and liquidity amount on the y-axis:
+
+![Primer Intro](/assets/primer_intro.png)
+
+UniswapV3 introduces the concept of concentrated liquidity to AMMs. A liquidity provider can now choose the price range between which they choose to provide liquidity; if price is outside of that range, provider’s liquidity is not utilized so there’s less liquidity to trade in/out of the token at specific price ranges.
+The last point is important to understand: traders typically only focus on the price chart without understanding impact of liquidity on price. If the token is trading in a price range where there is little V3 liquidity, the token will be subject to higher slippage. Higher slippage means price movement is more pronounced which is the definition of high volatility. Conversely, if token is trading in a price range with “thick” liquidity in liquidity space, then slippage is lower and more capital is required to move price significantly.
+Consider the following visual example. The price is trading at $25 and is currently in a “thick” liquidity position. Since this position has lots of liquidity in its price range, it takes a lot of capital to move the price up/down.
+
+![Primer Initial](/assets/primer_initial.png)
+
+As the price moves up, the token enters “thin” liquidity position which means it takes less capital to move price significantly. We can see that the price shoots up drastically from 30 until it stabilizes around 44. This higher volatility is characteristic of low liquidity positions:
+
+![Primer Shift](/assets/primer_shift.png)
+
+When the price hits $45, it stabilizes and remains around $45. This is because the token is trading in a thick liquidity position again, requiring more capital to move price significantly up/down.
+
+![Primer Discovery](/assets/primer_discovery.png)
+
+Keep these concepts in mind as they’re a key foundation for understanding Baseline market making.

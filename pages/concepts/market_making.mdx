@@ -1,0 +1,53 @@
+import { Callout } from "nextra/components";
+import Image from "next/image";
+
+## Market Making
+
+<Callout>
+  Some concepts on this page require familiarity with Uniswap V3's pool
+  mechanics and concentrated liquidity positions. For a brief summarization,
+  please read our [Primer on
+  UniswapV3](/concepts/market_making#primer-on-uniswapv3)
+</Callout>
+
+### Liquidity Structure
+
+Baseline's market making strategy consists of three consecutive liquidity positions:
+
+At launch, the supply is distributed into a Uniswap V3 concentrated liquidity pool consisting of 3 positions: Floor Position, Anchor Position and Discovery Position.
+
+- The **base (floor) position** supplies reserve liquidity to the pool sits at the bottom of the orderbook, concentrating liquidity into a tight range. The base position exists to defend the price of the token during periods of heavy selling, and the lowest price it defends is the token's BLV.
+- The **anchor position** supplies reserve liquidity from the token's BLV to the current market price in a wide range. The **anchor position** exists to support liquid trading conditions for the token even if a healthy speculative premium emerges.
+- The **discovery position** supplies new token liquidity into the pool from the current market price onwards in a wide range. The discovery position exists to facilitate upside price discovery and responsibly distribute supply into the market.
+
+![Primer Intro](/assets/positions.png)
+
+### Calculating the BLV
+
+The crux of Baseline's market making accounting revolves around two metrics: the system `capacity` and the token's total `floating supply`. In Baseline, `capacity` refers to the total amount of tokens that can be absorbed by the liquidity structure, and `floating supply` refers to the all the tokens that exist outside of a Baseline liquidity position. To guarantee solvency for all tokens, Baseline ensures that `capacity` > `floating supply` each time it deploys liquidity.
+
+To identify the BLV, Baseline finds the highest price it can deploy its liquidity structure that still fulfills the solvency invariant. The protocol does this by incrementally increasing the liquidity at each price level until the `capacity` can no longer absorb the total `floating supply`. This ensures that the protocol is always offering buying tokens in the most capital efficient manner, minimizing any unused liquidity in the system.
+
+### Liquidity Rebalances: `shift()` and `slide()`
+
+<Callout>
+  If you’d like to play with parameters yourself, you can try it here
+  https://baseline-simulations.streamlit.app/
+</Callout>
+
+The aforementioned positions rebalance when prices fluctuate as trading activities occur in the pool. The protocol utilizes two rebalancing strategies `Shift()` and `Slide()` to help prevent extreme market movements, ensuring a balanced and secure environment for traders.
+
+#### `shift()` when price increases
+
+The first rebalancing strategy, called `shift()`, is triggered when the token’s price increases beyond a certain threshold. The strategy does three things:
+
+1. Pulls Anchor and Discovery Position from UniswapV3 pool
+2. Moves some of the ETH liquidity from the Anchor Position to the Floor Position.
+3. Attempts to increase the floor price of the token by calculating whether the protocol can buy back all circulating tokens at a higher price.
+4. Redeploys a new Anchor Position with extra ETH liquidity.
+
+Step 3 not only ensures that protocol has enough reserves to buy back every token, it also increases the floor price in the process. This is what we mean when we say “using profits to increase its value over time”.
+
+#### `slide()` when price decreases
+
+The second rebalancing strategy, called `slide()`, is triggered when the token’s price decreases beyond a certain threshold. This strategy simply ‘slides’ the Discovery Position back towards the market price, condensing the Anchor Position.

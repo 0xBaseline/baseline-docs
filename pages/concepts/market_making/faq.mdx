@@ -1,0 +1,21 @@
+## Market Making FAQ
+
+### If the protocol is buying at a premium to Price Floor, how can it remain solvent?
+
+Baseline rebalances liquidity in such a way that the amount of reserves acquired selling tokens at a premium will always exceed the amount of reserves used to buyback tokens. This inequality ensures that the protocol will always have reserves on hand to buy every circulating tokens.
+
+### How much can the floor price increase by?
+
+It's impossible to say how much the floor price can increase by, but it's useful to consider factors that influence it. Floor price increases when the protocol realizes profitability from LPing, liquidity rebalancing and borrows. The more price discovery there is, the more rebalancing there is, the more reserves are pulled into floor which adds to protocol's profitability.
+
+### Why is the Anchor Position needed?
+
+The Anchor Position is needed because it helps the protocol make profits. It allows the protocol to sell tokens at a higher price than its safety net, which is the price floor. However, it also comes with a risk: if the protocol buys tokens at a higher price, it can reduce profitability. So, the Anchor Position is a balance between making profits and taking some risks in the trading process.
+
+### What happens if third-parties provide liquidity?
+
+Given permissionless nature of Uniswap protocol, there is nothing preventing third-parties from providing liquidity to the pair. This liquidity, however, will be independent of Baseline contracts and will not accrue to protocol. Protocol accounting and profitability will not affected by third-party liquidity, either. That's because to become a third-party LP, one must first acquire Baseline token from the protocol.
+
+### What actually triggers rebalancing?
+
+`shift()` and `slide()` in MarketMaking.sol are responsible for rebalancing and can be called by anyone. Practically, we expect on-chain keepers to call the rebalances.

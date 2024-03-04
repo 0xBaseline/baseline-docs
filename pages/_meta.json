@@ -1,0 +1,30 @@
+{
+  "index": {
+    "title": "What is Baseline?",
+    "theme": { "breadcrumb": false }
+  },
+  "blv": {
+    "title": "Baseline Value (BLV)",
+    "theme": { "breadcrumb": false }
+  },
+  "concepts": {
+    "title": "Protocol Mechanisms",
+    "theme": { "breadcrumb": false }
+  },
+  "yes": {
+    "title": "$YES",
+    "theme": { "breadcrumb": false }
+  },
+  "contracts": {
+    "title": "Contracts",
+    "theme": { "breadcrumb": false }
+  },
+  "security": {
+    "title": "Security",
+    "theme": { "breadcrumb": false }
+  },
+  "resources": {
+    "title": "Resources",
+    "theme": { "breadcrumb": false }
+  }
+}

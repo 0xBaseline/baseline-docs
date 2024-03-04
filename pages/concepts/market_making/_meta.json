@@ -1,0 +1,10 @@
+{
+  "uniswap_primer": {
+    "title": "Uniswap V3 Key Concepts",
+    "theme": { "breadcrumb": true }
+  },
+  "faq": {
+    "title": "Market Making FAQ",
+    "theme": { "breadcrumb": true }
+  }
+}
