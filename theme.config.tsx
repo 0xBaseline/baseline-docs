@@ -25,14 +25,6 @@ const config: DocsThemeConfig = {
   project: {
     link: 'https://github.com/0xBaseline/baseline-docs',
   },
-  banner: {
-    key: '20230121-JoinDiscord',
-    text: (
-      <a href="https://discord.gg/baseline" target="_blank">
-        🚀 Launch Soon™ - Join Discord Now  →
-      </a>
-    )
-  },
   chat: {
     link: 'https://discord.gg/baseline',
   },
