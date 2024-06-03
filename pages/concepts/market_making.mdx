@@ -12,15 +12,14 @@ import Image from "next/image";
 
 ### Liquidity Structure
 
-Baseline's market making strategy consists of three consecutive liquidity positions:
+Baseline's market-making strategy consists of three consecutive liquidity ranges positioned in a concentrated liquidity pool:
 
-At launch, the supply is distributed into a Uniswap V3 concentrated liquidity pool consisting of 3 positions: Floor Position, Anchor Position and Discovery Position.
+- The **floor position** guarantees the capacity needed to maintain a minimum price of a bToken (the Baseline Value; BLV). It is a very tight liquidity range with enough reserve assets to buy back the circulating bToken supply.
+- The **anchor range** provides reserve assets from the either BLV, or 22% below the current market price, to the current market price, ensuring liquid trading conditions for the token, regardless of the market environment.
+- The **discovery range** starts at the current market price and increases from there. It consists solely of unissued bTokens, which are sold as the market price increases. The liquidity surplus obtained from selling bTokens in the discovery range is directed back into the backing.
 
-- The **base (floor) position** supplies reserve liquidity to the pool sits at the bottom of the orderbook, concentrating liquidity into a tight range. The base position exists to defend the price of the token during periods of heavy selling, and the lowest price it defends is the token's BLV.
-- The **anchor position** supplies reserve liquidity from the token's BLV to the current market price in a wide range. The **anchor position** exists to support liquid trading conditions for the token even if a healthy speculative premium emerges.
-- The **discovery position** supplies new token liquidity into the pool from the current market price onwards in a wide range. The discovery position exists to facilitate upside price discovery and responsibly distribute supply into the market.
 
-![Primer Intro](/assets/positions.png)
+![Liquidity_Structure](/assets/liquidity_structure.png)
 
 ### Calculating the BLV
 
@@ -28,26 +27,54 @@ The crux of Baseline's market making accounting revolves around two metrics: the
 
 To identify the BLV, Baseline finds the highest price it can deploy its liquidity structure that still fulfills the solvency invariant. The protocol does this by incrementally increasing the liquidity at each price level until the `capacity` can no longer absorb the total `floating supply`. This ensures that the protocol is always offering buying tokens in the most capital efficient manner, minimizing any unused liquidity in the system.
 
-### Liquidity Rebalances: `shift()` and `slide()`
+### Liquidity Rebalances: `sweep()`, `slide()`, and `bump()`
 
 <Callout>
   If you’d like to play with parameters yourself, you can try it here
   https://baseline-simulations.streamlit.app/
 </Callout>
 
-The aforementioned positions rebalance when prices fluctuate as trading activities occur in the pool. The protocol utilizes two rebalancing strategies `Shift()` and `Slide()` to help prevent extreme market movements, ensuring a balanced and secure environment for traders.
+Baseline has three rebalancing strategies: `sweep()`, `slide()`, and `bump()`. These market-making strategies help adjust the liquidity profile based on the market conditions of the underlying token. 
 
-#### `shift()` when price increases
+### When the price is trending upward, `sweep()` is called
 
-The first rebalancing strategy, called `shift()`, is triggered when the token’s price increases beyond a certain threshold. The strategy does three things:
+Once the price has increased by 2%, the `sweep()` function is called to rebalance the liquidity.
 
-1. Pulls Anchor and Discovery Position from UniswapV3 pool
-2. Moves some of the ETH liquidity from the Anchor Position to the Floor Position.
-3. Attempts to increase the floor price of the token by calculating whether the protocol can buy back all circulating tokens at a higher price.
-4. Redeploys a new Anchor Position with extra ETH liquidity.
+sweep():
 
-Step 3 not only ensures that protocol has enough reserves to buy back every token, it also increases the floor price in the process. This is what we mean when we say “using profits to increase its value over time”.
+1. Takes liquidity from the bottom of the anchor range and moves it into the floor, increasing its capacity and likelihood of bumping the floor.
+2. Takes the liquidity surplus and deposits it across the anchor range, building thicker liquidity near actively traded prices.
+3. Increases the capacity of the discovery range, allowing the system to become progressively more liquid.
 
-#### `slide()` when price decreases
+![Sweep](/assets/Sweep.mov)
 
-The second rebalancing strategy, called `slide()`, is triggered when the token’s price decreases beyond a certain threshold. This strategy simply ‘slides’ the Discovery Position back towards the market price, condensing the Anchor Position.
+<Callout>
+  :bulb: **Tip:** At high market prices, the sweep() function realizes greater liquidity surpluses, increasing the likelihood of a BLV bump.
+</Callout>
+
+### When the price is trending downward, `slide()` is called
+
+As the market price moves downward, the anchor range fills up with bTokens. When the price moves down 2%, slide() is called.
+
+slide():
+
+1. Moves anchor liquidity closer to the BLV price, increasing the absorbable capacity.
+2. Lowers the barrier for the market price to rise by lowering the liquidity depth of the discovery range.
+
+![Slide](/assets/Slide.mov)
+
+<Callout>
+:bulb: **Tip:** Liquidity becomes progressively thinner as the market price approaches the BLV, encouraging greater volatility.
+</Callout>
+
+### `bump()` is called to raise the BLV
+
+Once enough liquidity surplus has been gathered, bump() attempts to increase the BLV price of the token by calculating whether the protocol can buy back all circulating tokens at a higher price.
+
+![Bump](/assets/Bump.mov)
+
+<Callout>
+:bulb: **Tip:** When the BLV price increases, holders can access additional borrowing capacity.
+</Callout>
+
+
