@@ -1,68 +1,51 @@
 ## Glossary
 
-**Afterburner**\
-A contract that allows protocols to use their earned fees to perform leveraged buybacks.
+**Afterburner**: A contract that allows protocols to use their earned fees to perform leveraged buybacks.
 
 \
-**Anchor**\
-Liquidity range consisting of both the bToken and the reserve asset; the tradable range.
+**Anchor**: Liquidity range consisting of both the bToken and the reserve asset; the tradable range.
 
 \
-**Backing**\
-The total amount of reserve assets in the Floor and the Anchor
+**Backing**: The total amount of reserve assets in the Floor and the Anchor
 
 \
-**Baseline Token (bToken)**\
-ERC-20 token that is powered by Baseline’s tokenomics engine.
+**Baseline Token (bToken)**: ERC-20 token that is powered by Baseline’s tokenomics engine.
 
 \
-**Baseline Value (BLV)**\
-The up-only-price at which the protocol can buy back all circulating supply.
+**Baseline Value (BLV)**: The up-only-price at which the protocol can buy back all circulating supply.
 
 \
-**Boost**\
-The act of borrowing a bToken without providing new collateral; boost is available when the BLV of a bToken increases, leading to an increase in borrowing capacity.
+**Boost**: The act of borrowing a bToken without providing new collateral; boost is available when the BLV of a bToken increases, leading to an increase in borrowing capacity.
 
 \
-**Bump**\
-A market-making function that calculates at which price the protocol can buy back all of the existing supply and moves the BLV price up accordingly.
+**Bump**: A market-making function that calculates at which price the protocol can buy back all of the existing supply and moves the BLV price up accordingly.
 
 \
-**Concentrated Liquidity**\
-Technology created by Uniswap that powers Baseline’s tokenomics engine; a series of programmable buy and sell orders placed across a price range.
+**Concentrated Liquidity**: Technology created by Uniswap that powers Baseline’s tokenomics engine; a series of programmable buy and sell orders placed across a price range.
 
 \
-**Credit Facility**\
-A contract that allows you to borrow the reserve asset at the BLV price.
+**Credit Facility**: A contract that allows you to borrow the reserve asset at the BLV price.
 
 \
-**Default**\
-Forfeiting your bToken collateral by not repaying your loan.
+**Default**: Forfeiting your bToken collateral by not repaying your loan.
 
 \
-**Discovery**\
-Liquidity range where unissued bTokens are sold for reserve assets to realize liquidity surpluses.
+**Discovery**: Liquidity range where unissued bTokens are sold for reserve assets to realize liquidity surpluses.
 
 \
-**Floor**\
-The total amount of reserve assets at the BLV price; total capacity at the BLV.
+**Floor**: The total amount of reserve assets at the BLV price; total capacity at the BLV.
 
 \
-**Looping**\
-The act of borrowing the reserve asset to buy more bTokens, and then repeating that process.
+**Looping**: The act of borrowing the reserve asset to buy more bTokens, and then repeating that process.
 
 \
-**Reserve Asset**\
-ERC-20 token that a bToken is paired against, usually ETH, USD, or YES.
+**Reserve Asset**: ERC-20 token that a bToken is paired against, usually ETH, USD, or YES.
 
 \
-**Slide**\
-A market-making function that is called when the market price moves down 2%. It reduces the Discovery and Anchor capacity and moves them back to the current price.
+**Slide**: A market-making function that is called when the market price moves down 2%. It reduces the Discovery and Anchor capacity and moves them back to the current price.
 
 \
-**Sweep**\
-A market-making function called when the market price goes up 2%. It moves liquidity surpluses to the floor and increases the capacity for the Anchor and Discovery range.
+**Sweep**: A market-making function called when the market price goes up 2%. It moves liquidity surpluses to the floor and increases the capacity for the Anchor and Discovery range.
 
 \
-**Ticks**\
-Ticks represent the boundaries between discrete areas in price space, with 1 tick indicating a 0.01% increase or decrease in price. Each tick space may have different liquidity depths configured.
+**Ticks**: Ticks represent the boundaries between discrete areas in price space, with 1 tick indicating a 0.01% increase or decrease in price. Each tick space may have different liquidity depths configured.
