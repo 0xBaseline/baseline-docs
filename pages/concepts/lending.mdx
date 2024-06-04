@@ -4,7 +4,7 @@
 
 Baseline has a decentralized lending facility that allows token holders to borrow assets by using their Baseline
 tokens as collateral. Since Baseline guarantees an intrinsic value for each token, the protocol allows holders to
-borrow this value at a high loan-to-backing value, for a small fee, and no risk of liquidation.
+borrow this value at a high loan-to-backing value, for a small fee, and no risk of price liquidation.
 
 The credit facility differentiates itself in a few ways from established lending markets:
 
@@ -37,10 +37,10 @@ The credit facility differentiates itself in a few ways from established lending
   loan.
 - **Repaying a loan**: A user can repay loan any time by depositing reserves into Lending.sol, and receiving proportional
   share of collateral back. A user can partially repay the loan.
-- **Rolling a loan**: A user can roll a loan if it's not expired by interacting with Lending.sol. If the floor price has
-  gone up since last borrow, rolling a loan will allow you to take the net reserves out, with fee taken on those reserves.
-- **Defaulting on Loans**: The protocol automatically defaults all expired loans at end of day. Instead, the user repays
-  within some timeframe, or defaults. Upon default, while the protocol's reserves shrink, the seized collateral exceeds the
+- **Extending a loan**: A user can extend a loan if it's not expired, by interacting with Lending.sol. If the floor price has
+  gone up since last borrow, extending a loan will allow you to take the net reserves out, with fee taken on those reserves.
+- **Defaulting on Loans**: The protocol automatically defaults all expired loans at end of day. Users either repay
+  or extend prior to expiration, or default. Upon default, the users underlying collateral is burnt. While the protocol's reserves shrink in the event of default, the seized collateral exceeds the
   borrowed backing, thereby realizing a profit for the protocol.
 
 ## Use Cases
