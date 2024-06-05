@@ -11,10 +11,6 @@
     "title": "Protocol Mechanisms",
     "theme": { "breadcrumb": false }
   },
-  "yes": {
-    "title": "$YES",
-    "theme": { "breadcrumb": false }
-  },
   "contracts": {
     "title": "Contracts",
     "theme": { "breadcrumb": false }
@@ -22,6 +18,12 @@
   "security": {
     "title": "Security",
     "theme": { "breadcrumb": false }
+  },
+  "faq": {
+    "title": "FAQ",
+    "theme": {
+      "breadcrumb": false
+    }
   },
   "glossary": {
     "title": "Glossary",
