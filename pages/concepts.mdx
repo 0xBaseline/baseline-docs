@@ -4,7 +4,7 @@ _Baseline features a permissionless market making system and a native credit fac
 
 ### Market Making
 
-Baseline's market making strategy naturally grow the value of its underlying token's BLV over time through a series of liquidity operations. Whenever the token's price moves beyond a certain threshold, anyone can permissionlessly rebalance protocol-owned liquidity across three Uniswap V3 positions.
+Baseline's market making strategy naturally grows the value of its underlying token's BLV over time through a series of liquidity operations. Whenever the token's price moves beyond a certain threshold, anyone can permissionlessly rebalance protocol-owned liquidity across three Uniswap V3 positions.
 
 In Baseline, market making operations are trustless and deterministic: anyone is able to trigger liquidity rebalances, and the underlying liquidity structure changes in a predetermined pattern. This reduces potential information asymmetry gained around liquidity rebalances, helping keep the market fair, predictable, and transparent.
 
@@ -14,8 +14,8 @@ For more details about the feature, check out our [Market Making](/concepts/mark
 
 Holders can immediately access the full value of their token's BLV without the need to sell them by utilizing Baseline's native credit facility. When tokens are deposited in the facility, users can borrow the underlying liquidity assets directly out of the Uniswap pool for a fixed fee and duration.
 
-Since tokens deposited in the credit facility cannot be sold into the pool, lending the token's BLV cannot cause the protocol to accrue bad debt or impact its ability to fulfill liquidity obligations. Additionally, the system doesn't require any market-driven liquidation for loans as the price can never go below the borrowed value. Loans in Baseline's credit facility can only default if borrowers let them expire, by neglecting to repay the borrowed amount within the duration of the loan.
+Since tokens deposited in the credit facility cannot be sold into the pool, lending the token's BLV cannot cause the protocol to accrue bad debt or impact its ability to fulfill liquidity obligations. Additionally, the system doesn't require any market-driven liquidation for loans, as the BLV price can never go below the borrowed value. Loans in Baseline's credit facility can only default if borrowers let them expire, by neglecting to either extend or repay the borrowed amount within the duration of the loan.
 
-When a borrower fails to repay their loan, Baseline repossesses their deposited tokens, treating the situation the same as if the borrower had sold their tokens at the BLV price. This means that when a loan expires, the borrower forgoes any market premium in the token's BLV, redistributing the value back to remaining holders.
+When a borrower fails to repay their loan by expiration, Baseline automatically and programatically repossesses and burns their deposited token collateral, treating the situation the same as if the borrower had sold their tokens at the BLV price. This means that when a loan expires, the borrower forgoes any market premium in the token's BLV, redistributing the value back to remaining holders.
 
 For more details about the feature, check out our [Credit Facility](/concepts/lending) page.
