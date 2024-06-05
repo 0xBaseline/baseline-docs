@@ -3,8 +3,8 @@
 The protocol generates fees in the following ways:
 
 1. **LP fees** - token is deployed into a 1% Uniswap V3 pool, which means swaps pay 1% when swapping in/out of the pool. This fee goes directly to increasing the BLV. You can learn more about Uniswap fee tiers [here](https://docs.uniswap.org/concepts/protocol/fees).
-2. **Liquidity rebalancing fees** - the protocol rebalances reserves from discovery into floor and anchor when `shift()` is called. These reserves go toward increasing the BLV.
+2. **Liquidity rebalancing fees** - the protocol rebalances reserves from discovery into floor and anchor when `sweep()` is called. These reserves go toward increasing the BLV.
 3. **Borrow fees** - users pay a one-time per-diem fee when they open or extend a borrow position. This fee goes directly to increasing the BLV.
 
 ## Team fees
-During `shift()` rebalancing, the protocol directs 10% of **surplus** capacity (in bAsset terms) to team multisig.
+During `sweep()` rebalancing, the protocol directs 10% of **surplus** capacity (in bAsset terms) to team multisig.
