@@ -1,1 +1,2 @@
 ## Afterburner
+The Afterburner contract enables protocols to utilize their earned fees for leveraged buybacks. The contract takes the fees and uses them to purchase the bToken; it then continuously borrows the floor to purchase more bTokens until it runs out of capacity, pushing up the market price. Finally, it defaults on that loan, removing the earlier-bought bTokens from the circulating supply without impacting the market. The Afterburner contract is triggered every 5 minutes.
