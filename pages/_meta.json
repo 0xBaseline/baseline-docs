@@ -23,6 +23,12 @@
     "title": "Security",
     "theme": { "breadcrumb": false }
   },
+  "glossary": {
+    "title": "Glossary",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
   "resources": {
     "title": "Resources",
     "theme": { "breadcrumb": false }
