@@ -40,7 +40,9 @@ sweep():
 2. Takes the liquidity surplus and deposits it across the anchor range, building thicker liquidity near actively traded prices.
 3. Increases the capacity of the discovery range, allowing the system to become progressively more liquid.
 
-{/* ![Sweep](/assets/Sweep_1.mp4) */}
+<video controls autoplay>
+  <source src="./assets/Sweep_1.mp4" type="video/mp4" />
+</video>
 
 <Callout>
   **Tip:** At high market prices, the sweep() function realizes greater
@@ -56,7 +58,9 @@ slide():
 1. Moves anchor liquidity closer to the BLV price, increasing the absorbable capacity.
 2. Lowers the barrier for the market price to rise by lowering the liquidity depth of the discovery range.
 
-{/* ![Slide](/assets/Slide.mp4) */}
+<video controls autoplay>
+  <source src="./assets/Slide.mp4" type="video/mp4" />
+</video>
 
 <Callout>
   **Tip:** Liquidity becomes progressively thinner as the market price
@@ -67,7 +71,9 @@ slide():
 
 Once enough liquidity surplus has been gathered, bump() attempts to increase the BLV price of the token by calculating whether the protocol can buy back all circulating tokens at a higher price.
 
-{/* ![Bump](/assets/Bump.mp4) */}
+<video controls autoplay>
+  <source src="./assets/Bump.mp4" type="video/mp4" />
+</video>
 
 <Callout>
   **Tip:** When the BLV price increases, holders can access additional borrowing
