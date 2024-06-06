@@ -18,7 +18,6 @@ Baseline's market-making strategy consists of three consecutive liquidity ranges
 - The **anchor range** provides reserve assets from the either BLV, or 22% below the current market price, to the current market price, ensuring liquid trading conditions for the token, regardless of the market environment.
 - The **discovery range** starts at the current market price and increases from there. It consists solely of unissued bTokens, which are sold as the market price increases. The liquidity surplus obtained from selling bTokens in the discovery range is directed back into the backing.
 
-
 ![Liquidity_Structure](/assets/liquidity_structure.png)
 
 ### Calculating the BLV
@@ -29,7 +28,7 @@ To identify the BLV, Baseline finds the highest price it can deploy its liquidit
 
 ### Liquidity Rebalances: `sweep()`, `slide()`, and `bump()`
 
-Baseline has three rebalancing strategies: `sweep()`, `slide()`, and `bump()`. These market-making strategies help adjust the liquidity profile based on the market conditions of the underlying token. 
+Baseline has three rebalancing strategies: `sweep()`, `slide()`, and `bump()`. These market-making strategies help adjust the liquidity profile based on the market conditions of the underlying token.
 
 ### When the price is trending upward, `sweep()` is called
 
@@ -41,10 +40,11 @@ sweep():
 2. Takes the liquidity surplus and deposits it across the anchor range, building thicker liquidity near actively traded prices.
 3. Increases the capacity of the discovery range, allowing the system to become progressively more liquid.
 
-{/* ![Sweep](/assets/Sweep.mov) */}
+{/* ![Sweep](/assets/Sweep_1.mp4) */}
 
 <Callout>
-  **Tip:** At high market prices, the sweep() function realizes greater liquidity surpluses, increasing the likelihood of a BLV bump.
+  **Tip:** At high market prices, the sweep() function realizes greater
+  liquidity surpluses, increasing the likelihood of a BLV bump.
 </Callout>
 
 ### When the price is trending downward, `slide()` is called
@@ -56,20 +56,20 @@ slide():
 1. Moves anchor liquidity closer to the BLV price, increasing the absorbable capacity.
 2. Lowers the barrier for the market price to rise by lowering the liquidity depth of the discovery range.
 
-{/* ![Slide](/assets/Slide.mov) */}
+{/* ![Slide](/assets/Slide.mp4) */}
 
 <Callout>
-  **Tip:** Liquidity becomes progressively thinner as the market price approaches the BLV, encouraging greater volatility.
+  **Tip:** Liquidity becomes progressively thinner as the market price
+  approaches the BLV, encouraging greater volatility.
 </Callout>
 
 ### `bump()` is called to raise the BLV
 
 Once enough liquidity surplus has been gathered, bump() attempts to increase the BLV price of the token by calculating whether the protocol can buy back all circulating tokens at a higher price.
 
-{/* ![Bump](/assets/Bump.mov) */}
+{/* ![Bump](/assets/Bump.mp4) */}
 
 <Callout>
-  **Tip:** When the BLV price increases, holders can access additional borrowing capacity.
+  **Tip:** When the BLV price increases, holders can access additional borrowing
+  capacity.
 </Callout>
-
-
