@@ -48,53 +48,53 @@ Markets are constantly changing, with varying levels of trading activity and pri
 
 The Baseline market making system has three methods to rebalance liquidity: `bump()`, `sweep()`, and `slide()`. 
 
-#### `bump()`
+### `bump()`
 When the Floor can be moved higher, a `bump()` is called
 
-**Description**
+**Description**  
 A `bump()` operation shifts the highly concentrated liquidity within the Floor to a slightly higher price range. A `bump()` is a permanent change and cannot be reversed.
 
-**Condition**
+**Condition**  
 A `bump()` can be initiated when there is sufficient reserve capacity (e.g., ETH or USD) to purchase the entire floating supply at the new, elevated price point. This new price point is one [tick spacing](#tick-spacing0) above the current Floor.
 
 /*insert bump animation*/
 
-**Purpose**
+**Purpose**  
 Make number go up.
 
-#### `sweep ()`
+### `sweep ()`
 
 When the price is trending upwards, `sweep()` is called
 
-**Description**
+**Description**  
 A `sweep()` operation adjusts the Anchor and Discovery price ranges to align more closely with the current market price. This ensures that liquidity is optimally distributed in response to upward price movements.
 
-**Condition**
+**Condition**  
 A `sweep()` is initiated when the price of the token has increased 2% into the Discovery price range.
 
 /*insert [sweep animation] ←- this is pretty crucial animation to explain how the system takes profit*/
 
-**Purpose**
+**Purpose**  
 The `sweep()` operation provides a mechanism for the market making system to secure profits and build up surplus capacity. This is accomplished by selling tokens at a higher price and rebuying them for cheaper. 
 
-#### `slide()`
+### `slide()`
 
 When the price is trending downwards, `slide()` is called
 
-**Description**
+**Description**  
 A `slide()` operation repositions the Anchor and Discovery price range closer to the market price when the price is trending downwards.
 
 /*insert slide animation*/
 
-**Purpose**
+**Purpose**  
 The primary goal of a `slide()` operation is to absorb sell pressure during downtrends. This is achieved by repositioning the Anchor price range closer to the Floor, allowing the market making system to absorb sell pressure at a discounted price. In addition, the liquidity in Anchor and Discovery is thinned out, allowing the price to recover more easily. 
 
-**Condition**
+**Condition**  
 A `slide()` is initiated when the price of the token has decreased 2% from its last recorded checkpoint. 
 
 <Callout>
 [Note] Every `sweep()` and `slide()` operation updates the current price as the latest checkpoint.
 </Callout>
 
-**Automated Rebalancing**
+**Automated Rebalancing**  
 These strategies are written at the smart contract level and exist as public functions. This means any external party can execute these functions so long as the condition is satisfied for each operation. Baseline monitors the state of the liquidity pool and will call these functions automatically.
