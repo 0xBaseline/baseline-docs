@@ -19,21 +19,21 @@ The Floor is a narrow price range with highly concentrated liquidity. Its primar
 </Callout>
 
 
-/*insert graphic*/
+![5](/assets/5.png)
 
 You may be wondering where the system sources the capital to guarantee the floor price. The liquidity is sourced from the presale of the Baseline Token (bToken). Unlike traditional token launches, where presale funds are typically distributed to the project team, Baseline token launches keep the liquidity in the market making system. See the [presale](#presale) section to learn how the initial liquidity is provisioned. [link]
 
 ### Anchor
 The Anchor is a price range with lower liquidity depth compared to the Floor, but covers a broader price span. Unlike the Floor which is designed to hold price, the Anchor is designed to encourage price movements and support trading activity. 
 
-/*insert graphic*/
+![5](/assets/5.png)
 
 The Anchor is a dynamic price range that is updated after a [liquidity rebalance](#rebalancing-liquidity). The Anchor occupies the price range from the market price and extends towards the Floor.
 
 ### Discovery
 The Discovery is a price range with thicker liquidity compared to the Anchor, and spans an even broader price range. Similar to Anchor, the Discovery is a dynamic price range that is updated after a [liquidity rebalance](#rebalancing-liquidity). The Discovery occupies the price range from the market price and extends considerably higher. The Anchor and Discovery were built with these liquidity profiles in order for the system to take profit during uptrends, and move these profits to the Floor in order to initiate a [`bump()`](#bump). This strategy is explained in greater detail in the [`sweep()`](#sweep) section.
 
-/*insert graphic*/
+![5](/assets/5.png)
 
 ### Swap Fees
 In Uniswap V3 pools, every trade incurs a small fee, known as the swap fee. This fee is collected from traders and paid to liquidity providers.
