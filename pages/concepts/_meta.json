@@ -1,4 +1,8 @@
 {
+  "blv": {
+    "title": "Baseline Value (BLV)",
+    "theme": { "breadcrumb": true }
+  },
   "market_making": {
     "title": "Market Making",
     "theme": { "breadcrumb": true }
@@ -10,5 +14,10 @@
   "fees": {
     "title": "Fees",
     "theme": { "breadcrumb": false }
-  }
+  },
+"afterburner": {
+  "title": "Afterburner",
+  "theme": { "breadcrumb": false }
+}
+  
 }

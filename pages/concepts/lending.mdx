@@ -1,52 +1,91 @@
-## Credit Facility
+## Baseline Lending
 
+### Introduction
+Baseline offers a unique lending facility where users can deposit their bTokens as collateral and withdraw the reserve asset for a small loan fee. Since each bToken is backed by its [BLV](/concepts/blv), the lending facility is able to issue loans equal to the intrinsic value (BLV) of the deposited collateral without any liquidation risk. The lending facility is able to withdraw reserves from the [Floor](#floor) without impacting the backing of bTokens since any bTokens deposited as collateral are effectively removed from the floating supply.
+
+/*insert animation to show a user depositing bTokens into lending facility and taking out floor reserves*/
 ### Baseline Lending
+Baseline Lending stands out from traditional lending markets in several key ways:
 
-Baseline has a decentralized lending facility that allows token holders to borrow assets by using their Baseline
-tokens as collateral. Since Baseline guarantees an intrinsic value for each token, the protocol allows holders to
-borrow this value at a high loan-to-backing value, for a small fee, and no risk of liquidation.
+- **Peer-to-Protocol** - Users borrow directly from the protocol-owned reserves rather than from other users. This approach eliminates the risk of third-party lenders removing liquidity during periods of market stress.
+- **Fixed duration** - Loans are granted for a set term, and once expired, the collateral is burned.
+- **No interest rates** - Loans are not charged ongoing interest, but rather a one-time origination fee based on the borrowed value and loan term duration (fee is 0.027% per day). Loans can be extended for the same fee.
+- **Isolated risk architecture** - Unlike other lending markets that socialize borrower risk through a shared pool architecture, Baseline keeps each loan separate. A user can only have one loan at a time, but may add or decrease this loan position.
+- **No liquidations** - Since every token is backed by reserves at the floor price value, the protocol doesn't need to manage a liquidation engine. This means the protocol does not need to seize a borrower’s assets and perform a sell off. In the event of a loan default (due to expiry), the protocol simply burns the collateral.
+- **No oracles** - Since there are no liquidations, the lending facility doesn't require any oracles to function, making it simpler and secure from external price manipulation risks.
 
-The credit facility differentiates itself in a few ways from established lending markets:
+### Interactions
+- **Opening a loan:** To initiate a loan, users deposit bTokens into the lending facility and receive reserve assets in return, minus the borrow fee. Note that users cannot open a new loan if they already have an existing one.
+For example, if a bToken trades at $1.20 USDC and has a BLV of $1.00, depositing 1 bToken for 100 days allows the user to withdraw $0.973 USDC after deducting the lending fee ($1.00 USDC * 0.027% * 100)
+- **Repaying a loan:** Users can repay their loan at any time prior to expiration by depositing reserves into the lending facility, and receiving a proportional amount of their collateral back. Partial repayments are also permitted.
+- **Extending a loan:** Loans can be extended, if they have not expired, by interacting with the lending facility.
+- **Adding to a loan:** Users can deposit additional bTokens as collateral and increase their existing loan position.
+- **Defaulting on Loans:** The protocol automatically defaults all expired loans at the end of each day by burning the collateral. Upon default, even though the protocol's reserves have decreased, the burned collateral value exceeds the borrowed value. This effectively bolsters the liquidity structure of the pool and allows the system to progress towards the next `bump()`.
 
-- **Peer-to-lender** - users borrow directly from the protocol using protocol-owned reserves. The borrower does
-  not have to rely on external third-party lenders who may pull liquidity during market stress.
-- **Isolated risk architecture** - unlike other lending markets that socialize borrower risk through shared pool
-  architecture , Baseline keeps each loan separate.
-- **No interest rates** - loans are not charged interest, but rather a one-time origination fee at the time of
-  opening or extending a position
-- **No liquidations** - since every token is backed by reserves at the floor price value, the protocol doesn't
-  need to manage a liquidation engine, meaning the protocol doesn't seize borrowers' assets. In the event of a default
-  (due to expiry), the protocol simply burns the collateral, reducing the circulating supply and reserves at a ratio
-  that grows the intrinsic value
-- **Fixed duration** - instead of price-based liquidations, loans have a fixed duration
-- **No oracles** - as there is no liquidations, the credit facility doesn't require any oracles to function, making it
-  simpler and more reliable.
+### Lending Fees
+The fees that the lending facility earns are sent to the [Afterburner](/concepts/afterburner) module to conduct leveraged token buybacks and token burning. Token burns increase the system’s surplus capacity and make progress towards initiating the next [`bump()`](#bump) operation.
 
-## Loan Terms and Conditions
+### Advanced Topics
 
-- Loans are extended in $ETH against Baseline token collateral
-- Loan duration is denoted in days, can be any number of days, and expire at beginning of next full day
-- There is a .027% per diem, one-time, fee for opening a loan. Loans can be extended for the same fee
-- The loan-to-backing ratio is 100%
-- A user can only have one loan at a time
+#### Looping
+The native lending facility enables users to establish a leveraged position in a Baseline token. This is achieved by depositing bTokens into the lending facility, taking out a loan, and then using that loan to buy more bTokens. This process can be repeated multiple times and is known as looping.
 
-## Interactions
+##### _How Looping Works_
+Here’s a simplified example to illustrate how looping works. For this example, we assume there are no additional costs such as slippage, borrowing fees, or swap fees.
 
-- **Opening a loan**: To use the credit facility, the user deposits token into Lending.sol, and receives reserves in return.
-  The borrow fee is taken from the received reserves. Keep in mind that the user cannot open a new loan if they have an existing
-  loan.
-- **Repaying a loan**: A user can repay loan any time by depositing reserves into Lending.sol, and receiving proportional
-  share of collateral back. A user can partially repay the loan.
-- **Rolling a loan**: A user can roll a loan if it's not expired by interacting with Lending.sol. If the floor price has
-  gone up since last borrow, rolling a loan will allow you to take the net reserves out, with fee taken on those reserves.
-- **Defaulting on Loans**: The protocol automatically defaults all expired loans at end of day. Instead, the user repays
-  within some timeframe, or defaults. Upon default, while the protocol's reserves shrink, the seized collateral exceeds the
-  borrowed backing, thereby realizing a profit for the protocol.
+**Initial Position**
+- User owns 1,000 bTokens, each valued at the market price of 1.20 USDC.
+- The Baseline Value (BLV) of each bToken is 1.00 USDC.
 
-## Use Cases
+**First Loop**
+- User deposits 1,000 bTokens into the lending facility.
+- User withdraws 1,000 USDC from the lending facility.
+- With the 1,000 USDC, the user buys 833.33 bTokens at market price.
 
-The borrowed assets may be used in any way the user desires:
+**Second Loop**
+- User deposits 833.33 bTokens into the lending facility.
+- User withdraws 833.33 USDC from the lending facility.
+- With the 833.33 USDC, the user buys 694.44 bTokens at market price.
 
-- Borrow and rebuy token to create a highly capital efficient leveraged position
-- Borrow and stake reserve into yielding facility (e.g. borrow ETH and stake into stETH)
-- Borrow and LP in Baseline pool, creating a fee generating liquidity position that can also be used to DCA in
+**At the End of Two Loops**
+- Collateral: 1,833.33 bTokens (from both deposit steps).
+- Wallet Holdings: 694.44 bTokens.
+- Debt: 1,833.33 USDC (from both withdrawal steps).
+
+In total, the user has 2,527.77 bTokens (combining both deposited and wallet holdings) and 1,833.33 USDC in debt. Despite the increased bToken holdings, the overall value of the position remains the same as initially calculated, assuming no fees:
+
+- Initial Value: 1,000 bTokens @ 1.20 USDC = 1,200 USDC.
+- Looping Value: 2,527.77 bTokens @ 1.20 USDC = 3,033.32 USDC. When you account for 1,833.33 USDC of debt, you’re left with the same 1,200 USDC.
+
+<Callout>
+[Note] Looping is not an action that can be performed indefinitely. Notice how in the example above, each successive loop results in reduced borrowing power. This is due to the difference between the bToken’s market price and BLV. 
+</Callout>
+
+##### _Looping Benefits_
+
+When you loop your position, you are betting on the upside of the bToken against the reserve asset. By looping, you can gain more exposure to the asset without having to invest additional capital. 
+
+/*insert graphic*/
+
+##### _Looping Risks_
+
+If the price of bTokens falls relative to the reserve asset, your position will incur greater losses. This is because your leveraged position has outsized exposure to the bToken, and your collateral value decreases more than your borrow value. In addition to pricing risk, there is loan default risk for opening a leveraged position.
+
+##### _When to Loop_
+
+Looping near the BLV poses the least amount of risk because the supporting liquidity structure from the Floor prevents the price from dropping significantly. In addition, looping near BLV is a lot more capital efficient since you’re able to achieve a higher loan-to-value (LTV).
+
+##### _How to Loop_
+
+Looping is now a built-in feature which allows a user to deposit their bTokens and set a leverage level. The system will loop your position until the desired leverage level is met.
+
+##### _How to Exit a Loop_
+
+Exiting a loop is simply inverting the steps for creating a looped position. The process involves repaying your debt, accessing your collateral, and selling your collateral to repay more debt. It’s possible to partially unwind your looped position, or fully unwind it back into the reserve asset.
+
+#### Boosting
+Boosting allows borrowers (who have an existing position) to access additional capital after the [BLV](/concepts/blv) has increased. This is possible because the user’s deposited collateral has increased in value due to the BLV increase. Since the lending facility calculates how much can be borrowed based on the BLV of the deposited collateral, the borrowing capacity will have increased. Here is an example to better illustrate this mechanic:
+
+1. **Initial Loan:** A user deposits bTokens as collateral and takes out a loan based on the BLV of those bTokens. For example, if the BLV is $1.00 per bToken, and the user deposits 1000 bTokens, that user can withdraw $1000 in reserve assets.
+2. **BLV Increase:** Over time, the market making system accumulates enough capacity to perform a `bump()` operation and increase the BLV from $1.00 to $1.02. This increases the intrinsic value of the collateral. 
+3. **Boosting Opportunity:** Because the value of the collateral has increased, the user’s position now has more borrowing power. The new borrowing capacity on the position is now $1020, a $20 increase from $1000. The Boost value is therefore $20 of additional capital that can be borrowed.
