@@ -18,6 +18,7 @@ The Floor is a narrow price range with highly concentrated liquidity. Its primar
 [NOTE] Floating supply is the amount of tokens purchased by external parties and NOT owned by the protocol. For example, a person who buys tokens from the protocol is swapping out Baseline tokens in exchange for the reserve asset. These Baseline tokens are introduced into the floating supply, and are backed by the reserve assets that now belong to the protocol. 
 </Callout>
 
+
 /*insert graphic*/
 
 You may be wondering where the system sources the capital to guarantee the floor price. The liquidity is sourced from the presale of the Baseline Token (bToken). Unlike traditional token launches, where presale funds are typically distributed to the project team, Baseline token launches keep the liquidity in the market making system. See the [presale](#presale) section to learn how the initial liquidity is provisioned. [link]
@@ -47,7 +48,7 @@ Markets are constantly changing, with varying levels of trading activity and pri
 
 The Baseline market making system has three methods to rebalance liquidity: `bump()`, `sweep()`, and `slide()`. 
 
-##### `bump()`
+#### `bump()`
 When the Floor can be moved higher, a `bump()` is called
 
 **Description**
@@ -61,7 +62,7 @@ A `bump()` can be initiated when there is sufficient reserve capacity (e.g., ETH
 **Purpose**
 Make number go up.
 
-##### `sweep ()`
+#### `sweep ()`
 
 When the price is trending upwards, `sweep()` is called
 
@@ -76,7 +77,7 @@ A `sweep()` is initiated when the price of the token has increased 2% into the D
 **Purpose**
 The `sweep()` operation provides a mechanism for the market making system to secure profits and build up surplus capacity. This is accomplished by selling tokens at a higher price and rebuying them for cheaper. 
 
-##### `slide()`
+#### `slide()`
 
 When the price is trending downwards, `slide()` is called
 
