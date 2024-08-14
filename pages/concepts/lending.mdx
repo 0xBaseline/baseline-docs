@@ -1,11 +1,15 @@
 import { Callout } from "nextra/components";
+import Image from "next/image";
+import { Tabs } from 'nextra/components'
+import { Cards, Card } from 'nextra/components'
 
 ## Baseline Lending
 
 ### Introduction
-Baseline offers a unique lending facility where users can deposit their bTokens as collateral and withdraw the reserve asset for a small loan fee. Since each bToken is backed by its [BLV](/concepts/blv), the lending facility is able to issue loans equal to the intrinsic value (BLV) of the deposited collateral without any liquidation risk. The lending facility is able to withdraw reserves from the [Floor](market_making#floor) without impacting the backing of bTokens since any bTokens deposited as collateral are effectively removed from the floating supply.
+Baseline offers a unique lending facility where users can deposit their bTokens as collateral and withdraw the reserve asset for a small loan fee. Since each bToken is backed by its [BLV](/concepts/blv), the lending facility is able to issue loans equal to the intrinsic value (BLV) of the deposited collateral without any liquidation risk. The lending facility is able to withdraw reserves from the [Floor](market_making/floor#floor) without impacting the backing of bTokens since any bTokens deposited as collateral are effectively removed from the floating supply.
 
-/*insert animation to show a user depositing bTokens into lending facility and taking out floor reserves*/
+{/*insert animation to show a user depositing bTokens into lending facility and taking out floor reserves*/
+}
 
 ### Key Concepts
 
@@ -27,69 +31,13 @@ For example, if a bToken trades at $1.20 USDC and has a BLV of $1.00, depositing
 - **Defaulting on Loans:** The protocol automatically defaults all expired loans at the end of each day by burning the collateral. Upon default, even though the protocol's reserves have decreased, the burned collateral value exceeds the borrowed value. This effectively bolsters the liquidity structure of the pool and allows the system to progress towards the next `bump()`.
 
 ### Lending Fees
-The fees that the lending facility earns are sent to the [Afterburner](/concepts/afterburner) module to conduct leveraged token buybacks and token burning. Token burns increase the system’s surplus capacity and make progress towards initiating the next [`bump()`](market_making#bump) operation.
+The fees that the lending facility earns are sent to the [Afterburner](/concepts/afterburner) module to conduct leveraged token buybacks and token burning. Token burns increase the system’s surplus capacity and make progress towards initiating the next [`bump()`](/concepts/market_making#rebalancing-liquidity) operation.
 
 ### Advanced Topics
 
-#### Looping
-The native lending facility enables users to establish a leveraged position in a Baseline token. This is achieved by depositing bTokens into the lending facility, taking out a loan, and then using that loan to buy more bTokens. This process can be repeated multiple times and is known as looping.
-
-##### _How Looping Works_
-Here’s a simplified example to illustrate how looping works. For this example, we assume there are no additional costs such as slippage, borrowing fees, or swap fees.
-
-**Initial Position**
-- User owns 1,000 bTokens, each valued at the market price of 1.20 USDC.
-- The Baseline Value (BLV) of each bToken is 1.00 USDC.
-
-**First Loop**
-- User deposits 1,000 bTokens into the lending facility.
-- User withdraws 1,000 USDC from the lending facility.
-- With the 1,000 USDC, the user buys 833.33 bTokens at market price.
-
-**Second Loop**
-- User deposits 833.33 bTokens into the lending facility.
-- User withdraws 833.33 USDC from the lending facility.
-- With the 833.33 USDC, the user buys 694.44 bTokens at market price.
-
-**At the End of Two Loops**
-- Collateral: 1,833.33 bTokens (from both deposit steps).
-- Wallet Holdings: 694.44 bTokens.
-- Debt: 1,833.33 USDC (from both withdrawal steps).
-
-In total, the user has 2,527.77 bTokens (combining both deposited and wallet holdings) and 1,833.33 USDC in debt. Despite the increased bToken holdings, the overall value of the position remains the same as initially calculated, assuming no fees:
-
-- Initial Value: 1,000 bTokens @ 1.20 USDC = 1,200 USDC.
-- Looping Value: 2,527.77 bTokens @ 1.20 USDC = 3,033.32 USDC. When you account for 1,833.33 USDC of debt, you’re left with the same 1,200 USDC.
-
-<Callout>
-Looping is not an action that can be performed indefinitely. Notice how in the example above, each successive loop results in reduced borrowing power. This is due to the difference between the bToken’s market price and BLV. 
-</Callout>
-
-##### _Looping Benefits_
-
-When you loop your position, you are betting on the upside of the bToken against the reserve asset. By looping, you can gain more exposure to the asset without having to invest additional capital. 
-
-![11](/assets/11.png)
-
-##### _Looping Risks_
-
-If the price of bTokens falls relative to the reserve asset, your position will incur greater losses. This is because your leveraged position has outsized exposure to the bToken, and your collateral value decreases more than your borrow value. In addition to pricing risk, there is loan default risk for opening a leveraged position.
-
-##### _When to Loop_
-
-Looping near the BLV poses the least amount of risk because the supporting liquidity structure from the Floor prevents the price from dropping significantly. In addition, looping near BLV is a lot more capital efficient since you’re able to achieve a higher loan-to-value (LTV).
-
-##### _How to Loop_
-
-Looping is now a built-in feature which allows a user to deposit their bTokens and set a leverage level. The system will loop your position until the desired leverage level is met.
-
-##### _How to Exit a Loop_
-
-Exiting a loop is simply inverting the steps for creating a looped position. The process involves repaying your debt, accessing your collateral, and selling your collateral to repay more debt. It’s possible to partially unwind your looped position, or fully unwind it back into the reserve asset.
-
-#### Boosting
-Boosting allows borrowers (who have an existing position) to access additional capital after the [BLV](/concepts/blv) has increased. This is possible because the user’s deposited collateral has increased in value due to the BLV increase. Since the lending facility calculates how much can be borrowed based on the BLV of the deposited collateral, the borrowing capacity will have increased. Here is an example to better illustrate this mechanic:
-
-1. **Initial Loan:** A user deposits bTokens as collateral and takes out a loan based on the BLV of those bTokens. For example, if the BLV is $1.00 per bToken, and the user deposits 1000 bTokens, that user can withdraw $1000 in reserve assets.
-2. **BLV Increase:** Over time, the market making system accumulates enough capacity to perform a `bump()` operation and increase the BLV from $1.00 to $1.02. This increases the intrinsic value of the collateral. 
-3. **Boosting Opportunity:** Because the value of the collateral has increased, the user’s position now has more borrowing power. The new borrowing capacity on the position is now $1020, a $20 increase from $1000. The Boost value is therefore $20 of additional capital that can be borrowed.
+ <Cards>
+    <Card title="🔁 ・ Looping" href="/concepts/lending/looping" style={{backgroundColor: 'black', padding: '0.1rem'}} /> 
+</Cards>
+ <Cards>
+    <Card title="⏫️ ・ Boosting" href="/concepts/lending/boosting" style={{backgroundColor: 'black', padding: '0.1rem'}} />
+</Cards>

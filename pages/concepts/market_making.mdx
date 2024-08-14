@@ -1,6 +1,8 @@
 import { Callout } from "nextra/components";
 import Image from "next/image";
 import { Tabs } from 'nextra/components'
+import { Cards, Card } from 'nextra/components'
+
 
 
 ## Market Making
@@ -12,63 +14,50 @@ In traditional market making, the challenge lies in determining how much liquidi
 
 ### Price Ranges
 Baseline tokens utilize three distinct price ranges for liquidity allocation: Floor, Anchor, and Discovery. Each range serves a specific purpose and is programmatically managed according to a set of rules enforced at the smart contract level.
+ <Cards>
+    <Card title="📈 ・ Floor" href="/concepts/market_making/floor" style={{backgroundColor: 'black', padding: '0.1rem'}} />
+</Cards>
+ <Cards>
+    <Card title="⚓️ ・ Anchor" href="/concepts/market_making/anchor" style={{backgroundColor: 'black', padding: '0.1rem'}} /> 
+</Cards>
+ <Cards>
+    <Card title="🔎 ・ Discovery" href="/concepts/market_making/discovery" style={{backgroundColor: 'black', padding: '0.1rem'}} />
+</Cards>
 
-### Floor
-The Floor is a narrow price range with highly concentrated liquidity. Its primary function is to ensure that it can absorb the entire floating supply of a Baseline Token. Think of the Floor as a substantial buy wall that allows every token holder to exit their position at the Floor price, also known as the [Baseline Value (BLV)](/concepts/blv).
-
-<Callout>
-Floating supply is the amount of tokens purchased by external parties and NOT owned by the protocol. For example, a person who buys tokens from the protocol is swapping out Baseline tokens in exchange for the reserve asset. These Baseline tokens are introduced into the floating supply, and are backed by the reserve assets that now belong to the protocol. 
-</Callout>
-
-
-![5](/assets/5.png)
-
-You may be wondering where the system sources the capital to guarantee the floor price. The liquidity is sourced from the presale of the Baseline Token (bToken). Unlike traditional token launches, where presale funds are typically distributed to the project team, Baseline token launches keep the liquidity in the market making system. See the [presale](/launching#presale) section to learn how the initial liquidity is provisioned.
-
-### Anchor
-The Anchor is a price range with lower liquidity depth compared to the Floor, but covers a broader price span. Unlike the Floor which is designed to hold price, the Anchor is designed to encourage price movements and support trading activity. 
-
-![5](/assets/5.png)
-
-The Anchor is a dynamic price range that is updated after a [liquidity rebalance](#rebalancing-liquidity). The Anchor occupies the price range from the market price and extends towards the Floor.
-
-### Discovery
-The Discovery is a price range with thicker liquidity compared to the Anchor, and spans an even broader price range. Similar to Anchor, the Discovery is a dynamic price range that is updated after a [liquidity rebalance](#rebalancing-liquidity). The Discovery occupies the price range from the market price and extends considerably higher. The Anchor and Discovery were built with these liquidity profiles in order for the system to take profit during uptrends, and move these profits to the Floor in order to initiate a [`bump()`](#bump). This strategy is explained in greater detail in the [`sweep()`](#sweep) section.
-
-![5](/assets/5.png)
 
 ### Swap Fees
 In Uniswap V3 pools, every trade incurs a small fee, known as the swap fee. This fee is collected from traders and paid to liquidity providers.
 
-In the Baseline system, the protocol itself acts as the main liquidity provider. As a result, it collects most of the swap fees generated from trading activity within these pools. These fees are then sent to the [Afterburner module](/concepts/afterburner) to conduct leveraged token buybacks and token burning. When there is a sufficient surplus in the system (either through increased reserves or decreased floating supply), the system will attempt to [`bump()`](#bump) up the Floor price.
+In the Baseline system, the protocol itself acts as the main liquidity provider. As a result, it collects most of the swap fees generated from trading activity within these pools. These fees are then sent to the [Afterburner module](/concepts/afterburner) to conduct leveraged token buybacks and token burning. When there is a sufficient surplus in the system (either through increased reserves or decreased floating supply), the system will attempt to [`bump()`](/concepts/market_making#rebalancing-liquidity) up the Floor price.
 
-/*insert animation of swapping occurring, and 1% of the volume getting slowly redirected into the floor*/
+{/*insert animation of swapping occurring, and 1% of the volume getting slowly redirected into the floor*/
+}
 
 ### Advanced Topics
 
 #### Rebalancing Liquidity
 Markets are constantly changing, with varying levels of trading activity and price movements. ​​Rebalancing allows market makers to adapt to these changes, ensuring that liquidity remains appropriately distributed. In the context of Baseline, this involves dynamically shifting liquidity across Floor, Anchor, and Discovery price ranges.
 
-The Baseline market making system has three methods to rebalance liquidity: `bump()`, `sweep()`, and `slide()`. 
-
-<Tabs items={['Bump', 'Sweep', 'Slide', 'Drop']}>
+The Baseline market making system has four methods to rebalance liquidity: `bump()`, `sweep()`, `slide()`, and `drop()`. 
+<Callout emoji="">
+<Tabs items={['⬆️ Bump', '➡️ Sweep', '⬅️ Slide', '⬇️ Drop']}>
   <Tabs.Tab>
-    When the Floor can be moved higher, a `bump()` is called
+    When the Floor can be moved higher the protocol calls: `bump()`
 
     **Description**  
-    A `bump()` operation shifts the highly concentrated liquidity within the Floor to a slightly higher price range. A `bump()` is a permanent change and cannot be reversed.
+    - A `bump()` operation shifts the highly concentrated liquidity within the Floor to a slightly higher price range. A `bump()` is a permanent change and cannot be reversed.
 
     **Condition**  
-    A `bump()` can be initiated when there is sufficient reserve capacity (e.g., ETH or USD) to purchase the entire floating supply at the new, elevated price point. This new price point is one [tick spacing](#tick-spacing0) above the current Floor.
+    - A `bump()` can be initiated when there is sufficient reserve capacity (e.g., ETH or USD) to purchase the entire floating supply at the new, elevated price point. This new price point is one [tick spacing](#tick-spacing0) above the current Floor.
 
-    /*insert bump animation*/
+    {/*insert bump animation*/}
 
     **Purpose**  
-    Make number go up.
+    - Make number go up.
   </Tabs.Tab>
 
   <Tabs.Tab>
-    When the price is trending upwards, `sweep()` is called
+    When the price is trending upwards the protocol calls: `sweep()`
 
     **Description**  
     A `sweep()` operation adjusts the Anchor and Discovery price ranges to align more closely with the current market price. This ensures that liquidity is optimally distributed in response to upward price movements.
@@ -76,23 +65,23 @@ The Baseline market making system has three methods to rebalance liquidity: `bum
     **Condition**  
     A `sweep()` is initiated when the price of the token has increased 2% into the Discovery price range.
 
-    /*insert [sweep animation] ←- this is pretty crucial animation to explain how the system takes profit*/
+    {/*insert [sweep animation] ←- this is pretty crucial animation to explain how the system takes profit*/}
 
     **Purpose**  
     The `sweep()` operation provides a mechanism for the market making system to secure profits and build up surplus capacity. This is accomplished by selling tokens at a higher price and rebuying them for cheaper. 
 
-    <Callout>
+    <Callout type="info" emoji="" >
     Every `sweep()` and `slide()` operation updates the current price as the latest checkpoint.
     </Callout>
   </Tabs.Tab>
 
   <Tabs.Tab>
-    When the price is trending downwards, `slide()` is called
+    When the price is trending downwards the protocol calls: `slide()`
 
     **Description**  
     A `slide()` operation repositions the Anchor and Discovery price range closer to the market price when the price is trending downwards.
 
-    /*insert slide animation*/
+    {/*insert slide animation*/}
 
     **Purpose**  
     The primary goal of a `slide()` operation is to absorb sell pressure during downtrends. This is achieved by repositioning the Anchor price range closer to the Floor, allowing the market making system to absorb sell pressure at a discounted price. In addition, the liquidity in Anchor and Discovery is thinned out, allowing the price to recover more easily. 
@@ -100,14 +89,27 @@ The Baseline market making system has three methods to rebalance liquidity: `bum
     **Condition**  
     A `slide()` is initiated when the price of the token has decreased 2% from its last recorded checkpoint. 
 
-    <Callout>
+    <Callout type="info" emoji="">
     Every `sweep()` and `slide()` operation updates the current price as the latest checkpoint.
     </Callout>
   </Tabs.Tab>
 
-  <Tabs.Tab></Tabs.Tab>
-</Tabs>
+  <Tabs.Tab>
+    When the x can be moved lower the protocol calls: `drop()`
 
+    **Description**  
+    - A `drop()` operation shifts the highly concentrated liquidity within the x to a slightly lower price range. 
+
+    **Condition**  
+    - A `drop()` can be initiated when there is
+
+    {/*insert drop animation*/}
+
+    **Purpose**  
+    - Make number go down.
+  </Tabs.Tab>
+</Tabs>
+</Callout>
 ---
 
 #### Automated Rebalancing 
