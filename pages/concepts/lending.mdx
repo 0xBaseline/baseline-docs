@@ -3,7 +3,7 @@ import { Callout } from "nextra/components";
 ## Baseline Lending
 
 ### Introduction
-Baseline offers a unique lending facility where users can deposit their bTokens as collateral and withdraw the reserve asset for a small loan fee. Since each bToken is backed by its [BLV](/concepts/blv), the lending facility is able to issue loans equal to the intrinsic value (BLV) of the deposited collateral without any liquidation risk. The lending facility is able to withdraw reserves from the [Floor](#floor) without impacting the backing of bTokens since any bTokens deposited as collateral are effectively removed from the floating supply.
+Baseline offers a unique lending facility where users can deposit their bTokens as collateral and withdraw the reserve asset for a small loan fee. Since each bToken is backed by its [BLV](/concepts/blv), the lending facility is able to issue loans equal to the intrinsic value (BLV) of the deposited collateral without any liquidation risk. The lending facility is able to withdraw reserves from the [Floor](market_making#floor) without impacting the backing of bTokens since any bTokens deposited as collateral are effectively removed from the floating supply.
 
 /*insert animation to show a user depositing bTokens into lending facility and taking out floor reserves*/
 ### Baseline Lending
@@ -25,7 +25,7 @@ For example, if a bToken trades at $1.20 USDC and has a BLV of $1.00, depositing
 - **Defaulting on Loans:** The protocol automatically defaults all expired loans at the end of each day by burning the collateral. Upon default, even though the protocol's reserves have decreased, the burned collateral value exceeds the borrowed value. This effectively bolsters the liquidity structure of the pool and allows the system to progress towards the next `bump()`.
 
 ### Lending Fees
-The fees that the lending facility earns are sent to the [Afterburner](/concepts/afterburner) module to conduct leveraged token buybacks and token burning. Token burns increase the system’s surplus capacity and make progress towards initiating the next [`bump()`](#bump) operation.
+The fees that the lending facility earns are sent to the [Afterburner](/concepts/afterburner) module to conduct leveraged token buybacks and token burning. Token burns increase the system’s surplus capacity and make progress towards initiating the next [`bump()`](market_making#bump) operation.
 
 ### Advanced Topics
 
