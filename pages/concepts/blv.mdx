@@ -5,13 +5,14 @@ import { Callout } from "nextra/components";
 ### Introduction
 Baseline Value (BLV) is the guaranteed floor price of a Baseline token. The BLV is created by reserving enough liquidity in the pool to buy back the entire floating supply of the token. Put simply, the BLV is the price that the last token can be sold into the pool if all holders decide to exit. 
 
-Baseline guarantees this value by maintaining permanent liquidity in the [Floor](#floor) price range. This liquidity cannot be removed by anyone, including the team. This means the BLV can never go down, but can be adjusted upwards through a [`bump()`](market_making#bump) operation. A `bump()` occurs when the system has accumulated sufficient reserves to reallocate liquidity to a higher price point while still ensuring that the entire floating supply can be bought back. Through this mechanic, Baseline tokens are essentially backed by reserve assets and possess intrinsic value. 
+Baseline guarantees this value by maintaining permanent liquidity in the [Floor](market_making#floor) price range. This liquidity cannot be removed by anyone, including the team. This means the BLV can never go down, but can be adjusted upwards through a [`bump()`](market_making#bump) operation. A `bump()` occurs when the system has accumulated sufficient reserves to reallocate liquidity to a higher price point while still ensuring that the entire floating supply can be bought back. Through this mechanic, Baseline tokens are essentially backed by reserve assets and possess intrinsic value. 
 
 ### Metrics
-**System Capacity:** The total amount of bTokens that can be absorbed by the system’s reserve assets.
-**Floating Supply:** The total amount of bTokens outside of the system’s liquidity position a.k.a. the number of bTokens in the hands of potential sellers.
+- **System Capacity:** The total amount of bTokens that can be absorbed by the system’s reserve assets.
+- **Floating Supply:** The total amount of bTokens outside of the system’s liquidity position a.k.a. the number of bTokens in the hands of potential sellers.
 
 To ensure that all tokens can be redeemed at the BLV, Baseline asserts the condition that `capacity > floating supply` whenever liquidity is deployed.
+
 ### Identifying the BLV
 To identify the BLV, Baseline calculates the highest price point at which it can deploy liquidity while still meeting its solvency requirement (`capacity > floating supply`). 
 
@@ -19,11 +20,13 @@ To identify the BLV, Baseline calculates the highest price point at which it can
 Capacity is not limited to the Floor price range alone. Capacity can also include the reserve assets available in the Anchor and Discovery price ranges. These reserve assets absorb some of the floating supply, and are also taken into account when calculating the BLV. 
 </Callout>
 
-### Advanced Topics
-**Ticks**
-In Uniswap V3 pools, prices are determined using a system called ticks. Each tick represents a very small price increment (1 basis point or 0.01%). As an example, 100 ticks correspond to approximately a 1% change in price.
+## Protocol Fees
 
-**Tick Spacing**
-Uniswap V3 pools use [tick spacing](https://support.uniswap.org/hc/en-us/articles/21069524840589-What-is-a-tick-when-providing-liquidity) to define where liquidity can be allocated. The tick spacing spacing is determined by the pool's swap fee percentage. For example, a pool with a 1% swap fee has a tick spacing of 200. This means liquidity can only be allocated in increments of 200 ticks, which covers approximately a 2% price range.
+The protocol generates fees in the following ways:
 
-In Baseline pools, the Floor price range is defined within one tick spacing. The BLV represents the lower bound of this tick spacing. When a `bump()` operation occurs in a 1% fee pool, the system will attempt to move the Floor price range one tick spacing higher (~2% higher).
+1. **LP fees** - token is deployed into a 1% Uniswap V3 pool, which means swaps pay 1% when swapping in/out of the pool. This fee goes directly to increasing the BLV. You can learn more about Uniswap fee tiers [here](https://docs.uniswap.org/concepts/protocol/fees).
+2. **Liquidity rebalancing fees** - the protocol rebalances reserves from discovery into floor and anchor when `sweep()` is called. These reserves go toward increasing the BLV.
+3. **Borrow fees** - users pay a one-time per-diem fee when they open or extend a borrow position. This fee goes directly to increasing the BLV.
+
+{/* ## Team fees
+During `sweep()` rebalancing, the protocol directs 10% of **surplus** capacity (in bAsset terms) to team multisig. */}

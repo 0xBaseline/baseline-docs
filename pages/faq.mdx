@@ -1,149 +1,147 @@
-# General FAQ
+## General FAQ
 
-### How does Baseline differ from YES?
-Baseline is an innovative automated tokenomics engine for ERC20 tokens, while YES is the first token launched on Baseline.  
+**How does Baseline differ from YES?**
 
+- Baseline is an innovative automated tokenomics engine for ERC20 tokens, while YES is the first token launched on Baseline.  
 
-### What is the YES token supply and where can I see current supply?
+**What is the YES token supply and where can I see current supply?**
 
-Token supply is dynamic and based on the buys/sells in LP, `token supply = total supply - POL`. The current supply is able to be viewed on the Dapp or via  `getCirculatingSupply` function in the contracts.  
+- Token supply is dynamic and based on the buys/sells in LP, `token supply = total supply - POL`. The current supply is able to be viewed on the Dapp or via  `getCirculatingSupply` function in the contracts.  
 
+**Did the team get an allo or are they also aping?**
 
-
-### Did the team get an allo or are they also aping?
-
-There is no team allocation, no VC allocation, no LP incentives allocation.
+- There is no team allocation, no VC allocation, no LP incentives allocation.
 All supply is minted into the uniswap pool, and must be bought. 
 
-### How is the market cap of YES calculated?
+**How is the market cap of YES calculated?**
 
- `MC = circ_supply * market_price`
+-  `MC = circ_supply * market_price`
 
 
-# **Market Making FAQ**
+## Market Making FAQ
 
-### What is BLV and how does it move?
+**What is BLV and how does it move?**
 
-BLV is an abbreviation for Baseline Value, this is the backed value of each token. From an overly simplistic view, you can look at the system as a balance sheet of assets and liabilities: the ETH in the pool are the assets, and the YES tokens are liabilities. How the system keeps the BLV moving up is that it simply charges fees on every swap/borrow, such that the protocol is gaining more assets than its giving out in liabilities. When there's sufficient new assets owned by the protocol, the system can move the BLV up. 
+- BLV is an abbreviation for Baseline Value, this is the backed value of each token. From an overly simplistic view, you can look at the system as a balance sheet of assets and liabilities: the ETH in the pool are the assets, and the YES tokens are liabilities. How the system keeps the BLV moving up is that it simply charges fees on every swap/borrow, such that the protocol is gaining more assets than its giving out in liabilities. When there's sufficient new assets owned by the protocol, the system can move the BLV up. 
 
-A simple example would be if the protocol is treating its balance sheet as 1:1 assets to liabilities, a price of 1$. That means there is 1$ in the protocol for every 1 YES circulating.
+- A simple example would be if the protocol is treating its balance sheet as 1:1 assets to liabilities, a price of 1$. That means there is 1$ in the protocol for every 1 YES circulating.
 
-Imagine that there are a few swaps where someone buys 0.95 YES for 1$, due to LP fee of 5%. That means the protocol made 5% profit on every swap.
+- Imagine that there are a few swaps where someone buys 0.95 YES for 1$, due to LP fee of 5%. That means the protocol made 5% profit on every swap.
 
-After enough profit is generated, the protocol finds that for every YES circulating, there are now 1.05$ in the protocol. It then rebalances its liquidity to allow this, and now every circulating YES has 1.05$ of BLV
+- After enough profit is generated, the protocol finds that for every YES circulating, there are now 1.05$ in the protocol. It then rebalances its liquidity to allow this, and now every circulating YES has 1.05$ of BLV
 
-Again this is an overly simplistic example and doesn't go into the nuance of how the liquidity is structured, but it illustrates the core idea behind how the BLV works
+- Again this is an overly simplistic example and doesn't go into the nuance of how the liquidity is structured, but it illustrates the core idea behind how the BLV works
 
-### The BLV really can’t go down? It sounds too good to be true.
+**The BLV really can’t go down? It sounds too good to be true.**
 
-The Baseline system is ETH denominated. In ETH terms, the BLV is not able to decrease in value. The dollar price of ETH is a variable outside of the control of this protocol, and therefore when viewing charts in dollar terms you may see discrepancies that are not present on the ETH based charts. 
+- The Baseline system is ETH denominated. In ETH terms, the BLV is not able to decrease in value. The dollar price of ETH is a variable outside of the control of this protocol, and therefore when viewing charts in dollar terms you may see discrepancies that are not present on the ETH based charts. 
 
-TLDR: BLV backed by ETH, so in ETH terms, BLV is UpOnly™ 
+- TLDR: BLV backed by ETH, so in ETH terms, BLV is UpOnly™ 
 
-### **If the protocol is buying at a premium to BLV, how can it remain solvent?**
+**If the protocol is buying at a premium to BLV, how can it remain solvent?**
 
-Baseline rebalances liquidity in such a way that the amount of reserves acquired selling tokens at a premium will always exceed the amount of reserves used to buyback tokens. This inequality ensures that the protocol will always have reserves on hand to buy every circulating token.
+- Baseline rebalances liquidity in such a way that the amount of reserves acquired selling tokens at a premium will always exceed the amount of reserves used to buyback tokens. This inequality ensures that the protocol will always have reserves on hand to buy every circulating token.
 
-### **How much can the BLV increase by?**
+**How much can the BLV increase by?**
 
-It's impossible to say how much the BLV can increase by, but it's useful to consider factors that influence it. BLV increases when the protocol realizes profitability from LPing, liquidity rebalancing, and borrows. The more price discovery there is, the more rebalancing there is, the more reserves are pulled into floor which adds to protocol's profitability.
+- It's impossible to say how much the BLV can increase by, but it's useful to consider factors that influence it. BLV increases when the protocol realizes profitability from LPing, liquidity rebalancing, and borrows. The more price discovery there is, the more rebalancing there is, the more reserves are pulled into floor which adds to protocol's profitability.
 
-### **Why is the Anchor Position needed?**
+**Why is the Anchor Position needed?**
 
-The Anchor Position is needed because it helps the protocol make profits. It allows the protocol to sell tokens at a higher price than its safety net, which is the price floor. However, it also comes with a risk: if the protocol buys tokens at a higher price, it can reduce profitability. So, the Anchor Position is a balance between making profits and taking some risks in the trading process.
+- The Anchor Position is needed because it helps the protocol make profits. It allows the protocol to sell tokens at a higher price than its safety net, which is the price floor. However, it also comes with a risk: if the protocol buys tokens at a higher price, it can reduce profitability. So, the Anchor Position is a balance between making profits and taking some risks in the trading process.
 
-### **What happens if third-parties provide liquidity?**
+**What happens if third-parties provide liquidity?**
 
-Given the permissionless nature of Uniswap protocol, there is nothing preventing third-parties from providing liquidity to the pair. This liquidity, however, will be independent of Baseline contracts and will not accrue to protocol. Protocol accounting and profitability will not affected by third-party liquidity, either. That's because to become a third-party LP, one must first acquire Baseline token from the protocol.
+- Given the permissionless nature of Uniswap protocol, there is nothing preventing third-parties from providing liquidity to the pair. This liquidity, however, will be independent of Baseline contracts and will not accrue to protocol. Protocol accounting and profitability will not affected by third-party liquidity, either. That's because to become a third-party LP, one must first acquire Baseline token from the protocol.
 
-### **What actually triggers rebalancing?**
+**What actually triggers rebalancing?**
 
-`sweep()` , `slide()`, and `bump()` in MarketMaking.sol are responsible for rebalancing and can be called by anyone. Practically, we expect on-chain keepers to call the rebalances.
+- `sweep()` , `slide()`, and `bump()` in MarketMaking.sol are responsible for rebalancing and can be called by anyone. Practically, we expect on-chain keepers to call the rebalances.
 
-## What’s the difference between a `sweep()` , `slide()`, and `bump()`?
+**What’s the difference between a `sweep()` , `slide()`, and `bump()`?**
 
-`sweep()` , `slide()`, and `bump()` are all market-making functions called at different points relative to price action. 
+- `sweep()` , `slide()`, and `bump()` are all market-making functions called at different points relative to price action. 
 
-`sweep()` is called when the market price goes up 2%. It moves liquidity surpluses to the floor and increases the capacity for the Anchor and Discovery range.
-`slide()`is called when the market price moves down 2%. It reduces the Discovery and Anchor capacity and moves them back to the current price.
-`bump()` **** calculates at which price the protocol can buy back all of the existing supply and moves the BLV price up accordingly.
+- `sweep()` is called when the market price goes up 2%. It moves liquidity surpluses to the floor and increases the capacity for the Anchor and Discovery range.
+- `slide()`is called when the market price moves down 2%. It reduces the Discovery and Anchor capacity and moves them back to the current price.
+- `bump()` calculates at which price the protocol can buy back all of the existing supply and moves the BLV price up accordingly.
 
-### Is rebalancing liquidity based on premium done externally or every swap?
+**Is rebalancing liquidity based on premium done externally or every swap?**
 
-Rebalancing is done externally.
+- Rebalancing is done externally.
 
-### What's the new risk introduced with the hole and relying on external LP providers?
+**What's the new risk introduced with the hole and relying on external LP providers?**
 
-The risk is high slippage near floor, there is still capacity at the BLV to absorb all token sells.
+- The risk is high slippage near floor, there is still capacity at the BLV to absorb all token sells.
 
-### What percent of swap fees and loan fees get directed to afterburner ?
+**What percent of swap fees and loan fees get directed to afterburner?**
 
-The afterburner receives all LP fees and interest fees.
+- The afterburner receives all LP fees and interest fees.
 
-### How often does the afterburner trigger? Is it manual?
+**How often does the afterburner trigger? Is it manual?**
 
-The afterburner can be publicly triggered. There is a configurable cooldown period and it will burn off a percentage of the assets that it has every couple minutes. A forever TWAP. Volume builds it up, looping builds it up, and it runs off into the pool. And then we keep trading. 
+- The afterburner can be publicly triggered. There is a configurable cooldown period and it will burn off a percentage of the assets that it has every couple minutes. A forever TWAP. Volume builds it up, looping builds it up, and it runs off into the pool. And then we keep trading. 
 
-### Basically the after burner uses the ETH to buy YES and the protocol owns that YES?
+**Basically the after burner uses the ETH to buy YES and the protocol owns that YES?**
 
-Yes. 
+- Yes. 
 
-And then the protocol leverage loops that YES, and then defaults it. Acting as a counterbalance to supply expansion and increasing backing for all. Yes.
+- And then the protocol leverage loops that YES, and then defaults it. Acting as a counterbalance to supply expansion and increasing backing for all. Yes.
 
-# **Credit Facility FAQ**
+## Credit Facility FAQ
 
-### Can I be liquidated?
+**Can I be liquidated?**
 
-There are no price based liquidations. Since every token is backed by reserves at the Baseline Value, the protocol doesn't need to manage a liquidation engine, meaning the protocol doesn't seize borrowers' assets. 
+- There are no price based liquidations. Since every token is backed by reserves at the Baseline Value, the protocol doesn't need to manage a liquidation engine, meaning the protocol doesn't seize borrowers' assets. 
 
-**Your loan can, however, expire and default.** In the event of a default (due to expiry), the protocol simply burns the collateral, reducing the circulating supply and reserves at a ratio that grows the intrinsic value.
+- **Your loan can, however, expire and default.** In the event of a default (due to expiry), the protocol simply burns the collateral, reducing the circulating supply and reserves at a ratio that grows the intrinsic value.
 
-### What is looping?
+**What is looping?**
 
-Looping is the process in which you borrow against wETH using YES, then utilize that wETH to purchase more YES, and continue this cycle repeatedly. In other words, looping gives you leveraged exposure to YES, free from the risk of price liquidations. 
+- Looping is the process in which you borrow against wETH using YES, then utilize that wETH to purchase more YES, and continue this cycle repeatedly. In other words, looping gives you leveraged exposure to YES, free from the risk of price liquidations. 
 
-### How many times I can loop?
+**How many times I can loop?**
 
-It’s all up to you, how much collateral you’re providing, and the price premium. Be aware that looping becomes drastically more advantageous closer to floor, as your loan to value ratio is a lot higher than at high premiums.
+- It’s all up to you, how much collateral you’re providing, and the price premium. Be aware that looping becomes drastically more advantageous closer to floor, as your loan to value ratio is a lot higher than at high premiums.
 
-### What's the advantage of looping?
+**What's the advantage of looping?**
 
-Looping provides leveraged exposure to YES. If the price of YES increases, then you’d be able to realize this increase across the looped position. Additionally, as the BLV increases, you’re able to Boost your position to pull out the equity gained in the position. 
+- Looping provides leveraged exposure to YES. If the price of YES increases, then you’d be able to realize this increase across the looped position. Additionally, as the BLV increases, you’re able to Boost your position to pull out the equity gained in the position. 
 
-### What are the risks of looping?
+**What are the risks of looping?**
 
-The risks to looping are that you have leveraged exposure to YES. If you bought or looped at a premium, there is the risk that price can go down relative to your purchase price. You are also at risk of losing additional collateral in the event of loan expiration.
+- The risks to looping are that you have leveraged exposure to YES. If you bought or looped at a premium, there is the risk that price can go down relative to your purchase price. You are also at risk of losing additional collateral in the event of loan expiration.
 
-### I took out a second loan, why am I only seeing one loan on the site?
+**I took out a second loan, why am I only seeing one loan on the site?**
 
-All loans + loops are displayed as one position. Any additional borrows or extensions are applied to this position. You have one expiration date, adding to this extension applies to the position as a whole.
+- All loans + loops are displayed as one position. Any additional borrows or extensions are applied to this position. You have one expiration date, adding to this extension applies to the position as a whole.
 
-### How is it possible that loans can't be liquidated and the protocol remains solvent?
+**How is it possible that loans can't be liquidated and the protocol remains solvent?**
 
-Loan cannot be liquidated by price movement. Since each YES token is backed by a Baseline Value, and this value is what is lent out when a loan is obtained, the protocol always has enough reserves to buy back all tokens at this price. While loans cannot be liquidated, they will default if they are not paid back prior to expiration. 
+- Loans cannot be liquidated by price movement. Since each YES token is backed by a Baseline Value, and this value is what is lent out when a loan is obtained, the protocol always has enough reserves to buy back all tokens at this price. While loans cannot be liquidated, they will default if they are not paid back prior to expiration. 
 
-### What happens if I don't pay back my loan in time?
+**What happens if I don't pay back my loan in time?**
 
-**You MUST either extend or repay your loan prior to expiration.** F**ailure to do so will result in the loan defaulting, the collateral will automatically be programmatically burnt by the contract**. 
+- **You MUST either extend or repay your loan prior to expiration.** F**ailure to do so will result in the loan defaulting, the collateral will automatically be programmatically burnt by the contract**. 
 
-There is nothing the team can do to recover defaulted loans. Please add a reminder in your phone or calendar about your loan so that you have ample time to extend or repay prior to expiration. 
+- There is nothing the team can do to recover defaulted loans. Please add a reminder in your phone or calendar about your loan so that you have ample time to extend or repay prior to expiration. 
 
-### Can I extend my loan, if I want to?
+**Can I extend my loan, if I want to?**
 
-Yes, you may extend you loan at any time **prior to expiration**. You can choose the length of your loan. Keep in mind that this extension will apply to any future loops/additions to the loan. 
+- Yes, you may extend you loan at any time **prior to expiration**. You can choose the length of your loan. Keep in mind that this extension will apply to any future loops/additions to the loan. 
 
-### How can I unwind my loan, and can I pay it back partially?
+**How can I unwind my loan, and can I pay it back partially?**
 
-Yes, you can repay partially. If you have looped your loan, you will likely need to repay a portion of it in wETH, receive YES, swap that YES to wETH, and repay an additional portion, repeating until the loan is fully repaid. 
+- Yes, you can repay partially. If you have looped your loan, you will likely need to repay a portion of it in wETH, receive YES, swap that YES to wETH, and repay an additional portion, repeating until the loan is fully repaid. 
 
-### How does the "Boost" function work?
+**How does the "Boost" function work?**
 
-The Boost function allows loan holders to access the increase in equity that occurs when the BLV shifts upwards. 
+- The Boost function allows loan holders to access the increase in equity that occurs when the BLV shifts upwards. 
 
-### **Is there a capacity on how much the protocol can lend out?**
+**Is there a capacity on how much the protocol can lend out?**
 
-The ultimate capacity of the protocol can lend out is 100% of the reserves, meaning the total backed value of all Baseline tokens in circulation.
+- The ultimate capacity of the protocol can lend out is 100% of the reserves, meaning the total backed value of all Baseline tokens in circulation.
 
-### **Why is the origination fee so high when other lending markets charge less?**
+**Why is the origination fee so high when other lending markets charge less?**
 
-The origination fee is a fixed, one-time fee unlike traditional lending markets that charge an annualized interest rate that changes with market demand. It can also be thought of as the privilege of accessing liquidity no matter market conditions.
+- The origination fee is a fixed, one-time fee unlike traditional lending markets that charge an annualized interest rate that changes with market demand. It can also be thought of as the privilege of accessing liquidity no matter market conditions.
