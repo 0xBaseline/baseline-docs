@@ -11,13 +11,8 @@
     "title": "Credit Facility",
     "theme": { "breadcrumb": true }
   },
-  "fees": {
-    "title": "Fees",
+    "afterburner": {
+    "title": "Afterburner",
     "theme": { "breadcrumb": false }
-  },
-"afterburner": {
-  "title": "Afterburner",
-  "theme": { "breadcrumb": false }
-}
-  
+  }
 }

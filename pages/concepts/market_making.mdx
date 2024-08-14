@@ -1,5 +1,7 @@
 import { Callout } from "nextra/components";
 import Image from "next/image";
+import { Tabs } from 'nextra/components'
+
 
 ## Market Making
 
@@ -21,7 +23,7 @@ Floating supply is the amount of tokens purchased by external parties and NOT ow
 
 ![5](/assets/5.png)
 
-You may be wondering where the system sources the capital to guarantee the floor price. The liquidity is sourced from the presale of the Baseline Token (bToken). Unlike traditional token launches, where presale funds are typically distributed to the project team, Baseline token launches keep the liquidity in the market making system. See the [presale](#presale) section to learn how the initial liquidity is provisioned.
+You may be wondering where the system sources the capital to guarantee the floor price. The liquidity is sourced from the presale of the Baseline Token (bToken). Unlike traditional token launches, where presale funds are typically distributed to the project team, Baseline token launches keep the liquidity in the market making system. See the [presale](/launching#presale) section to learn how the initial liquidity is provisioned.
 
 ### Anchor
 The Anchor is a price range with lower liquidity depth compared to the Floor, but covers a broader price span. Unlike the Floor which is designed to hold price, the Anchor is designed to encourage price movements and support trading activity. 
@@ -43,58 +45,80 @@ In the Baseline system, the protocol itself acts as the main liquidity provider.
 /*insert animation of swapping occurring, and 1% of the volume getting slowly redirected into the floor*/
 
 ### Advanced Topics
+
 #### Rebalancing Liquidity
 Markets are constantly changing, with varying levels of trading activity and price movements. ​​Rebalancing allows market makers to adapt to these changes, ensuring that liquidity remains appropriately distributed. In the context of Baseline, this involves dynamically shifting liquidity across Floor, Anchor, and Discovery price ranges.
 
 The Baseline market making system has three methods to rebalance liquidity: `bump()`, `sweep()`, and `slide()`. 
 
-##### Bump
-When the Floor can be moved higher, a `bump()` is called
+<Tabs items={['Bump', 'Sweep', 'Slide', 'Drop']}>
+  <Tabs.Tab>
+    When the Floor can be moved higher, a `bump()` is called
 
-**Description**  
-A `bump()` operation shifts the highly concentrated liquidity within the Floor to a slightly higher price range. A `bump()` is a permanent change and cannot be reversed.
+    **Description**  
+    A `bump()` operation shifts the highly concentrated liquidity within the Floor to a slightly higher price range. A `bump()` is a permanent change and cannot be reversed.
 
-**Condition**  
-A `bump()` can be initiated when there is sufficient reserve capacity (e.g., ETH or USD) to purchase the entire floating supply at the new, elevated price point. This new price point is one [tick spacing](#tick-spacing0) above the current Floor.
+    **Condition**  
+    A `bump()` can be initiated when there is sufficient reserve capacity (e.g., ETH or USD) to purchase the entire floating supply at the new, elevated price point. This new price point is one [tick spacing](#tick-spacing0) above the current Floor.
 
-/*insert bump animation*/
+    /*insert bump animation*/
 
-**Purpose**  
-Make number go up.
+    **Purpose**  
+    Make number go up.
+  </Tabs.Tab>
 
-##### Sweep
+  <Tabs.Tab>
+    When the price is trending upwards, `sweep()` is called
 
-When the price is trending upwards, `sweep()` is called
+    **Description**  
+    A `sweep()` operation adjusts the Anchor and Discovery price ranges to align more closely with the current market price. This ensures that liquidity is optimally distributed in response to upward price movements.
 
-**Description**  
-A `sweep()` operation adjusts the Anchor and Discovery price ranges to align more closely with the current market price. This ensures that liquidity is optimally distributed in response to upward price movements.
+    **Condition**  
+    A `sweep()` is initiated when the price of the token has increased 2% into the Discovery price range.
 
-**Condition**  
-A `sweep()` is initiated when the price of the token has increased 2% into the Discovery price range.
+    /*insert [sweep animation] ←- this is pretty crucial animation to explain how the system takes profit*/
 
-/*insert [sweep animation] ←- this is pretty crucial animation to explain how the system takes profit*/
+    **Purpose**  
+    The `sweep()` operation provides a mechanism for the market making system to secure profits and build up surplus capacity. This is accomplished by selling tokens at a higher price and rebuying them for cheaper. 
 
-**Purpose**  
-The `sweep()` operation provides a mechanism for the market making system to secure profits and build up surplus capacity. This is accomplished by selling tokens at a higher price and rebuying them for cheaper. 
+    <Callout>
+    Every `sweep()` and `slide()` operation updates the current price as the latest checkpoint.
+    </Callout>
+  </Tabs.Tab>
 
-##### Slide
+  <Tabs.Tab>
+    When the price is trending downwards, `slide()` is called
 
-When the price is trending downwards, `slide()` is called
+    **Description**  
+    A `slide()` operation repositions the Anchor and Discovery price range closer to the market price when the price is trending downwards.
 
-**Description**  
-A `slide()` operation repositions the Anchor and Discovery price range closer to the market price when the price is trending downwards.
+    /*insert slide animation*/
 
-/*insert slide animation*/
+    **Purpose**  
+    The primary goal of a `slide()` operation is to absorb sell pressure during downtrends. This is achieved by repositioning the Anchor price range closer to the Floor, allowing the market making system to absorb sell pressure at a discounted price. In addition, the liquidity in Anchor and Discovery is thinned out, allowing the price to recover more easily. 
 
-**Purpose**  
-The primary goal of a `slide()` operation is to absorb sell pressure during downtrends. This is achieved by repositioning the Anchor price range closer to the Floor, allowing the market making system to absorb sell pressure at a discounted price. In addition, the liquidity in Anchor and Discovery is thinned out, allowing the price to recover more easily. 
+    **Condition**  
+    A `slide()` is initiated when the price of the token has decreased 2% from its last recorded checkpoint. 
 
-**Condition**  
-A `slide()` is initiated when the price of the token has decreased 2% from its last recorded checkpoint. 
+    <Callout>
+    Every `sweep()` and `slide()` operation updates the current price as the latest checkpoint.
+    </Callout>
+  </Tabs.Tab>
 
-<Callout>
-Every `sweep()` and `slide()` operation updates the current price as the latest checkpoint.
-</Callout>
+  <Tabs.Tab></Tabs.Tab>
+</Tabs>
+
+---
 
 #### Automated Rebalancing 
 These strategies are written at the smart contract level and exist as public functions. This means any external party can execute these functions so long as the condition is satisfied for each operation. Baseline monitors the state of the liquidity pool and will call these functions automatically.
+
+#### Uniswap V3 Concepts
+
+**Ticks**  
+In Uniswap V3 pools, prices are determined using a system called ticks. Each tick represents a very small price increment (1 basis point or 0.01%). As an example, 100 ticks correspond to approximately a 1% change in price.
+
+**Tick Spacing**  
+Uniswap V3 pools use [tick spacing](https://support.uniswap.org/hc/en-us/articles/21069524840589-What-is-a-tick-when-providing-liquidity) to define where liquidity can be allocated. The tick spacing spacing is determined by the pool's swap fee percentage. For example, a pool with a 1% swap fee has a tick spacing of 200. This means liquidity can only be allocated in increments of 200 ticks, which covers approximately a 2% price range.
+
+In Baseline pools, the Floor price range is defined within one tick spacing. The BLV represents the lower bound of this tick spacing. When a `bump()` operation occurs in a 1% fee pool, the system will attempt to move the Floor price range one tick spacing higher (~2% higher).
