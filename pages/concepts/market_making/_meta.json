@@ -1,14 +1,1 @@
-{
-  "floor": {
-    "title": "Floor",
-    "theme": { "breadcrumb": true }
-  },
-  "anchor": {
-    "title": "Anchor",
-    "theme": { "breadcrumb": true }
-  },
-  "discovery": {
-    "title": "Discovery",
-    "theme": { "breadcrumb": true }
-  }
-}
+{}
