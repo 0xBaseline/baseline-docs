@@ -7,51 +7,22 @@ import { Cards, Card } from 'nextra/components'
 
 ## Market Making
 
+### Introduction
 Market makers are essential for facilitating smooth trading activity. They provide liquidity and help assets reach their fair market value over time. Their primary function is to offer consistent buy and sell options, rather than to influence price or generate trading volume. Given this objective, there is merit in replacing traditional market makers with a system that operates impartially and transparently.
 
 In traditional market making, the challenge lies in determining how much liquidity to deploy, and across which price ranges. Baseline addresses this challenge by employing a system with three distinct price ranges, each with distinct liquidity profiles.
 
 ### Price Ranges
 Baseline tokens utilize three distinct price ranges for liquidity allocation: Floor, Anchor, and Discovery. Each range serves a specific purpose and is programmatically managed according to a set of rules enforced at the smart contract level.
-
-<Tabs items={['📈 Floor', '⚓️ Anchor', '🔎 Discovery']}>
-  <Tabs.Tab>
-   ![Floor](/assets/floor.png)
-
-    The Floor is a narrow price range with highly concentrated liquidity. Its primary function is to ensure that it can absorb the entire floating supply of a Baseline Token. Think of the Floor as a substantial buy wall that allows every token holder to exit their position at the Floor price, also known as the [Baseline Value (BLV)](/concepts/blv).
-
-    <Callout type="info" emoji="">
-    Floating supply represents the amount of tokens purchased by external parties and NOT owned by the protocol. For example, a person who buys tokens from the protocol is swapping out Baseline tokens in exchange for the reserve asset. These Baseline tokens are introduced into the floating supply, and are backed by the reserve assets that now belong to the protocol. 
-    </Callout>
-
-    You may be wondering where the system sources the capital to guarantee the floor price. The liquidity is sourced from the presale of the Baseline Token (bToken). Unlike traditional token launches, where presale funds are typically distributed to the project team, Baseline token launches keep the liquidity in the market making system. See the [presale](/launching#presale) section to learn how the initial liquidity is provisioned.
-
-
-  </Tabs.Tab>
-
-  <Tabs.Tab>
-
-  ![Anchor](/assets/anchor.png)
-
-    The Anchor is a price range with lower liquidity depth compared to the Floor, but covers a broader price span. Unlike the Floor which is designed to hold price, the Anchor is designed to encourage price movements and support trading activity. 
-
-    The Anchor is a dynamic price range that is updated after a [liquidity rebalance](/concepts/market_making#rebalancing-liquidity). The Anchor occupies the price range from the market price and extends towards the Floor.
-
-
-  </Tabs.Tab>
-
-  <Tabs.Tab>
-
-    ![Discovery](/assets/discovery.png)
-
-    The Discovery is a price range with thicker liquidity compared to the Anchor, and spans an even broader price range. Similar to Anchor, the Discovery is a dynamic price range that is updated after a [liquidity rebalance](/concepts/market_making#rebalancing-liquidity). The Discovery occupies the price range from the market price and extends considerably higher. The Anchor and Discovery were built with these liquidity profiles in order for the system to take profit during uptrends, and move these profits to the Floor in order to initiate a `bump()`. This strategy is explained in greater detail in the [`sweep()`](/concepts/market_making#rebalancing-liquidity) section.
-
-
-  </Tabs.Tab>
-
-</Tabs>
-___
-&nbsp;
+ <Cards>
+    <Card title="📈 ・ Floor" href="/concepts/market_making/floor" style={{backgroundColor: 'black', padding: '0.1rem'}} />
+</Cards>
+ <Cards>
+    <Card title="⚓️ ・ Anchor" href="/concepts/market_making/anchor" style={{backgroundColor: 'black', padding: '0.1rem'}} /> 
+</Cards>
+ <Cards>
+    <Card title="🔎 ・ Discovery" href="/concepts/market_making/discovery" style={{backgroundColor: 'black', padding: '0.1rem'}} />
+</Cards>
 
 ### Swap Fees
 In Uniswap V3 pools, every trade incurs a small fee, known as the swap fee. This fee is collected from traders and paid to liquidity providers.

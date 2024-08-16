@@ -1,6 +1,10 @@
 {
+  "welcome": {
+    "title": "Welcome to Baseline Markets",
+    "theme": { "breadcrumb": false }
+  },
   "index": {
-    "title": "What is Baseline?",
+    "title": "What is Baseline",
     "theme": { "breadcrumb": false }
   },
   "concepts": {
@@ -9,6 +13,10 @@
   },
   "launching": {
     "title": "Launching a Baseline Token",
+    "theme": { "breadcrumb": false }
+  },
+  "growth": {
+    "title": "Growth-Based Vesting",
     "theme": { "breadcrumb": false }
   },
   "contracts": {
