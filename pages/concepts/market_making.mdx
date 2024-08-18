@@ -72,20 +72,26 @@ The Baseline market making system has four methods to rebalance liquidity: `bump
   <Tabs.Tab>
     When the Floor can be moved higher the protocol calls: `bump()`
 
+    <video controls autoplay>
+  <source src="/assets/Bump.mp4" type="video/mp4" />
+</video>
+
     **Description**  
-    - A `bump()` operation shifts the highly concentrated liquidity within the Floor to a slightly higher price range. A `bump()` is a permanent change and cannot be reversed.
+    A `bump()` operation shifts the highly concentrated liquidity within the Floor to a slightly higher price range. A `bump()` is a permanent change and cannot be reversed.
 
     **Condition**  
-    - A `bump()` can be initiated when there is sufficient reserve capacity (e.g., ETH or USD) to purchase the entire floating supply at the new, elevated price point. This new price point is one [tick spacing](#tick-spacing0) above the current Floor.
-
-    {/*insert bump animation*/}
+    A `bump()` can be initiated when there is sufficient reserve capacity (e.g., ETH or USD) to purchase the entire floating supply at the new, elevated price point. This new price point is one [tick spacing](#tick-spacing0) above the current Floor.
 
     **Purpose**  
-    - Make number go up.
+    The `bump()` operation provides a mechanism for the market making system to increase the BLV, securing a higher token floor price. 
   </Tabs.Tab>
 
   <Tabs.Tab>
     When the price is trending upwards the protocol calls: `sweep()`
+
+    <video controls autoplay>
+  <source src="/assets/Sweep_1.mp4" type="video/mp4" />
+</video>
 
     **Description**  
     A `sweep()` operation adjusts the Anchor and Discovery price ranges to align more closely with the current market price. This ensures that liquidity is optimally distributed in response to upward price movements.
@@ -93,48 +99,52 @@ The Baseline market making system has four methods to rebalance liquidity: `bump
     **Condition**  
     A `sweep()` is initiated when the price of the token has increased 2% into the Discovery price range.
 
-    {/*insert [sweep animation] ←- this is pretty crucial animation to explain how the system takes profit*/}
-
     **Purpose**  
     The `sweep()` operation provides a mechanism for the market making system to secure profits and build up surplus capacity. This is accomplished by selling tokens at a higher price and rebuying them for cheaper. 
 
     <Callout type="info" emoji="" >
-    Every `sweep()` and `slide()` operation updates the current price as the latest checkpoint.
+    Every `sweep()` operation serves as a checkpoint, updating the `discovery tick` to the current price.
     </Callout>
   </Tabs.Tab>
 
   <Tabs.Tab>
     When the price is trending downwards the protocol calls: `slide()`
 
+     {/*insert slide animation*/}
+
     **Description**  
-    A `slide()` operation repositions the Anchor and Discovery price range closer to the market price when the price is trending downwards.
-
-    {/*insert slide animation*/}
-
-    **Purpose**  
-    The primary goal of a `slide()` operation is to absorb sell pressure during downtrends. This is achieved by repositioning the Anchor price range closer to the Floor, allowing the market making system to absorb sell pressure at a discounted price. In addition, the liquidity in Anchor and Discovery is thinned out, allowing the price to recover more easily. 
+    A `slide()` operation repositions the Anchor price range around the market price when the price is trending downwards.
 
     **Condition**  
     A `slide()` is initiated when the price of the token has decreased 2% from its last recorded checkpoint. 
 
-    <Callout type="info" emoji="">
-    Every `sweep()` and `slide()` operation updates the current price as the latest checkpoint.
+
+    **Purpose**  
+    The goal of the `slide()` operation is to absorb sell pressure during downtrends. This is achieved by repositioning the Anchor price range closer to the Floor, allowing the market making system to absorb sell pressure at a discounted price. In addition, the liquidity in the Anchor is thinned out, allowing the price to recover more easily. 
+
+<Callout type="info" emoji="">
+    Every `slide()` operation serves as a checkpoint, updating the `slide tick` to the current price.
     </Callout>
   </Tabs.Tab>
 
   <Tabs.Tab>
-    When the x can be moved lower the protocol calls: `drop()`
+    When the Discovery price range can be moved lower the protocol calls: `drop()`
+
+     {/*insert drop animation*/}
 
     **Description**  
-    - A `drop()` operation shifts the highly concentrated liquidity within the x to a slightly lower price range. 
+    A `drop()` operation repositions the Discovery price range closer to the market price. 
 
     **Condition**  
-    - A `drop()` can be initiated when there is
-
-    {/*insert drop animation*/}
+    A `drop()` can be initiated once every 24 hours to reduce the distance between the last recorded `discovery tick` and the current market price by 20%.
 
     **Purpose**  
-    - Make number go down.
+    The `drop()` operation repositions the Discovery range to a slightly lower price range following `slide()` operations. In addition, liquidity in the Discovery is thinned, allowing the price to recover more easily.
+
+    <Callout type="info" emoji="">
+    Every `drop()` operation serves as an update checkpoint for the `discovery tick`, placing it 20% below the previous checkpoint. 
+    </Callout>
+  
   </Tabs.Tab>
 </Tabs>
 </Callout>
