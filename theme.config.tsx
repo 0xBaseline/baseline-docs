@@ -52,6 +52,9 @@ const config: DocsThemeConfig = {
       <meta name="apple-mobile-web-app-title" content="Baseline Docs" />
     </>
   ),
+  sidebar: {
+    defaultMenuCollapseLevel: 1, // here
+  },
   // useNextSeoProps: () => ({ titleTemplate: '%s – Baseline' })
   useNextSeoProps() {
     const { asPath } = useRouter()

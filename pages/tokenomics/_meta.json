@@ -4,15 +4,11 @@
     "theme": { "breadcrumb": true }
   },
   "market_making": {
-    "title": "Market Making",
-    "theme": { "breadcrumb": true }
-  },
-  "lending": {
-    "title": "Lending",
+    "title": "Automated Liquidity Rebalances",
     "theme": { "breadcrumb": true }
   },
     "afterburner": {
-    "title": "Afterburner",
+    "title": "Leveraged Buyback & Burn",
     "theme": { "breadcrumb": false }
   }
 }

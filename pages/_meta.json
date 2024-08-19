@@ -1,42 +1,31 @@
 {
   "index": {
-    "title": "Welcome to Baseline Markets",
+    "title": "Baseline Protocol",
     "theme": { "breadcrumb": false }
   },
-  "wtf": {
-    "title": "What is Baseline",
-    "theme": { "breadcrumb": false }
+  "tokenomics": {
+    "title": "Antifragile Tokenomics",
+    "theme": { "breadcrumb": true }
   },
-  "concepts": {
-    "title": "Protocol Concepts",
+  "utility": {
+    "title": "bToken Utility",
     "theme": { "breadcrumb": false }
   },
   "launching": {
     "title": "Launching a Baseline Token",
     "theme": { "breadcrumb": false }
   },
-  "growth": {
-    "title": "Growth-Based Vesting",
-    "theme": { "breadcrumb": false }
-  },
   "contracts": {
     "title": "Contracts",
     "theme": { "breadcrumb": false }
   },
-  "security": {
-    "title": "Security",
-    "theme": { "breadcrumb": false }
-  },
   "faq": {
-    "title": "FAQ",
-    "theme": { "breadcrumb": false }
+    "display": "hidden"
   },
   "glossary": {
-    "title": "Glossary",
-    "theme": { "breadcrumb": false }
+    "display": "hidden"
   },
   "resources": {
-    "title": "Resources",
-    "theme": { "breadcrumb": false }
+    "display": "hidden"
   }
 }
