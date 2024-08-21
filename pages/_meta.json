@@ -1,42 +1,12 @@
 {
-  "index": {
-    "title": "Welcome to Baseline Markets",
-    "theme": { "breadcrumb": false }
-  },
-  "wtf": {
-    "title": "What is Baseline",
-    "theme": { "breadcrumb": false }
-  },
-  "concepts": {
-    "title": "Protocol Concepts",
-    "theme": { "breadcrumb": false }
-  },
-  "launching": {
-    "title": "Launching a Baseline Token",
-    "theme": { "breadcrumb": false }
-  },
-  "growth": {
-    "title": "Growth-Based Vesting",
-    "theme": { "breadcrumb": false }
-  },
-  "contracts": {
-    "title": "Contracts",
-    "theme": { "breadcrumb": false }
-  },
-  "security": {
-    "title": "Security",
-    "theme": { "breadcrumb": false }
-  },
-  "faq": {
-    "title": "FAQ",
-    "theme": { "breadcrumb": false }
-  },
-  "glossary": {
-    "title": "Glossary",
-    "theme": { "breadcrumb": false }
-  },
-  "resources": {
-    "title": "Resources",
-    "theme": { "breadcrumb": false }
-  }
+    "index": "Welcome to Baseline Markets",
+    "what": "What is Baseline",
+    "concepts": "Protocol Concepts",
+    "launching": "Launching a Baseline Token",
+    "growth": "Growth-Based Vesting",
+    "contracts": "Contracts",
+    "security": "Security",
+    "faq": "FAQ",
+    "glossary": "Glossary",
+    "resources": "Resources"
 }
