@@ -13,6 +13,6 @@
   },
     "afterburner": {
     "title": "Afterburner",
-    "theme": { "breadcrumb": false }
+    "theme": { "breadcrumb": true }
   }
 }
