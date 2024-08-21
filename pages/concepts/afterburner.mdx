@@ -1,6 +1,6 @@
 # Afterburner
 
-The Afterburner is a standalone module that conducts leveraged token buybacks and token burning. The Afterburner uses funds collected from swap fees and lending fees (or any revenue source) to perform leveraged buybacks via a strategy called [looping](lending#looping). The looped position is set to a one day expiry and is intentionally defaulted in order to burn the underlying collateral. This Afterburner strategy not only increases the token price, but also decreases the floating supply of the bToken without creating any sell pressure. The token burn helps the system to progress towards the next [BLV](/concepts/blv) [`bump()`](/concepts/market_making#rebalancing-liquidity).
+The Afterburner is a standalone module that conducts leveraged token buybacks and token burning. The Afterburner uses funds collected from swap fees and lending fees (or any revenue source) to perform leveraged buybacks via a strategy called [looping](lending/looping). The looped position is set to a one day expiry and is intentionally defaulted in order to burn the underlying collateral. This Afterburner strategy not only increases the token price, but also decreases the floating supply of the bToken without creating any sell pressure. The token burn helps the system to progress towards the next [BLV](/concepts/blv) [`bump()`](/concepts/market_making#rebalancing-liquidity).
 
 ![Afterburner](/assets/afterburner.png)
 

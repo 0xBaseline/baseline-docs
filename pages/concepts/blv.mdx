@@ -4,7 +4,7 @@ import { Callout } from "nextra/components";
 
 Baseline Value (BLV) is the guaranteed floor price of a Baseline token. The BLV is created by reserving enough liquidity in the pool to buy back the entire floating supply of the token. Put simply, the BLV is the price that the last token can be sold into the pool if all holders decide to exit. 
 
-Baseline guarantees this value by maintaining permanent liquidity in the [Floor](market_making/floor#floor) price range. This liquidity cannot be removed by anyone, including the team. This means the BLV can never go down, but can be adjusted upwards through a [`bump()`](/concepts/market_making#rebalancing-liquidity) operation. A `bump()` occurs when the system has accumulated sufficient reserves to reallocate liquidity to a higher price point, while still ensuring that the entire floating supply can be bought back. Through this mechanic, Baseline tokens are essentially backed by reserve assets and possess intrinsic value. 
+Baseline guarantees this value by maintaining permanent liquidity in the [Floor](market_making/#price_ranges) price range. This liquidity cannot be removed by anyone, including the team. This means the BLV can never go down, but can be adjusted upwards through a [`bump()`](/concepts/market_making#rebalancing-liquidity) operation. A `bump()` occurs when the system has accumulated sufficient reserves to reallocate liquidity to a higher price point, while still ensuring that the entire floating supply can be bought back. Through this mechanic, Baseline tokens are essentially backed by reserve assets and possess intrinsic value. 
 
 ### Metrics
 - **System Capacity:** The total amount of bTokens that can be absorbed by the system’s reserve assets.

@@ -78,7 +78,7 @@ The Baseline market making system has four methods to rebalance liquidity: `bump
     A `bump()` operation shifts the highly concentrated liquidity within the Floor to a slightly higher price range. A `bump()` is a permanent change and cannot be reversed.
 
     **Condition**  
-    A `bump()` can be initiated when there is sufficient reserve capacity (e.g., ETH or USD) to purchase the entire floating supply at the new, elevated price point. This new price point is one [tick spacing](#tick-spacing0) above the current Floor.
+    A `bump()` can be initiated when there is sufficient reserve capacity (e.g., ETH or USD) to purchase the entire floating supply at the new, elevated price point. This new price point is one [tick spacing](#uniswap-v3-concepts) above the current Floor.
 
     **Purpose**  
     The `bump()` operation provides a mechanism for the market making system to increase the BLV, securing a higher token floor price. 
