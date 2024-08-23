@@ -118,8 +118,8 @@ The Baseline market making system has four methods to rebalance liquidity: `bump
 
 
     **Purpose**  
-    The goal of the `slide()` operation is to absorb sell pressure during downtrends. This is achieved by repositioning the Anchor price range closer to the Floor, allowing the market making system to absorb sell pressure at a discounted price. In addition, the liquidity in the Anchor is thinned out, allowing the price to recover more easily. 
-
+    The slide() operation aims to absorb sell pressure during downtrends by repositioning the Anchor price range closer to the Floor. This allows the market-making system to absorb sell pressure at a discounted price, while thinning out liquidity in the Anchor, facilitating easier price recovery.
+    
 <Callout type="info" emoji="">
     Every `slide()` operation serves as a checkpoint, updating the `slide tick` to the current price.
     </Callout>
