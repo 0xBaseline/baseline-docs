@@ -1,2 +1,16 @@
-## Afterburner
-The Afterburner contract enables protocols to utilize their earned fees for leveraged buybacks. The contract takes the fees and uses them to purchase the bToken; it then continuously borrows the floor to purchase more bTokens until it runs out of capacity, pushing up the market price. Finally, it defaults on that loan, removing the earlier-bought bTokens from the circulating supply without impacting the market. The Afterburner contract is triggered every 5 minutes.
+# Afterburner
+
+The Afterburner is a standalone module that conducts leveraged token buybacks and token burning. The Afterburner uses funds collected from swap fees and lending fees (or any revenue source) to perform leveraged buybacks via a strategy called [looping](lending/looping). The looped position is set to a one day expiry and is intentionally defaulted in order to burn the underlying collateral. This Afterburner strategy not only increases the token price, but also decreases the floating supply of the bToken without creating any sell pressure. The token burn helps the system to progress towards the next [BLV](/concepts/blv) [`bump()`](/concepts/market_making#rebalancing-liquidity).
+
+![Afterburner](/assets/afterburner.png)
+
+### Creating Premium Value
+
+The alternative to using the Afterburner, is to allocate protocol revenue directly into the Floor price range. While this method directly supports the BLV and facilitates bumps, it does not create immediate value for traders in the same manner as the Afterburner. For example, $10,000 invested into the Afterburner can be leveraged to generate $20,000 to $50,000 of buy pressure within the pool (depending on market price vs BLV). This premium value can be realized by any market participant immediately after the Afterburner fires off by selling their tokens.  Beyond creating premium value, the Afterburner also stimulates short-term price movements and market speculation.
+
+### Execution Strategy
+The Afterburner executes semi-randomly in order to mitigate frontrunning behavior. The Afterburner can be set up to execute in any manner, but is currently configured with the following execution strategy.
+
+- **Frequency** - Every 10-15 minutes, an attempt is made to fire off the Afterburner.
+- **Chance** - 1 in 100 odds. Every miss deducts the denominator by 1 point (increasing the odds over time). Every hit adds 100 points to the denominator.
+- **Size** - 10-15% of the funds in the Afterburner

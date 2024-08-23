@@ -1,2 +1,10 @@
 {
+    "looping": {
+      "title": "Looping",
+      "theme": { "breadcrumb": true }
+    },
+    "boosting": {
+      "title": "Boosting",
+      "theme": { "breadcrumb": true }
+    }
 }

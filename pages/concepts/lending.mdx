@@ -1,52 +1,42 @@
-## Credit Facility
+import { Callout } from "nextra/components";
+import Image from "next/image";
+import { Tabs } from 'nextra/components'
+import { Cards, Card } from 'nextra/components'
 
-### Baseline Lending
+# Lending
 
-Baseline has a decentralized lending facility that allows token holders to borrow assets by using their Baseline
-tokens as collateral. Since Baseline guarantees an intrinsic value for each token, the protocol allows holders to
-borrow this value at a high loan-to-backing value, for a small fee, and no risk of liquidation.
+Baseline offers a unique lending facility where users can deposit their bTokens as collateral and withdraw the reserve asset for a small loan fee. Since each bToken is backed by its [BLV](/concepts/blv), the lending facility is able to issue loans equal to the intrinsic value (BLV) of the deposited collateral without any liquidation risk. The lending facility is able to withdraw reserves from the [Floor](market_making/#price_ranges) without impacting the backing of bTokens since any bTokens deposited as collateral are effectively removed from the floating supply.
 
-The credit facility differentiates itself in a few ways from established lending markets:
+{/*insert animation to show a user depositing bTokens into lending facility and taking out floor reserves*/
+}
 
-- **Peer-to-lender** - users borrow directly from the protocol using protocol-owned reserves. The borrower does
-  not have to rely on external third-party lenders who may pull liquidity during market stress.
-- **Isolated risk architecture** - unlike other lending markets that socialize borrower risk through shared pool
-  architecture , Baseline keeps each loan separate.
-- **No interest rates** - loans are not charged interest, but rather a one-time origination fee at the time of
-  opening or extending a position
-- **No liquidations** - since every token is backed by reserves at the floor price value, the protocol doesn't
-  need to manage a liquidation engine, meaning the protocol doesn't seize borrowers' assets. In the event of a default
-  (due to expiry), the protocol simply burns the collateral, reducing the circulating supply and reserves at a ratio
-  that grows the intrinsic value
-- **Fixed duration** - instead of price-based liquidations, loans have a fixed duration
-- **No oracles** - as there is no liquidations, the credit facility doesn't require any oracles to function, making it
-  simpler and more reliable.
+### Key Concepts
 
-## Loan Terms and Conditions
+Baseline Lending stands out from traditional lending markets in several key ways:
 
-- Loans are extended in $ETH against Baseline token collateral
-- Loan duration is denoted in days, can be any number of days, and expire at beginning of next full day
-- There is a .027% per diem, one-time, fee for opening a loan. Loans can be extended for the same fee
-- The loan-to-backing ratio is 100%
-- A user can only have one loan at a time
+- **Peer-to-Protocol** - Users borrow directly from the protocol-owned reserves rather than from other users. This approach eliminates the risk of third-party lenders removing liquidity during periods of market stress.
+- **Fixed duration** - Loans are granted for a set term, and once expired, the collateral is burned.
+- **No interest rates** - Loans are not charged ongoing interest, but rather a one-time origination fee based on the borrowed value and loan term duration (fee is 0.027% per day). Loans can be extended for the same fee.
+- **Isolated risk architecture** - Unlike other lending markets that socialize borrower risk through a shared pool architecture, Baseline keeps each loan separate. A user can only have one loan at a time, but may add or decrease this loan position.
+- **No liquidations** - Since every token is backed by reserves at the floor price value, the protocol doesn't need to manage a liquidation engine. This means the protocol does not need to seize a borrower’s assets and perform a sell off. In the event of a loan default (due to expiry), the protocol simply burns the collateral.
+- **No oracles** - Since there are no liquidations, the lending facility doesn't require any oracles to function, making it simpler and secure from external price manipulation risks.
 
-## Interactions
+### Interactions
+- **Opening a loan:** To initiate a loan, users deposit bTokens into the lending facility and receive reserve assets in return, minus the borrow fee. Note that users cannot open a new loan if they already have an existing one.
+For example, if a bToken trades at $1.20 USDC and has a BLV of $1.00, depositing 1 bToken for 100 days allows the user to withdraw $0.973 USDC after deducting the lending fee ($1.00 USDC * 0.027% * 100)
+- **Repaying a loan:** Users can repay their loan at any time prior to expiration by depositing reserves into the lending facility, and receiving a proportional amount of their collateral back. Partial repayments are also permitted.
+- **Extending a loan:** Loans can be extended, if they have not expired, by interacting with the lending facility.
+- **Adding to a loan:** Users can deposit additional bTokens as collateral and increase their existing loan position.
+- **Defaulting on Loans:** The protocol automatically defaults all expired loans at the end of each day by burning the collateral. Upon default, even though the protocol's reserves have decreased, the burned collateral value exceeds the borrowed value. This effectively bolsters the liquidity structure of the pool and allows the system to progress towards the next `bump()`.
 
-- **Opening a loan**: To use the credit facility, the user deposits token into Lending.sol, and receives reserves in return.
-  The borrow fee is taken from the received reserves. Keep in mind that the user cannot open a new loan if they have an existing
-  loan.
-- **Repaying a loan**: A user can repay loan any time by depositing reserves into Lending.sol, and receiving proportional
-  share of collateral back. A user can partially repay the loan.
-- **Rolling a loan**: A user can roll a loan if it's not expired by interacting with Lending.sol. If the floor price has
-  gone up since last borrow, rolling a loan will allow you to take the net reserves out, with fee taken on those reserves.
-- **Defaulting on Loans**: The protocol automatically defaults all expired loans at end of day. Instead, the user repays
-  within some timeframe, or defaults. Upon default, while the protocol's reserves shrink, the seized collateral exceeds the
-  borrowed backing, thereby realizing a profit for the protocol.
+### Lending Fees
+The fees that the lending facility earns are sent to the [Afterburner](/concepts/afterburner) module to conduct leveraged token buybacks and token burning. Token burns increase the system’s surplus capacity and make progress towards initiating the next [`bump()`](/concepts/market_making#rebalancing-liquidity) operation.
 
-## Use Cases
+### Advanced Topics
 
-The borrowed assets may be used in any way the user desires:
-
-- Borrow and rebuy token to create a highly capital efficient leveraged position
-- Borrow and stake reserve into yielding facility (e.g. borrow ETH and stake into stETH)
-- Borrow and LP in Baseline pool, creating a fee generating liquidity position that can also be used to DCA in
+ <Cards>
+    <Card title="🔁 ・ Looping" href="/concepts/lending/looping" style={{backgroundColor: 'black', padding: '0.1rem'}} /> 
+</Cards>
+ <Cards>
+    <Card title="⏫️ ・ Boosting" href="/concepts/lending/boosting" style={{backgroundColor: 'black', padding: '0.1rem'}} />
+</Cards>

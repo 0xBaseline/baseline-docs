@@ -1,14 +1,22 @@
 {
   "index": {
-    "title": "What is Baseline?",
+    "title": "Welcome to Baseline Markets",
     "theme": { "breadcrumb": false }
   },
-  "blv": {
-    "title": "Baseline Value (BLV)",
+  "what": {
+    "title": "What is Baseline",
     "theme": { "breadcrumb": false }
   },
   "concepts": {
-    "title": "Protocol Mechanisms",
+    "title": "Protocol Concepts",
+    "theme": { "breadcrumb": false }
+  },
+  "launching": {
+    "title": "Launching a Baseline Token",
+    "theme": { "breadcrumb": false }
+  },
+  "growth": {
+    "title": "Growth-Based Vesting",
     "theme": { "breadcrumb": false }
   },
   "contracts": {
@@ -21,15 +29,11 @@
   },
   "faq": {
     "title": "FAQ",
-    "theme": {
-      "breadcrumb": false
-    }
+    "theme": { "breadcrumb": false }
   },
   "glossary": {
     "title": "Glossary",
-    "theme": {
-      "breadcrumb": false
-    }
+    "theme": { "breadcrumb": false }
   },
   "resources": {
     "title": "Resources",
