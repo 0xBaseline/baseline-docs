@@ -1,0 +1,66 @@
+import { Callout } from "nextra/components";
+import Image from "next/image";
+import { Tabs } from 'nextra/components'
+import { Cards, Card } from 'nextra/components'
+
+## Fixed Term Liquidity Loans
+
+Token holders in traditional ecosystems face a significant dilemma: to access the value of their assets, they 
+typically must sell, sacrificing their market position. While some tokens can be used as collateral on lending 
+platforms, these options are limited and inflexible, often requiring third party support and adoption. This 
+creates a substantial opportunity cost, as holders can't easily leverage their existing assets for new 
+investments without divesting. 
+
+Crypto's naturally attention-driven markets, coupled with inefficient liquidity structures, further exacerbate 
+this issue. Tokens often experiences high volatility as investors rapidly rotate between assets. This environment 
+not only increases the opportunity cost of holding, but also makes it challenging for investors to maintain 
+long-term positions while actively participating in the markets.
+
+Baseline naturally alleviates this by offering a simple fixed-term, fixed-interest loan. With the protocol's unique 
+lending facility, users can deposit their bTokens as collateral and withdraw their underlying BLV liquidity 
+immediately for an up-front origination fee.
+
+### Loan Fees & Terms
+
+- The fee for Baseline's loan terms is independently configured per bToken. 
+- All fees goes to Afterburner, so holders pay each other.
+
+- Baseline allows users to configure their own loan dates, giving them complete flexibility and control over the terms.
+- If the loan expires without extension, it will automatically be cleared.
+    - Because there's no way to liquidate the loan, the protocol must clear it out based on expiry.
+    - Without clearing out the supply, there's no way to account for lost tokens, wallet passwords, etc. and the protocol
+    - Must provision liquidity for this essentially "dead supply", slowing the growth of the system.
+    
+Unpaid loans are 'defaulted'- the collateral is burned.
+
+Because there's no way for the protocol to know
+
+{/*insert animation to show a user depositing bTokens into lending facility and taking out floor reserves*/}
+
+### Interactions
+- **Opening a loan:** To initiate a loan, users deposit bTokens into the lending facility and receive reserve assets in return, minus the borrow fee. Note that users cannot open a new loan if they already have an existing one.
+For example, if a bToken trades at $1.20 USDC and has a BLV of $1.00, depositing 1 bToken for 100 days allows the user to withdraw $0.973 USDC after deducting the lending fee ($1.00 USDC * 0.027% * 100)
+- **Repaying a loan:** Users can repay their loan at any time prior to expiration by depositing reserves into the lending facility, and receiving a proportional amount of their collateral back. Partial repayments are also permitted.
+- **Extending a loan:** Loans can be extended, if they have not expired, by interacting with the lending facility.
+- **Adding to a loan:** Users can deposit additional bTokens as collateral and increase their existing loan position.
+- **Defaulting on Loans:** The protocol automatically defaults all expired loans at the end of each day by burning the collateral. Upon default, even though the protocol's reserves have decreased, the burned collateral value exceeds the borrowed value. This effectively bolsters the liquidity structure of the pool and allows the system to progress towards the next `bump()`.
+
+### Lending Fees
+The fees that the lending facility earns are sent to the [Afterburner](/concepts/afterburner) module to conduct leveraged token buybacks and token burning. Token burns increase the system’s surplus capacity and make progress towards initiating the next [`bump()`](/concepts/market_making#rebalancing-liquidity) operation.
+
+## Boosting
+Boosting allows borrowers (who have an existing position) to access additional capital after the [BLV](/concepts/blv) has increased. This is possible because the user’s deposited collateral has increased in value due to the BLV increase. Since the lending facility calculates how much can be borrowed based on the BLV of the deposited collateral, the borrowing capacity will have increased. Here is an example to better illustrate this mechanic:
+
+1. **Initial Loan:** A user deposits bTokens as collateral and takes out a loan based on the BLV of those bTokens. For example, if the BLV is $1.00 per bToken, and the user deposits 1000 bTokens, that user can withdraw $1000 in reserve assets.
+2. **BLV Increase:** Over time, the market making system accumulates enough capacity to perform a `bump()` operation and increase the BLV from $1.00 to $1.02. This increases the intrinsic value of the collateral. 
+3. **Boosting Opportunity:** Because the value of the collateral has increased, the user’s position now has more borrowing power. The new borrowing capacity on the position is now $1020, a $20 increase from $1000. The Boost value is therefore $20 of additional capital that can be borrowed.
+
+
+### Advanced Topics
+
+ <Cards>
+    <Card title="🔁 ・ Looping" href="/concepts/lending/looping" style={{backgroundColor: 'black', padding: '0.1rem'}} /> 
+</Cards>
+ <Cards>
+    <Card title="⏫️ ・ Boosting" href="/concepts/lending/boosting" style={{backgroundColor: 'black', padding: '0.1rem'}} />
+</Cards>

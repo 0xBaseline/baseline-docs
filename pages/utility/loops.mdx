@@ -6,6 +6,24 @@ import { Cards, Card } from 'nextra/components'
 ## Looping
 The native lending facility enables users to establish a leveraged position in a Baseline token. This is achieved by depositing bTokens into the lending facility, taking out a loan, and then using that loan to buy more bTokens. This process can be repeated multiple times and is known as looping.
 
+The logic of looping just wraps around a loan; instead of giving the underlying liquidity to the borrower, it recursively buys more
+tokens until there's no additional capital remains.
+
+Looping is dangerous and users should understand what is happening before they loop.
+
+By looping, users trade off the guarantees of the BLV in exchange for increased exposure to the premium; their returns
+are purely based on how much the premium grows
+
+If a bToken with BLV .90c and market price of 1.00 goes to 1.10, the price increased by 10%. Normal spot holdings value increase 10%
+looped positions increase 100%, because the premium doubled from 10% to 20%.
+
+Looping is essentially a derivative that allows people to speculate on the shorter term price action
+
+### Funding Decay: "Rebasing"
+
+To simplify the looping experience, Baseline Loop Facility abstracts the process of paying interest or maintaining the position.
+ 
+
 ### How Looping Works
 Here’s a simplified example to illustrate how looping works. For this example, we assume there are no additional costs such as slippage, borrowing fees, or swap fees.
 

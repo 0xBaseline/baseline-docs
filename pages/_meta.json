@@ -3,20 +3,20 @@
     "title": "Baseline Protocol",
     "theme": { "breadcrumb": false }
   },
-  "tokenomics": {
-    "title": "Antifragile Tokenomics",
+  "btokenomics": {
+    "title": "bTokenomics",
     "theme": { "breadcrumb": true }
   },
   "utility": {
     "title": "bToken Utility",
     "theme": { "breadcrumb": false }
   },
-  "launching": {
-    "title": "Launching a Baseline Token",
+  "contracts": {
+    "title": "Smart Contracts",
     "theme": { "breadcrumb": false }
   },
-  "contracts": {
-    "title": "Contracts",
+  "launching": {
+    "title": "Launching a bToken",
     "theme": { "breadcrumb": false }
   },
   "faq": {
