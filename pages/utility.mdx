@@ -10,7 +10,7 @@ Baseline's unique BLV guarantee allows the protocol to offer leverage on bTokens
 their underlying BLV directly from the liquidity pool. Since the protocol can always buy back each bToken 
 at the BLV price, it can never accumulate bad debt from these loans. Any unpaid loans are effectively treated 
 as buybacks at the lowest possible price, allowing users to repay loans on their own terms without worrying 
-about market movements. 
+about market activity. 
 
 The absence of liquidation risk also eliminates the need for oracles, drastically simplifying the protocol's
 lending implementation. This enables Baseline to offer various forms of non-liquiditable leverage for bToken 
@@ -41,4 +41,8 @@ In the Baseline system, a bToken's LTV is purely market-driven: as a bToken's pr
 can borrow more relative to their collateral's cost. This introduces a unique dynamic to the bToken market 
 structure, where buyers gain increased access to capital as a bToken's price decreases: the increase in leverage, 
 coupled with an improved risk-return profile, also contributes to sustaining a healthy market premium for a bTokens. 
+
+- Whenever loans are taken in Baseline, users don't choose the amount to borrow against their collateral; 
+the protocol automatically borrows the maximum allowable amount (the full BLV), such that the least amount of collateral
+is needed for the liquidity requested by the
 
