@@ -10,18 +10,29 @@ representing the bToken's **Baseline Value (BLV)**: its guaranteed minimum price
 
 ![The Floor Price](/assets/blv.png)
 
-Baseline utilizes protocol-owned liquidity—neutral liquidity owned and managed by smart contracts—to ensure a 
+{/* content fill: why is the BLV important to users? - known maximum downside when entering a trade, used as a
+general hueristic for the amount of liquidity permanently accumulated by the system */}
+
+Baseline utilizes protocol-owned liquidity—socialized capital owned and managed by smart contracts—to ensure a 
 bToken's BLV. In Baseline, all liquidity is managed directly inside Uniswap V3 concentrated liquidity positions. 
 This way, the BLV reflects a directly redeemable value in the public market, rather than a proxy value for an 
-external balance sheet somewhere inaccessible to the average holder.
+external balance sheet that's inaccessible to the average holder.
 
-A bToken's BLV is calculated based on the highest price at which the socialized liquidity could buy back 
-the entire token supply. Put in a different context, if every holder decided to sell their bTokens, 
-the BLV is the price that the last token would be sold at.
+A bToken's BLV is calculated based on the highest price at which the socialized capital could buy back the entire 
+token supply. Put differently, if every holder decided to sell their bTokens, the BLV is the price that 
+the last token would be sold at.
+
+<Callout type="warning" emoji="⚠️"> 
+  BLV price is denominated in the underlying liquidity token, called the "reserve asset". For example,
+  if a bToken is paired in ETH instead of USDC, then the BLV will be priced in ETH terms, not USD. As a result,
+  if ETH goes down, the BLV of the bToken will go down as well. 
+</Callout>
 
 {/* add unruggable liquidity here? prevents scams, rugpulls, and other weird shit */}
 
 ### Protocol-Owned Liquidity Positions
+
+{/* How BLV is derived, what does it actually mean? Lower bound of the floor range... */}
 
 Baseline allocates liquidity across three distinct price ranges: Floor, Anchor, and Discovery. 
 

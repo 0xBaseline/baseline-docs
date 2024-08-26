@@ -30,8 +30,8 @@ over loan terms and allowing them to pay only for what they need. Users are limi
 but can add collateral to existing positions to increase their borrow position. 
 
 <Callout>
-    In $YES, the fixed-term fee is 9.9% per year, so a 1-month loan would be charged 9.9/12 = 0.825% of the 
-    loan amount.
+    In $YES, the fixed-term fee is 9.9% per year, so a 30-day loan would be charged 9.9%*(30/365) = ~.84% of 
+    the loan amount.
 </Callout>
 
 Loans can be repaid early or extended, though early repayments don't result in fee refunds. Thus, it's advisable 
@@ -50,22 +50,11 @@ inaccessible wallets, allowing liquidity to accumulate to remaining bTokens more
 
 ### Boosting
 
-Baseline's unique lending model allowing users to borrow more liquidity without additional capital when the 
-bToken's BLV increases. As loan LTVs are based on collateral BLV, any growth directly translates 
-to increased borrowable liquidity. For example, if a user initially deposits 1000 bTokens with a $1.00 BLV, they 
-can withdraw $1000. If the BLV increases to $1.02, the borrowing capacity rises to $1020, offering an additional 
-$20 of borrowable capital. This mechanism provides users with dynamic borrowing power that grows with the bToken's 
-value.
+Baseline's unique lending model allowing users to borrow more liquidity without additional collateral when the 
+BLV grows. This is possible because the user’s deposited collateral has increased in value due to the BLV increase: 
+since the lending facility calculates how much can be borrowed based on the BLV of the deposited collateral, 
+the borrowing capacity will have increased. 
 
-Here is an example to better illustrate this mechanic:
-
-1. **Initial Loan:** A user deposits bTokens as collateral and takes out a loan based on the BLV of those bTokens. 
-For example, if the BLV is $1.00 per bToken, and the user deposits 1000 bTokens, that user can withdraw $1000 in 
-underlying liquidity.
-
-2. **BLV Increase:** Over time, the market making system accumulates enough capacity to perform a `bump()` operation 
-and increases the BLV from $1.00 to $1.02. This increases the intrinsic value of the collateral. 
-
-3. **Boosting Opportunity:** Because the value of the collateral has increased, the user’s position now has more 
-borrowing power. The new borrowing capacity on the position is now $1020, a $20 increase from $1000. The Boost value 
-is therefore $20 of additional capital that can be borrowed.
+For example, if a user initially deposits 1000 bTokens with a $1.00 BLV, they can borrow $1000. If the BLV increases 
+to $1.02, the borrowing capacity rises to $1020, offering an additional $20 of borrowable capital. Boosting is entirely
+options, and any boosts incur the same fees and terms as any other loan in the Credit Facility.
