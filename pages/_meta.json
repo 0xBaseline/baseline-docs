@@ -15,10 +15,6 @@
     "title": "Smart Contracts",
     "theme": { "breadcrumb": false }
   },
-  "launching": {
-    "title": "Launching a bToken",
-    "theme": { "breadcrumb": false }
-  },
   "faq": {
     "display": "hidden"
   },
