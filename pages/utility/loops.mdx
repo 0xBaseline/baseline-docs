@@ -1,0 +1,152 @@
+import { Callout } from "nextra/components";
+import Image from "next/image";
+import { Tabs } from 'nextra/components'
+import { Cards, Card } from 'nextra/components'
+
+## Leveraged bToken Exposure
+
+While Baseline's lending facility allows users to leverage bTokens for exposure to other assets, 
+'looping' provides a unique way to gain amplified exposure to the bToken itself. Looping involves 
+repeatedly borrowing against bToken collateral to purchase more bTokens, creating a leveraged 
+position that increases sensitivity to the bToken's price movements relative to the underlying 
+reserve asset.
+
+<Callout type="warning" emoji="⚠️">
+  Like most forms of leverage, looping is an advanced strategy with significant risks. The strategy 
+  effectively trades the bToken's floor guarantees for additional premium exposure, exposing users to
+  full 100% drawdowns when bTokens trade at the floor.
+
+  **Users should thoroughly understand the mechanics and potential outcomes of looping before opening a position.**
+</Callout>
+
+### Looping Mechanics
+
+<Callout type="info" emoji="ℹ️">
+  Looping is not an infinite process. Each successive loop results in diminishing borrowing power 
+  due to the difference between the bToken's market price and its BLV.
+</Callout>
+
+To illustrate how looping works, let's walk through a simplified example. For clarity, we'll assume 
+no additional costs such as slippage, borrowing fees, or swap fees.
+
+**Initial Position**
+- User owns 1,000 bTokens
+- Market price: 1.20 USDC per bToken
+- Baseline Value (BLV): 1.00 USDC per bToken
+
+1. **First Loop**
+   - User deposits 1,000 bTokens into the lending facility
+   - Borrows 1,000 USDC (based on BLV)
+   - Buys 833.33 bTokens at market price (1,000 USDC / 1.20 USDC per bToken)
+
+2. **Second Loop**
+   - Deposits the newly acquired 833.33 bTokens
+   - Borrows another 833.33 USDC
+   - Buys 694.44 bTokens (833.33 USDC / 1.20 USDC per bToken)
+
+**Final Holdings**
+- Total Collateral: 1,833.33 bTokens (from both deposit steps)
+- Wallet Holdings: 694.44 bTokens
+- Total Debt: 1,833.33 USDC
+
+In total, the user now controls 2,527.77 bTokens with 1,833.33 USDC in debt. Note that despite the increased 
+bToken holdings, the net value of the position remains the same (assuming no fees or price changes):
+
+- Initial Value: 1,000 bTokens @ 1.20 USDC = 1,200 USDC
+- Looped Value: (2,527.77 bTokens @ 1.20 USDC) - 1,833.33 USDC debt = 1,200 USDC
+
+However, if the bToken price rises to 1.40 USDC, the looped position will have amplified gains:
+
+- Initial Value: 1,000 bTokens @ 1.40 USDC = 1,400 USDC
+- Looped Value: (2,527.77 bTokens @ 1.40 USDC) - 1,833.33 USDC debt = 2,027.77 USDC (over 4x the upside!)
+
+Similarly, if bToken's price falls to 1.00 USDC, the looped position will have amplified losses:
+
+- Initial Value: 1,000 bTokens @ 1.00 USDC = 1,000 USDC
+- Looped Value: (2,527.77 bTokens @ 1.00 USDC) - 1,833.33 USDC debt = 694.44 USDC
+
+
+### Funding Decay vs. Interest Rates
+
+Unlike standard loans, where users have to pay interest based on the amount borrowed, Baseline's 
+looping facility uses a "rebasing" mechanism to charge fees on looped positions. In this system, 
+the protocol automatically adjusts both debt and bToken balance over time, gradually "shrinking" 
+both collateral and debt, allowing users to maintain non-liquidatable leveraged exposure without 
+any active management of the positino.
+
+
+The fee structure in looped positions is based on the net premium value of the position, not the 
+borrowed amount. Fees are proportional to the bToken's premium at position closure, with higher 
+premiums resulting in higher fees and vice versa. This aligns the cost of maintaining a looped 
+position with the bToken's market performance.
+
+
+In this fee structure, users pay based on the net premium value of the position, not the borrowed 
+amount. As a result, the final fees accrued by the user is directly proportional to the premium of 
+the bToken when the position is closed. Users that exit a looped position at higher premiums will 
+pay more fees for their positio; at lower premiums, users will pay less. 
+
+### BLV Value Accrual
+
+Looped positions don't generate direct cash flows to the afterburner for buybacks, but looping still 
+positively impacts a bToken's BLV due to the supply reduction from "shrinking" user's collateral. 
+Baseline's looping facility" naturally creates deflationary pressure on the token, since its 
+circulating supply is constantly being reduced. As such, the protocol-owned liquidity in the system 
+can be shared across fewer tokens, naturally increasing the BLV of each remaining bToken over time. 
+
+
+### Benefits and Risks of Looping
+
+<Tabs items={['🚀 Benefits', '⚠️ Risks', '🎯 When to Loop', '🔄 How to Loop', '🚪 How to Exit']}>
+  <Tabs.Tab>
+    Looping allows users to gain increased exposure to bToken price movements without additional capital investment. 
+    When the bToken's price rises relative to the reserve asset, looped positions can see amplified returns.
+
+    ![Looping Benefits](/assets/11.png)
+
+    For example, if a bToken's price increases from $1.00 to $1.10 (a 10% gain), a looped position might see 
+    a 20% or greater increase in value, depending on the leverage used.
+  </Tabs.Tab>
+  
+  <Tabs.Tab>
+    The primary risks of looping include:
+    
+    1. **Amplified Losses**: If the bToken's price falls relative to the reserve asset, losses are magnified.
+    2. **Loan Default Risk**: Extended price downturns may lead to loan defaults if not managed properly.
+    3. **Complexity**: The mechanics of looped positions can be challenging to understand and manage effectively.
+
+    Users should carefully consider their risk tolerance and market outlook before engaging in looping.
+  </Tabs.Tab>
+  
+  <Tabs.Tab>
+    Looping tends to be most advantageous when:
+    
+    1. The bToken's price is close to its BLV, offering maximum capital efficiency and lower downside risk.
+    2. You have a strong conviction in the bToken's short to medium-term price appreciation.
+    3. You understand the risks involved and have a clear exit strategy.
+
+    Remember, while looping near the BLV offers better capital efficiency, it should still be approached 
+    with caution and a thorough understanding of the potential outcomes.
+  </Tabs.Tab>
+  
+  <Tabs.Tab>
+    Baseline has simplified the looping process with a built-in feature:
+
+    1. Deposit your bTokens into the Loop Facility.
+    2. Set your desired leverage level.
+    3. The system automatically loops your position to reach the specified leverage.
+
+    This streamlined process reduces complexity for users while still offering the benefits of a leveraged position.
+  </Tabs.Tab>
+  
+  <Tabs.Tab>
+    Exiting a looped position involves reversing the looping process:
+
+    1. Repay your outstanding debt.
+    2. Access your collateralized bTokens.
+    3. Sell bTokens to repay more debt if necessary.
+
+    You can choose to partially unwind your position or fully exit back to the reserve asset. It's crucial 
+    to monitor your position regularly and have a clear exit strategy to manage risk effectively.
+  </Tabs.Tab>
+</Tabs>

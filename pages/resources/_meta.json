@@ -1,0 +1,10 @@
+{
+  "faq": {
+    "title": "FAQ",
+    "theme": { "breadcrumb": true }
+  },
+  "glossary": {
+    "title": "Glossary",
+    "theme": { "breadcrumb": true }
+  }
+}

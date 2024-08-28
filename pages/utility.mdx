@@ -1,0 +1,47 @@
+import { Cards, Card } from 'nextra/components'
+import { Callout } from "nextra/components";
+
+## Non-Liquidatable Leverage
+
+Beyond its impact on market sentiment, the BLV enables a novel DeFi mechanic: non-liquidatable, oracleless 
+lending. This innovative approach significantly enhances the utility and efficiency of bTokens.
+
+Baseline's unique BLV guarantee allows the protocol to offer leverage on bTokens by preemptively lending 
+their underlying BLV directly from the liquidity pool. Since the protocol can always buy back each bToken 
+at the BLV price, it can never accumulate bad debt from these loans. Any unpaid loans are effectively treated 
+as buybacks at the lowest possible price, allowing users to repay loans on their own terms without worrying 
+about market activity. 
+
+The absence of liquidation risk also eliminates the need for oracles, drastically simplifying the protocol's
+lending implementation. This enables Baseline to offer various forms of non-liquiditable leverage for bToken 
+holders, drastically improving their capital efficiency and liquidity.
+
+### Infinite liquidity
+
+Unlike other most lending protocols, users borrow directly from the protocol-owned reserves rather than from 
+other users. This approach eliminates the risk of third-party lenders removing liquidity during periods of market 
+stress. Instead, liquidity comes directly from its protocol-owned liquidity positions, starting with the Floor 
+position. Whenever a new loan is opened, Baseline pulls the corresponding liquidity directly from the liquidity 
+pool. This allows Baseline to offer infinite liquidity, since there is always more liquidity than the amount of 
+borrowable BLV across the total circulating supply.
+
+<Callout>
+    If you look at the transaction for a loan, you might see a lot of tokens moving around. This is because the
+    protocol is withdrawing the liquidity directly from the pool. 
+</Callout>
+
+### Loan-to-Value: LTV
+
+Loan-to-Value, or LTV, is a crucial concept in lending. It describes the amount of capital you can borrow for 
+the amount of capital collateralized: the higher the LTV, the more efficient the loan. Most lending protocols 
+today rely on a third-party services or governance control to determine safe LTVs for accepted collateral, but 
+Baseline's lending implementation automatically offers the highest possible LTV while still being safe.
+
+In the Baseline system, a bToken's LTV is purely market-driven: as a bToken's price approaches its BLV, users 
+can borrow more relative to their collateral's cost. This introduces a unique dynamic to the bToken market 
+structure, where buyers gain increased access to capital as a bToken's price decreases: the increase in leverage, 
+coupled with an improved risk-return profile, also contributes to sustaining a healthy market premium for a bTokens. 
+
+- Whenever loans are taken in Baseline, users don't choose the amount to borrow against their collateral; 
+the protocol automatically borrows the maximum allowable amount (the full BLV), such that the least amount of collateral
+is needed for the liquidity requested by the

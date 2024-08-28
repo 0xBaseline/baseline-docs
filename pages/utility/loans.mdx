@@ -1,0 +1,60 @@
+import { Callout } from "nextra/components";
+import Image from "next/image";
+import { Tabs } from 'nextra/components'
+import { Cards, Card } from 'nextra/components'
+
+
+## Fixed Term Liquidity Loans
+
+Tokens today present their holders with a dilemma: realizing any gains typically requires selling, 
+sacrificing exposure to future upside in exchange for liquidity. While some tokens may be listed as 
+collateral on lending platforms, the process is restrictive, unreliable, and highly dependent on 
+external liquidity for borrowing capacity.
+
+Coupled with the naturally attention-driven markets and inefficient liquidity structures in crypto today, 
+the opportunity cost problem of holding tokens can result in extreme volatility as traders rotate in and 
+out of different assets. Baseline directly addresses this issue by offering simple fixed-term, fixed-interest
+loans against bToken collateral, giving users a new way to realize the value of their assets without
+sacrificing upside exposure by borrowing. 
+ 
+In Baseline, bTokens can be deposited to withdraw their underlying BLV liquidity for an upfront fee. 
+All collected fees are directed to the Afterburner, ensuring that any generated value from borrowing 
+activity accrues directly to the bToken holders.
+
+
+### Loan Fees & Terms
+
+Baseline's loan fees are paid upfront and pro-rated to a fixed yearly interest rate based on the duration of 
+the loan. Users can configure the duration of the loan in increments of days, providing users full flexibility 
+over loan terms and allowing them to pay only for what they need. Users are limited to one active loan per bToken, 
+but can add collateral to existing positions to increase their borrow position. 
+
+<Callout>
+    In $YES, the fixed-term fee is 9.9% per year, so a 30-day loan would be charged 9.9%*(30/365) = ~.84% of 
+    the loan amount.
+</Callout>
+
+Loans can be repaid early or extended, though early repayments don't result in fee refunds. Thus, it's advisable 
+to open shorter-duration loans and extend as needed rather than initially opting for longer terms. The expiry of 
+the new loan will be the same as the existing loan, and any new extensions will apply to the entire aggregate loan.
+
+While Baseline loans can't be liquidated due to market activity, expired loans are automatically defaulted. 
+This mechanism is crucial for maintaining system efficiency, as Baseline's BLV accounting provisions liquidity 
+for each circulating token: defaulting expired loans prevents "dead supply" accumulation from lost tokens or 
+inaccessible wallets, allowing liquidity to accumulate to remaining bTokens more efficiently. 
+
+<Callout>
+    Because bTokens are burned upon expiration, loans that expire result in the borrowers losing the premium 
+    value of their bToken collateral. As a result, it's important to manage loan terms carefully to avoid defaulting.
+</Callout>
+
+### Boosting
+
+Baseline's unique lending model allowing users to borrow more liquidity without additional collateral when the 
+BLV grows. This is possible because the user’s deposited collateral has increased in value due to the BLV increase: 
+since the lending facility calculates how much can be borrowed based on the BLV of the deposited collateral, 
+the borrowing capacity will have increased. 
+
+For example, if a user initially deposits 1000 bTokens with a $1.00 BLV, they can borrow $1000. If the BLV increases 
+to $1.02, the borrowing capacity rises to $1020, offering an additional $20 of borrowable capital. Boosting is entirely
+options, and any boosts incur the same fees and terms as any other loan in the Credit Facility.

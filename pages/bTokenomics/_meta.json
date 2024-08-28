@@ -1,0 +1,14 @@
+{
+  "dynamic_liquidity": {
+    "title": "Dynamic Liquidity",
+    "theme": { "breadcrumb": true }
+  },
+  "elastic_supply": {
+    "title": "Elastic Supply",
+    "theme": { "breadcrumb": true }
+  },
+  "afterburner": {
+    "title": "Leveraged Buybacks",
+    "theme": { "breadcrumb": true }
+  }
+}

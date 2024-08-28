@@ -1,0 +1,122 @@
+import { Callout } from "nextra/components";
+import Image from "next/image";
+import { Tabs } from 'nextra/components'
+import { Cards, Card } from 'nextra/components'
+
+## Autonomous Market Making
+
+Under the hood, the BLV is actually a side effect of a much larger system. Baseline is also a 
+fully autonomous market making system, rebalancing bToken liquidity positions to passively capture 
+value from market fluctuations over time. Each time a bToken is traded, Baseline accrues a small 
+liquidity surplus, permanently growing the BLV.
+
+Baseline's liquidity rebalances are unique in that they are _permissionlessly executed_: anyone is able 
+to trigger a rebalance strategy, as long as the right liquidity conditions are met. This way, dynamic 
+liquidity is an intrinsic property of bTokens, rather than a service provided by a third party.
+
+## Intelligent Liquidity
+
+Today, most on-chain liquidity is passively deployed as a single static liquidity position. 
+This liquidity is often extremely inefficient and naively priced, requiring significant external 
+capital to be effective. Most importantly, the structure does not allow for any flexibility, preventing
+the liquidity from adapting to changing market conditions. 
+
+Baseline uses a more sophisticated approach to liquidity management. Instead of a single static position,
+the protocol dynamically allocates liquidity across multiple price ranges using four rebalancing strategies:
+`sweep()`, `slide()`, `bump()`, and `drop()`. Each strategy impacts a different part of the liquidity 
+structure and fulfills a specific purpose so that Baseline tokens can offer more resilient and efficient 
+liquidity to their holders.
+
+## Rebalancing Strategies
+
+<Callout emoji="">
+<Tabs items={[ '➡️ Sweep', '⬆️ Bump', '⬅️ Slide', '⬇️ Drop']}>
+  <Tabs.Tab>
+    When the price is trending upwards the protocol calls: `sweep()`
+
+    <video controls autoplay>
+  <source src="/assets/Sweep_1.mp4" type="video/mp4" />
+</video>
+
+    **Description**  
+    A `sweep()` operation adjusts the Anchor and Discovery price ranges to align more closely with the current market price. This ensures that liquidity is optimally distributed in response to upward price movements.
+
+    **Condition**  
+    A `sweep()` is initiated when the price of the token has increased 2% into the Discovery price range.
+
+    **Purpose**  
+    The `sweep()` operation provides a mechanism for the market making system to secure profits and build up surplus capacity. This is accomplished by selling tokens at a higher price and rebuying them for cheaper. 
+
+    <Callout type="info" emoji="" >
+    Every `sweep()` operation serves as a checkpoint, updating the `discovery tick` to the current price.
+    </Callout>
+  </Tabs.Tab>
+ <Tabs.Tab>
+    When the Floor can be moved higher the protocol calls: `bump()`
+
+    <video controls autoplay>
+  <source src="/assets/Bump.mp4" type="video/mp4" />
+</video>
+
+    **Description**  
+    A `bump()` operation shifts the highly concentrated liquidity within the Floor to a slightly higher price range. A `bump()` is a permanent change and cannot be reversed.
+
+    **Condition**  
+    A `bump()` can be initiated when there is sufficient reserve capacity (e.g., ETH or USD) to purchase the entire floating supply at the new, elevated price point. This new price point is one [tick spacing](#uniswap-v3-concepts) above the current Floor.
+
+    **Purpose**  
+    The `bump()` operation provides a mechanism for the market making system to increase the BLV, securing a higher token floor price. 
+  </Tabs.Tab>
+  
+  <Tabs.Tab>
+    When the price is trending downwards the protocol calls: `slide()`
+
+     {/*insert slide animation*/}
+
+    **Description**  
+    A `slide()` operation repositions the Anchor price range around the market price when the price is trending downwards.
+
+    **Condition**  
+    A `slide()` is initiated when the price of the token has decreased 2% from its last recorded checkpoint. 
+
+
+    **Purpose**  
+    The slide() operation aims to absorb sell pressure during downtrends by repositioning the Anchor price range closer to the Floor. This allows the market-making system to absorb sell pressure at a discounted price, while thinning out liquidity in the Anchor, facilitating easier price recovery.
+    
+<Callout type="info" emoji="">
+    Every `slide()` operation serves as a checkpoint, updating the `slide tick` to the current price.
+    </Callout>
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    When the Discovery price range can be moved lower the protocol calls: `drop()`
+
+     {/*insert drop animation*/}
+
+    **Description**  
+    A `drop()` operation repositions the Discovery price range closer to the market price. 
+
+    **Condition**  
+    A `drop()` can be initiated once every 24 hours to reduce the distance between the last recorded `discovery tick` and the current market price by 20%.
+
+    **Purpose**  
+    The `drop()` operation repositions the Discovery range to a slightly lower price range following `slide()` operations. In addition, liquidity in the Discovery is thinned, allowing the price to recover more easily.
+
+    <Callout type="info" emoji="">
+    Every `drop()` operation serves as an update checkpoint for the `discovery tick`, placing it 20% below the previous checkpoint. 
+    </Callout>
+  
+  </Tabs.Tab>
+</Tabs>
+</Callout>
+---
+
+{/* #### Uniswap V3 Concepts
+
+**Ticks**  
+In Uniswap V3 pools, prices are determined using a system called ticks. Each tick represents a very small price increment (1 basis point or 0.01%). As an example, 100 ticks correspond to approximately a 1% change in price.
+
+**Tick Spacing**  
+Uniswap V3 pools use [tick spacing](https://support.uniswap.org/hc/en-us/articles/21069524840589-What-is-a-tick-when-providing-liquidity) to define where liquidity can be allocated. The tick spacing spacing is determined by the pool's swap fee percentage. For example, a pool with a 1% swap fee has a tick spacing of 200. This means liquidity can only be allocated in increments of 200 ticks, which covers approximately a 2% price range.
+
+In Baseline pools, the Floor price range is defined within one tick spacing. The BLV represents the lower bound of this tick spacing. When a `bump()` operation occurs in a 1% fee pool, the system will attempt to move the Floor price range one tick spacing higher (~2% higher).  */}
