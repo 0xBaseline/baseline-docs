@@ -3,6 +3,10 @@
     "title": "Introduction",
     "theme": { "breadcrumb": false }
   },
+  "what": {
+    "title": "What is Baseline",
+    "theme": { "breadcrumb": false }
+  },
   "bTokenomics": {
     "title": "bTokenomics",
     "theme": { "breadcrumb": true }
