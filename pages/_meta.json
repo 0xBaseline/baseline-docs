@@ -21,12 +21,6 @@
     "title": "Smart Contracts",
     "theme": { "breadcrumb": false }
   },
-  "faq": {
-    "display": "hidden"
-  },
-  "glossary": {
-    "display": "hidden"
-  },
   "resources": {
     "title": "Resources",
     "theme": { "breadcrumb": false }
@@ -35,5 +29,4 @@
     "title": "Launching a bToken",
     "theme": { "breadcrumb": false }
   }
- 
 }
