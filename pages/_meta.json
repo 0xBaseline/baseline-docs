@@ -1,32 +1,44 @@
 {
-  "index": {
-    "title": "Introduction",
-    "theme": { "breadcrumb": false }
-  },
-  "trader": {
-    "display": "hidden"
-  },
-  "founders": {
-    "display": "hidden"
-  },
-  "btokenomics": {
-    "title": "bTokenomics",
-    "theme": { "breadcrumb": true }
-  },
-  "utility": {
-    "title": "bToken Utility",
-    "theme": { "breadcrumb": false }
-  },
-  "contracts": {
-    "title": "Smart Contracts",
-    "theme": { "breadcrumb": false }
-  },
-  "resources": {
-    "title": "Resources",
-    "theme": { "breadcrumb": false }
-  },
-  "launching": {
-    "title": "Launching a bToken",
-    "theme": { "breadcrumb": false }
-  }
+    "index": {
+        "title": "Introduction",
+        "theme": {
+            "breadcrumb": false
+        }
+    },
+    "trader": {
+        "display": "hidden"
+    },
+    "founders": {
+        "display": "hidden"
+    },
+    "btokenomics": {
+        "title": "bTokenomics",
+        "theme": {
+            "breadcrumb": true
+        }
+    },
+    "utility": {
+        "title": "bToken Utility",
+        "theme": {
+            "breadcrumb": true
+        }
+    },
+    "contracts": {
+        "title": "Smart Contracts",
+        "theme": {
+            "breadcrumb": false
+        }
+    },
+    "resources": {
+        "title": "Resources",
+        "theme": {
+            "breadcrumb": false
+        }
+    },
+    "launching": {
+        "title": "Launching a bToken",
+        "theme": {
+            "breadcrumb": false
+        }
+    }
 }
