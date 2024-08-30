@@ -29,7 +29,7 @@ the loan. Users can configure the duration of the loan in increments of days, pr
 over loan terms and allowing them to pay only for what they need. Users are limited to one active loan per bToken, 
 but can add collateral to existing positions to increase their borrow position. 
 
-<Callout>
+<Callout type="info" emoji="" >
     In $YES, the fixed-term fee is 9.9% per year, so a 30-day loan would be charged 9.9%*(30/365) = ~.84% of 
     the loan amount.
 </Callout>
@@ -42,7 +42,7 @@ Baseline loans are immune to market-driven liquidations, but they are automatica
 system efficiency, as Baseline's BLV accounting allocates liquidity for every circulating token. Defaulting expired loans prevents the 
 accumulation of "dead supply" from lost tokens or inaccessible wallets, enabling liquidity to more effectively support the remaining bTokens.
 
-<Callout>
+<Callout type="warning" emoji="⚠️">
     Because bTokens are burned upon expiration, loans that expire result in the borrowers losing the premium 
     value of their bToken collateral. As a result, it's important to manage loan terms carefully to avoid defaulting.
 </Callout>
