@@ -3,16 +3,101 @@ import Image from "next/image";
 import { Tabs } from 'nextra/components'
 import { Cards, Card } from 'nextra/components'
 
-## Autonomous Market Making
+## Baseline Market Making
 
-Under the hood, the BLV is actually a side effect of a much larger system. Baseline is also a 
-fully autonomous market making system, rebalancing bToken liquidity positions to passively capture 
+Under the hood, the BLV is a side effect of a much larger system. Baseline is also a 
+fully autonomous market making system, rebalancing bToken liquidity positions to automatically capture 
 value from market fluctuations over time. Each time a bToken is traded, Baseline accrues a small 
 liquidity surplus, permanently growing the BLV.
 
-Baseline's liquidity rebalances are unique in that they are _permissionlessly executed_: anyone is able 
-to trigger a rebalance strategy, as long as the right liquidity conditions are met. This way, dynamic 
-liquidity is an intrinsic property of bTokens, rather than a service provided by a third party.
+Baseline's liquidity rebalances are unique in that they are handled by the protocol and _executed permissionlessly_: 
+There' s no  centralized market maker in charge of liquidity provisioning, the protocol market makes itself through 
+smart contracts.
+
+### Protocol-Owned Liquidity Positions
+
+{/* How BLV is derived, what does it actually mean? Lower bound of the floor range... */}
+
+Baseline allocates liquidity across three distinct price ranges: Floor, Anchor, and Discovery. 
+
+<Tabs items={['📈 Floor', '⚓️ Anchor', '🔎 Discovery']}>
+  <Tabs.Tab>
+   ![Floor](/assets/floor.png)
+
+    The Floor is a narrow price range with highly concentrated liquidity. Its primary function is to ensure that 
+    it can absorb the entire floating supply of a Baseline Token. Think of the Floor as a substantial buy wall 
+    that allows every bToken holder to exit their position at the [Baseline Value (BLV)](/btokenomics).
+
+    You may be wondering where the system sources the capital to guarantee the floor price. The liquidity is 
+    sourced from the presale of the Baseline Token (bToken). Unlike traditional token launches, where presale 
+    funds are typically distributed to the project team, Baseline token launches keep the liquidity in the market 
+    making system. See the [presale](//launching#presale) section to learn how the initial liquidity is provisioned.
+
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+  ![Anchor](/assets/anchor.png)
+
+    The Anchor is a price range with lower liquidity depth compared to the Floor, but covers a broader price span. 
+    Unlike the Floor which is designed to hold price, the Anchor is designed to encourage price discovery and support 
+    trading activity. 
+
+    The Anchor is a dynamic price range that is updated after a [liquidity rebalance](/btokenomics/dynamic_liquidity#rebalancing-strategies). 
+    The Anchor occupies the price range from the market price and extends towards the Floor.
+
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+    ![Discovery](/assets/discovery.png)
+
+    The Discovery is a price range with thicker liquidity compared to the Anchor, and spans an even broader price range. 
+    Similar to Anchor, the Discovery is a dynamic price range that is updated after a [liquidity rebalance](/btokenomics/dynamic_liquidity#rebalancing-strategies). 
+    The Discovery occupies the price range from the market price and extends considerably higher. The Anchor and Discovery 
+    were built with these liquidity profiles in order for the system to take profit during uptrends, and move these profits to the Floor in 
+    order to initiate a `bump()`. This strategy is explained in greater detail in the [`sweep()`](/btokenomics/dynamic_liquidity#rebalancing-strategies) section.
+
+
+  </Tabs.Tab>
+
+</Tabs>
+___
+&nbsp;
+ 
+
+{/* ### Metrics
+- **System Capacity:** The total amount of bTokens that can be absorbed by the system’s reserve assets.
+- **Floating Supply:** The total amount of bTokens outside of the system’s liquidity position a.k.a. the number of 
+bTokens in the hands of potential sellers.
+
+To ensure that all tokens can be redeemed at the BLV, Baseline asserts the condition that `capacity > floating supply` 
+whenever liquidity is deployed.
+
+### Identifying the BLV
+To identify the BLV, Baseline calculates the highest price point at which it can deploy liquidity, while still meeting 
+its solvency requirement (`capacity > floating supply`). 
+
+<Callout type="info" emoji="">
+Capacity is not limited to the Floor price range alone. Capacity can also include the reserve assets available in 
+the Anchor and Discovery price ranges. These reserve assets absorb some of the floating supply, and are also taken into 
+account when calculating the BLV. 
+</Callout>
+
+## Protocol Fees
+
+The protocol generates fees in the following ways:
+
+1. **LP fees** - token is deployed into a 1% Uniswap V3 pool, which means swaps pay 1% when swapping in/out of the pool. 
+This fee goes directly to increasing the BLV. You can learn more about Uniswap fee tiers [here](https://docs.uniswap.org/concepts/protocol/fees).
+2. **Liquidity rebalancing fees** - the protocol rebalances reserves from discovery into floor and anchor when `sweep()` is called. 
+These reserves go toward increasing the BLV.
+3. **Borrow fees** - users pay a one-time per-diem fee when they open or extend a borrow position. This fee goes directly to increasing the BLV. */}
+
+{/* ## Team fees
+During `sweep()` rebalancing, the protocol directs 10% of **surplus** capacity (in bAsset terms) to team multisig. */}
 
 ## Intelligent Liquidity
 
@@ -39,10 +124,15 @@ liquidity to their holders.
 </video>
 
     **Description**  
-    A `sweep()` operation adjusts the Anchor and Discovery price ranges to align more closely with the current market price. This ensures that liquidity is optimally distributed in response to upward price movements.
+     A `sweep()` builds up surplus capacity by accumulating liquidity. By moving liquidity from higher price 
+     ranges downwards, `sweep()` enables Baseline to net buy more bTokens with the same amount of assets. 
+     
+     A `sweep()` also adjusts the Anchor and Discovery price ranges to align more closely with the current market 
+     price. This ensures that liquidity is optimally distributed in response to upward price movements.
 
     **Condition**  
-    A `sweep()` is initiated when the price of the token has increased 2% into the Discovery price range.
+    A `sweep()` is called when the token price is trending upwards. More specifically, when the 
+    current price of the token has increased 2% into the Discovery liquidity position.
 
     **Purpose**  
     The `sweep()` operation provides a mechanism for the market making system to secure profits and build up surplus capacity. This is accomplished by selling tokens at a higher price and rebuying them for cheaper. 
@@ -59,10 +149,12 @@ liquidity to their holders.
 </video>
 
     **Description**  
-    A `bump()` operation shifts the highly concentrated liquidity within the Floor to a slightly higher price range. A `bump()` is a permanent change and cannot be reversed.
+    A `bump()` operation shifts the highly concentrated liquidity within the Floor to a slightly higher price range. 
+    A `bump()` is a permanent change and cannot be reversed.
 
     **Condition**  
-    A `bump()` can be initiated when there is sufficient reserve capacity (e.g., ETH or USD) to purchase the entire floating supply at the new, elevated price point. This new price point is one [tick spacing](#uniswap-v3-concepts) above the current Floor.
+    A `bump()` can be initiated when there is sufficient reserve capacity (e.g., ETH or USD) to purchase the entire 
+    floating supply at the new, elevated price point. This new price point is one tick spacing above the current Floor.
 
     **Purpose**  
     The `bump()` operation provides a mechanism for the market making system to increase the BLV, securing a higher token floor price. 
@@ -81,7 +173,9 @@ liquidity to their holders.
 
 
     **Purpose**  
-    The slide() operation aims to absorb sell pressure during downtrends by repositioning the Anchor price range closer to the Floor. This allows the market-making system to absorb sell pressure at a discounted price, while thinning out liquidity in the Anchor, facilitating easier price recovery.
+    The slide() operation aims to absorb sell pressure during downtrends by repositioning the Anchor price range closer to 
+    the Floor. This allows the market-making system to absorb sell pressure at a discounted price, while thinning out liquidity 
+    in the Anchor, facilitating easier price recovery.
     
 <Callout type="info" emoji="">
     Every `slide()` operation serves as a checkpoint, updating the `slide tick` to the current price.

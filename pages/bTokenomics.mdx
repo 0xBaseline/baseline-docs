@@ -6,99 +6,30 @@ import { Cards, Card } from 'nextra/components'
 ## BLV: The Baseline Value
 
 One of the most recognizable features of a Baseline Token is the distinctive yellow line on the chart,
-representing the bToken's **Baseline Value (BLV)**: its guaranteed minimum price.
+representing the bToken's **Baseline Value (BLV)**: the guaranteed minimum price of a Baseline token.
 
 ![BLVChart](/assets/blvchart.png)
 
 {/* content fill: why is the BLV important to users? - known maximum downside when entering a trade, used as a
 general hueristic for the amount of liquidity permanently accumulated by the system */}
 
-Baseline utilizes protocol-owned liquidity—socialized capital owned and managed by smart contracts—to ensure a 
-bToken's BLV. In Baseline, all liquidity is managed directly inside Uniswap V3 concentrated liquidity positions. 
-This way, the BLV reflects a directly redeemable value in the public market, rather than a proxy value for an 
-external balance sheet that's inaccessible to the average holder.
+The BLV is set by reserving enough liquidity in the pool to buy back the entire floating supply of the token. Put simply, 
+the BLV is the price at which the last token could be sold if all holders exit.
+This liquidity is locked and cannot be removed by anyone, including the team. This means the BLV can never decrease and 
+only increases over time.
 
-A bToken's BLV is calculated based on the highest price at which the socialized capital could buy back the entire 
-token supply. Put differently, if every holder decided to sell their bTokens, the BLV is the price that 
-the last token would be sold at.
+Baseline uses protocol-owned liquidity managed by smart contracts within Uniswap V3 concentrated positions to 
+guarantee a bToken's BLV. This makes the BLV a directly redeemable value on the public market, unlike the 
+estimated inaccessible book values commonly found in other protocols.
+
+A bToken's BLV is calculated based on the highest price at which the system could buy back the entire 
+token supply. Put differently, if every holder decided to sell their bTokens, the BLV is the price at which
+the last token would be sold.
 
 <Callout type="warning" emoji="⚠️"> 
-  BLV price is denominated in the underlying liquidity token, called the ["reserve asset"](/resources/glossary#ra). For example,
-  if a bToken is paired in ETH instead of USDC, then the BLV will be priced in ETH terms, not USD. As a result,
-  if ETH goes down, the BLV of the bToken will go down as well. 
+  BLV price is denominated in the underlying liquidity token, called the ["reserve asset"](/resources/glossary#ra). 
+  For example, if a bToken is paired with ETH, its BLV is priced in ETH, not USD. Therefore,  
+  if ETH's price falls against USD, the bToken's BLV stays the same in ETH but drops in USD. 
 </Callout>
 
 {/* add unruggable liquidity here? prevents scams, rugpulls, and other weird shit */}
-
-### Protocol-Owned Liquidity Positions
-
-{/* How BLV is derived, what does it actually mean? Lower bound of the floor range... */}
-
-Baseline allocates liquidity across three distinct price ranges: Floor, Anchor, and Discovery. 
-
-<Tabs items={['📈 Floor', '⚓️ Anchor', '🔎 Discovery']}>
-  <Tabs.Tab>
-   ![Floor](/assets/floor.png)
-
-    The Floor is a narrow price range with highly concentrated liquidity. Its primary function is to ensure that 
-    it can absorb the entire floating supply of a Baseline Token. Think of the Floor as a substantial buy wall 
-    that allows every bToken holder to exit their position at the [Baseline Value (BLV)](/concepts/blv).
-
-    You may be wondering where the system sources the capital to guarantee the floor price. The liquidity is 
-    sourced from the presale of the Baseline Token (bToken). Unlike traditional token launches, where presale 
-    funds are typically distributed to the project team, Baseline token launches keep the liquidity in the market 
-    making system. See the [presale](/launching#presale) section to learn how the initial liquidity is provisioned.
-
-
-  </Tabs.Tab>
-
-  <Tabs.Tab>
-
-  ![Anchor](/assets/anchor.png)
-
-    The Anchor is a price range with lower liquidity depth compared to the Floor, but covers a broader price span. 
-    Unlike the Floor which is designed to hold price, the Anchor is designed to encourage price discovery and support 
-    trading activity. 
-
-    The Anchor is a dynamic price range that is updated after a [liquidity rebalance](/concepts/market_making#rebalancing-liquidity). The Anchor occupies the price range from the market price and extends towards the Floor.
-
-
-  </Tabs.Tab>
-
-  <Tabs.Tab>
-
-    ![Discovery](/assets/discovery.png)
-
-    The Discovery is a price range with thicker liquidity compared to the Anchor, and spans an even broader price range. Similar to Anchor, the Discovery is a dynamic price range that is updated after a [liquidity rebalance](/concepts/market_making#rebalancing-liquidity). The Discovery occupies the price range from the market price and extends considerably higher. The Anchor and Discovery were built with these liquidity profiles in order for the system to take profit during uptrends, and move these profits to the Floor in order to initiate a `bump()`. This strategy is explained in greater detail in the [`sweep()`](/concepts/market_making#rebalancing-liquidity) section.
-
-
-  </Tabs.Tab>
-
-</Tabs>
-___
-&nbsp;
- 
-
-{/* ### Metrics
-- **System Capacity:** The total amount of bTokens that can be absorbed by the system’s reserve assets.
-- **Floating Supply:** The total amount of bTokens outside of the system’s liquidity position a.k.a. the number of bTokens in the hands of potential sellers.
-
-To ensure that all tokens can be redeemed at the BLV, Baseline asserts the condition that `capacity > floating supply` whenever liquidity is deployed.
-
-### Identifying the BLV
-To identify the BLV, Baseline calculates the highest price point at which it can deploy liquidity, while still meeting its solvency requirement (`capacity > floating supply`). 
-
-<Callout type="info" emoji="">
-Capacity is not limited to the Floor price range alone. Capacity can also include the reserve assets available in the Anchor and Discovery price ranges. These reserve assets absorb some of the floating supply, and are also taken into account when calculating the BLV. 
-</Callout>
-
-## Protocol Fees
-
-The protocol generates fees in the following ways:
-
-1. **LP fees** - token is deployed into a 1% Uniswap V3 pool, which means swaps pay 1% when swapping in/out of the pool. This fee goes directly to increasing the BLV. You can learn more about Uniswap fee tiers [here](https://docs.uniswap.org/concepts/protocol/fees).
-2. **Liquidity rebalancing fees** - the protocol rebalances reserves from discovery into floor and anchor when `sweep()` is called. These reserves go toward increasing the BLV.
-3. **Borrow fees** - users pay a one-time per-diem fee when they open or extend a borrow position. This fee goes directly to increasing the BLV. */}
-
-{/* ## Team fees
-During `sweep()` rebalancing, the protocol directs 10% of **surplus** capacity (in bAsset terms) to team multisig. */}

@@ -3,11 +3,13 @@
     "title": "Introduction",
     "theme": { "breadcrumb": false }
   },
-  "what": {
-    "title": "What is Baseline",
-    "theme": { "breadcrumb": false }
+  "trader": {
+    "display": "hidden"
   },
-  "bTokenomics": {
+  "founders": {
+    "display": "hidden"
+  },
+  "btokenomics": {
     "title": "bTokenomics",
     "theme": { "breadcrumb": true }
   },
@@ -33,4 +35,5 @@
     "title": "Launching a bToken",
     "theme": { "breadcrumb": false }
   }
+ 
 }

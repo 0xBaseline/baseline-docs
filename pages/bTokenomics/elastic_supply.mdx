@@ -17,19 +17,20 @@ they grow and shrink in response to market demand.
 Due to Baseline's market making, bTokens are more naturally resilient to common market manipulation. Tactics 
 such as cornering the supply ("bundling"), spoofing volume, and pushing price in a specific direction now 
 require significantly higher capital expenditure than for traditional tokens. As a result, bToken markets are
-more authentic and honest than what you traditionally see on token screeners and centralized exchanges.
+more authentic and reliable than what you traditionally see on token screeners and centralized exchanges.
 
 ## The Solvency Invariant
 
 By being the sole issuer of bTokens, Baseline also gains certain guarantees in its liquidity accounting: 
-because bTokens cannot be minted externally, the protocol knows the circulating supply at any given time 
-by discounting any bTokens inside its liquidity positions from the total supply.
+because bTokens cannot be minted externally, the protocol knows the circulating supply at any given time.
 
-To ensure that the liquidity structure remains solvent across rebalances, Baseline uses the invariant  
-`Capacity > Circulating Supply`  to ensure that the liquidity structure can support the outstanding supply. 
-In this invariant, `Capacity` is calculated as the total amount of bTokens purchasable across all the 
-protocol-owned liquidity positions. `Circulating Supply` represents the total amount of sellable bTokens 
-purchased by external parties.
+To ensure that the liquidity structure remains solvent across rebalances, Baseline uses the invariant 
+
+`Capacity > Circulating Supply`  
+
+to ensure that the liquidity structure can support the outstanding supply. 
+In this invariant, `Capacity` is calculated as the total amount of bTokens purchasable across all of the 
+protocol-owned liquidity positions. `Circulating Supply` represents the total amount of bTokens purchased from the liquidity pool.
 
 <Callout>
   The `Circulating Supply` is not the total token supply of the contract; additional bTokens sitting 
@@ -38,5 +39,5 @@ purchased by external parties.
 </Callout>
 
 The invariant is simple: check that the current configuration of the protocol's liquidity positions can 
-buy back more than all of the tokens circulation. While basic, this one check is what keeps the Baseline 
-system secure throughout its constantly changing liquidity positions and circulating supply.
+buy back more than all of the tokens circulation. While basic, this single check is what keeps the Baseline 
+system secure despite constant changes in liquidity positions and circulating supply.
