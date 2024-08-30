@@ -7,8 +7,8 @@
     "title": "Glossary",
     "theme": { "breadcrumb": true }
   },
-"links": {
+  "links": {
   "title": "Links",
   "theme": { "breadcrumb": true }
-}
+  }
 }
