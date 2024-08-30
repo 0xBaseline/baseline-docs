@@ -6,5 +6,9 @@
   "glossary": {
     "title": "Glossary",
     "theme": { "breadcrumb": true }
-  }
+  },
+"links": {
+  "title": "Links",
+  "theme": { "breadcrumb": true }
+}
 }
