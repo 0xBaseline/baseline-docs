@@ -1,0 +1,227 @@
+import { Callout } from "nextra/components";
+import Image from "next/image";
+import { Tabs } from 'nextra/components'
+import { Cards, Card } from 'nextra/components'
+
+## Baseline Market Making
+
+Under the hood, the BLV is a side effect of a much larger system. Baseline is also a 
+fully autonomous market making system, rebalancing bToken liquidity positions to automatically capture 
+value from market fluctuations over time. Each time a bToken is traded, Baseline accrues a small 
+liquidity surplus, permanently growing the BLV.
+
+Baseline's liquidity rebalances are unique in that they are handled by the protocol and _executed permissionlessly_: 
+There's no  centralized market maker in charge of liquidity provisioning, the protocol market makes itself through 
+smart contracts.
+
+
+The key difference between Baseline and traditional market-making strategies is Baseline's focus on maximizing value for 
+its token holders. It does this by providing deep liquidity on the buy side to create a rising floor price and continuous 
+liquidity on the sell side for constant price discovery.
+
+![306](/assets/306.png)
+
+In Baseline, profits from market making are redistributed to token holders, ensuring fair token distribution and supporting 
+positive price trends. This approach is possible because the entire token supply is minted and managed within Baseline’s automated 
+market-making system.
+
+
+### Protocol-Owned Liquidity Positions
+
+{/* How BLV is derived, what does it actually mean? Lower bound of the floor range... */}
+
+Baseline allocates liquidity across three distinct price ranges: Floor, Anchor, and Discovery. 
+
+<Tabs items={['📈 Floor', '⚓️ Anchor', '🔎 Discovery']}>
+  <Tabs.Tab>
+   ![floor](/assets/floor.png)
+
+    The Floor is a narrow price range with highly concentrated liquidity. Its primary function is to ensure that 
+    it can absorb the entire floating supply of a Baseline Token. Think of the Floor as a substantial buy wall 
+    that allows every bToken holder to exit their position at the [Baseline Value (BLV)](/concepts).
+
+    You may be wondering where the system sources the capital to guarantee the floor price. The liquidity is 
+    sourced from the presale of the Baseline Token (bToken). Unlike traditional token launches, where presale 
+    funds are typically distributed to the project team, Baseline token launches keep the liquidity in the market 
+    making system. See the [presale](//launching#presale) section to learn how the initial liquidity is provisioned.
+
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+  ![anchor](/assets/anchor.png)
+
+    The Anchor is a price range with lower liquidity depth compared to the Floor, but covers a broader price span. 
+    Unlike the Floor which is designed to hold price, the Anchor is designed to encourage price discovery and support 
+    trading activity. 
+
+    The Anchor is a dynamic price range that is updated after a [liquidity rebalance](/concepts/dynamic_liquidity#rebalancing-strategies). 
+    The Anchor occupies the price range from the market price and extends towards the Floor.
+
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+    ![discovery](/assets/discovery.png)
+
+    The Discovery is a price range with thicker liquidity compared to the Anchor, and spans an even broader price range. 
+    Similar to Anchor, the Discovery is a dynamic price range that is updated after a [liquidity rebalance](/concepts/dynamic_liquidity#rebalancing-strategies). 
+    The Discovery occupies the price range from the market price and extends considerably higher. The Anchor and Discovery 
+    were built with these liquidity profiles in order for the system to take profit during uptrends, and move these profits to the Floor in 
+    order to initiate a `bump()`. This strategy is explained in greater detail in the [`sweep()`](/concepts/dynamic_liquidity#rebalancing-strategies) section.
+
+
+  </Tabs.Tab>
+
+</Tabs>
+___
+{/*&nbsp;*/}
+
+{/* ### Metrics
+- **System Capacity:** The total amount of bTokens that can be absorbed by the system’s reserve assets.
+- **Floating Supply:** The total amount of bTokens outside of the system’s liquidity position a.k.a. the number of 
+bTokens in the hands of potential sellers.
+
+To ensure that all tokens can be redeemed at the BLV, Baseline asserts the condition that `capacity > floating supply` 
+whenever liquidity is deployed.
+
+### Identifying the BLV
+To identify the BLV, Baseline calculates the highest price point at which it can deploy liquidity, while still meeting 
+its solvency requirement (`capacity > floating supply`). 
+
+<Callout type="info" emoji="">
+Capacity is not limited to the Floor price range alone. Capacity can also include the reserve assets available in 
+the Anchor and Discovery price ranges. These reserve assets absorb some of the floating supply, and are also taken into 
+account when calculating the BLV. 
+</Callout>
+
+## Protocol Fees
+
+The protocol generates fees in the following ways:
+
+1. **LP fees** - token is deployed into a 1% Uniswap V3 pool, which means swaps pay 1% when swapping in/out of the pool. 
+This fee goes directly to increasing the BLV. You can learn more about Uniswap fee tiers [here](https://docs.uniswap.org/concepts/protocol/fees).
+2. **Liquidity rebalancing fees** - the protocol rebalances reserves from discovery into floor and anchor when `sweep()` is called. 
+These reserves go toward increasing the BLV.
+3. **Borrow fees** - users pay a one-time per-diem fee when they open or extend a borrow position. This fee goes directly to increasing the BLV. */}
+
+{/* ## Team fees
+During `sweep()` rebalancing, the protocol directs 10% of **surplus** capacity (in bAsset terms) to team multisig. */}
+
+## Intelligent Liquidity
+
+Today, most on-chain liquidity is passively deployed as a single static liquidity position. 
+This liquidity is often extremely inefficient and naively priced, requiring significant external 
+capital to be effective. Most importantly, the structure does not allow for any flexibility, preventing
+the liquidity from adapting to changing market conditions. 
+
+Baseline uses a more sophisticated approach to liquidity management. Instead of a single static position,
+the protocol dynamically allocates liquidity across multiple price ranges using four rebalancing strategies:
+`sweep()`, `slide()`, `bump()`, and `drop()`. Each strategy impacts a different part of the liquidity 
+structure and fulfills a specific purpose so that Baseline tokens can offer more resilient and efficient 
+liquidity to their holders.
+
+## Rebalancing Strategies
+
+<Callout emoji="">
+<Tabs items={[ '➡️ Sweep', '⬆️ Bump', '⬅️ Slide', '⬇️ Drop']}>
+  <Tabs.Tab>
+    When the price is trending upwards the protocol calls: `sweep()`
+
+    <video controls autoplay>
+  <source src="/assets/Sweep_1.mp4" type="video/mp4" />
+</video>
+
+    **Description**  
+     A `sweep()` builds up surplus capacity by accumulating liquidity. By moving liquidity from higher price 
+     ranges downwards, `sweep()` enables Baseline to net buy more bTokens with the same amount of assets. 
+     
+     A `sweep()` also adjusts the Anchor and Discovery price ranges to align more closely with the current market 
+     price. This ensures that liquidity is optimally distributed in response to upward price movements.
+
+    **Condition**  
+    A `sweep()` is called when the token price is trending upwards. More specifically, when the 
+    current price of the token has increased 2% into the Discovery liquidity position.
+
+    **Purpose**  
+    The `sweep()` operation provides a mechanism for the market making system to secure profits and build up surplus capacity. This is accomplished by selling tokens at a higher price and rebuying them for cheaper. 
+
+    <Callout type="info" emoji="" >
+    Every `sweep()` operation serves as a checkpoint, updating the `discovery tick` to the current price.
+    </Callout>
+  </Tabs.Tab>
+ <Tabs.Tab>
+    When the Floor can be moved higher the protocol calls: `bump()`
+
+    <video controls autoplay>
+  <source src="/assets/Bump.mp4" type="video/mp4" />
+</video>
+
+    **Description**  
+    A `bump()` operation shifts the highly concentrated liquidity within the Floor to a slightly higher price range. 
+    A `bump()` is a permanent change and cannot be reversed.
+
+    **Condition**  
+    A `bump()` can be initiated when there is sufficient reserve capacity (e.g., ETH or USD) to purchase the entire 
+    floating supply at the new, elevated price point. This new price point is one tick spacing above the current Floor.
+
+    **Purpose**  
+    The `bump()` operation provides a mechanism for the market making system to increase the BLV, securing a higher token floor price. 
+  </Tabs.Tab>
+  
+  <Tabs.Tab>
+    When the price is trending downwards the protocol calls: `slide()`
+
+     {/*insert slide animation*/}
+
+    **Description**  
+    A `slide()` operation repositions the Anchor price range around the market price when the price is trending downwards.
+
+    **Condition**  
+    A `slide()` is initiated when the price of the token has decreased 2% from its last recorded checkpoint. 
+
+
+    **Purpose**  
+    The slide() operation aims to absorb sell pressure during downtrends by repositioning the Anchor price range closer to 
+    the Floor. This allows the market-making system to absorb sell pressure at a discounted price, while thinning out liquidity 
+    in the Anchor, facilitating easier price recovery.
+    
+<Callout type="info" emoji="">
+    Every `slide()` operation serves as a checkpoint, updating the `slide tick` to the current price.
+    </Callout>
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    When the Discovery price range can be moved lower the protocol calls: `drop()`
+
+     {/*insert drop animation*/}
+
+    **Description**  
+    A `drop()` operation repositions the Discovery price range closer to the market price. 
+
+    **Condition**  
+    A `drop()` can be initiated once every 24 hours to reduce the distance between the last recorded `discovery tick` and the current market price by 20%.
+
+    **Purpose**  
+    The `drop()` operation repositions the Discovery range to a slightly lower price range following `slide()` operations. In addition, liquidity in the Discovery is thinned, allowing the price to recover more easily.
+
+    <Callout type="info" emoji="">
+    Every `drop()` operation serves as an update checkpoint for the `discovery tick`, placing it 20% below the previous checkpoint. 
+    </Callout>
+  
+  </Tabs.Tab>
+</Tabs>
+</Callout>
+---
+
+{/* #### Uniswap V3 Concepts
+
+**Ticks**  
+In Uniswap V3 pools, prices are determined using a system called ticks. Each tick represents a very small price increment (1 basis point or 0.01%). As an example, 100 ticks correspond to approximately a 1% change in price.
+
+**Tick Spacing**  
+Uniswap V3 pools use [tick spacing](https://support.uniswap.org/hc/en-us/articles/21069524840589-What-is-a-tick-when-providing-liquidity) to define where liquidity can be allocated. The tick spacing spacing is determined by the pool's swap fee percentage. For example, a pool with a 1% swap fee has a tick spacing of 200. This means liquidity can only be allocated in increments of 200 ticks, which covers approximately a 2% price range.
+
+In Baseline pools, the Floor price range is defined within one tick spacing. The BLV represents the lower bound of this tick spacing. When a `bump()` operation occurs in a 1% fee pool, the system will attempt to move the Floor price range one tick spacing higher (~2% higher).  */}

@@ -1,38 +1,50 @@
 {
-  "index": {
-    "title": "What is Baseline?",
-    "theme": { "breadcrumb": false }
-  },
-  "blv": {
-    "title": "Baseline Value (BLV)",
-    "theme": { "breadcrumb": false }
-  },
-  "concepts": {
-    "title": "Protocol Mechanisms",
-    "theme": { "breadcrumb": false }
-  },
-  "contracts": {
-    "title": "Contracts",
-    "theme": { "breadcrumb": false }
-  },
-  "security": {
-    "title": "Security",
-    "theme": { "breadcrumb": false }
-  },
-  "faq": {
-    "title": "FAQ",
-    "theme": {
-      "breadcrumb": false
+    "index": {
+        "title": "Introduction",
+        "theme": {
+            "breadcrumb": false
+        }
+    },
+    "trader": {
+        "title": "Traders",
+        "theme": {
+            "breadcrumb": false
+        }
+    },
+    "founders": {
+        "title": "Founders",
+        "theme": {
+            "breadcrumb": false
+        }
+    },
+    "concepts": {
+        "title": "bTokenomics",
+        "theme": {
+            "breadcrumb": true
+        }
+    },
+    "utility": {
+        "title": "bToken Utility",
+        "theme": {
+            "breadcrumb": true
+        }
+    },
+    "contracts": {
+        "title": "Smart Contracts",
+        "theme": {
+            "breadcrumb": false
+        }
+    },
+    "resources": {
+        "title": "Resources",
+        "theme": {
+            "breadcrumb": false
+        }
+    },
+    "launching": {
+        "title": "Launching a bToken",
+        "theme": {
+            "breadcrumb": false
+        }
     }
-  },
-  "glossary": {
-    "title": "Glossary",
-    "theme": {
-      "breadcrumb": false
-    }
-  },
-  "resources": {
-    "title": "Resources",
-    "theme": { "breadcrumb": false }
-  }
 }

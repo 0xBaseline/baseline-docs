@@ -1,14 +1,14 @@
 {
-  "market_making": {
-    "title": "Market Making",
+  "dynamic_liquidity": {
+    "title": "Dynamic Liquidity",
     "theme": { "breadcrumb": true }
   },
-  "lending": {
-    "title": "Credit Facility",
+  "elastic_supply": {
+    "title": "Elastic Supply",
     "theme": { "breadcrumb": true }
   },
-  "fees": {
-    "title": "Fees",
-    "theme": { "breadcrumb": false }
+  "afterburner": {
+    "title": "Leveraged Buybacks",
+    "theme": { "breadcrumb": true }
   }
 }
