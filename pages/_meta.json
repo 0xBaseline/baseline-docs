@@ -8,13 +8,13 @@
     "trader": {
         "title": "Traders",
         "theme": {
-            "breadcrumb": true
+            "breadcrumb": false
         }
     },
     "founders": {
         "title": "Founders",
         "theme": {
-            "breadcrumb": true
+            "breadcrumb": false
         }
     },
     "concepts": {
@@ -35,7 +35,7 @@
             "breadcrumb": false
         }
     },
-    
+
     "contracts": {
         "title": "Smart Contracts",
         "theme": {
