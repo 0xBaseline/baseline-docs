@@ -6,13 +6,13 @@
         }
     },
     "trader": {
-        "title": "Traders",
+        "title": " For Traders",
         "theme": {
             "breadcrumb": false
         }
     },
     "founders": {
-        "title": "Founders",
+        "title": "For Founders",
         "theme": {
             "breadcrumb": false
         }
