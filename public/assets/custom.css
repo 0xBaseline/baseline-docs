@@ -1,0 +1,9 @@
+/* custom.css */
+
+.sidebar-group {
+  display: none;
+}
+
+.sidebar-group.active {
+  display: block;
+}

@@ -8,13 +8,13 @@
     "trader": {
         "title": "Traders",
         "theme": {
-            "breadcrumb": false
+            "breadcrumb": true
         }
     },
     "founders": {
         "title": "Founders",
         "theme": {
-            "breadcrumb": false
+            "breadcrumb": true
         }
     },
     "concepts": {
@@ -34,11 +34,12 @@
         "theme": {
             "breadcrumb": false
         }
+        
     },
     "resources": {
         "title": "Resources",
         "theme": {
-            "breadcrumb": false
+            "breadcrumb": false   
         }
     },
     "launching": {
