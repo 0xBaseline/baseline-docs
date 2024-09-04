@@ -5,23 +5,23 @@ import { Cards, Card } from 'nextra/components'
 
 ## Baseline Market Making
 
-Under the hood, the BLV is a side effect of a much larger system. Baseline is also a 
+Under the hood, the BLV is a feature of a much larger system. Baseline is also a 
 fully autonomous market making system, rebalancing bToken liquidity positions to automatically capture 
-value from market fluctuations over time. Each time a bToken is traded, Baseline accrues a small 
-liquidity surplus, permanently growing the BLV.
+value from market fluctuations over time. Each time a bToken is traded or borrowed, Baseline accrues a small 
+liquidity surplus via swap fees aor interest, permanently growing the BLV.
 
 Baseline's liquidity rebalances are unique in that they are handled by the protocol and _executed permissionlessly_: 
-There's no  centralized market maker in charge of liquidity provisioning, the protocol market makes itself through 
+There's no  centralized market maker in charge of liquidity provisioning, the protocol executes market making operations itself through 
 smart contracts.
 
 
-The key difference between Baseline and traditional market-making strategies is Baseline's focus on maximizing value for 
+The key difference between Baseline and traditional market-making strategies is that Baseline aims to maximize value for 
 its token holders. It does this by providing deep liquidity on the buy side to create a rising floor price and continuous 
 liquidity on the sell side for constant price discovery.
 
 ![306](/assets/306.png)
 
-In Baseline, profits from market making are redistributed to token holders, ensuring fair token distribution and supporting 
+In Baseline, profits from market making and lending are redistributed to token holders, ensuring fair value distribution and supporting 
 positive price trends. This approach is possible because the entire token supply is minted and managed within Baseline’s automated 
 market-making system.
 
@@ -40,7 +40,7 @@ Baseline allocates liquidity across three distinct price ranges: Floor, Anchor, 
     it can absorb the entire floating supply of a Baseline Token. Think of the Floor as a substantial buy wall 
     that allows every bToken holder to exit their position at the [Baseline Value (BLV)](/concepts).
 
-    You may be wondering where the system sources the capital to guarantee the floor price. The liquidity is 
+    You may be wondering where the system sources the initial capital to guarantee the floor price. The liquidity is 
     sourced from the presale of the Baseline Token (bToken). Unlike traditional token launches, where presale 
     funds are typically distributed to the project team, Baseline token launches keep the liquidity in the market 
     making system. See the [presale](//launching#presale) section to learn how the initial liquidity is provisioned.
@@ -126,7 +126,26 @@ liquidity to their holders.
 ## Rebalancing Strategies
 
 <Callout emoji="">
-<Tabs items={[ '➡️ Sweep', '⬆️ Bump', '⬅️ Slide', '⬇️ Drop']}>
+<Tabs items={[ '⬆️ Bump', '➡️ Sweep', '⬅️ Slide', '⬇️ Drop']}>
+   <Tabs.Tab>
+    When the Floor can be moved higher the protocol calls: `bump()`
+
+    <video controls autoplay>
+  <source src="/assets/Bump.mp4" type="video/mp4" />
+</video>
+
+    **Description**  
+    A `bump()` operation shifts the highly concentrated liquidity within the Floor to a slightly higher price range. 
+    A `bump()` is a permanent change and cannot be reversed.
+
+    **Condition**  
+    A `bump()` can be initiated when there is sufficient reserve capacity (e.g., ETH or USD) to purchase the entire 
+    floating supply at the new, elevated price point. This new price point is one tick spacing above the current Floor.
+
+    **Purpose**  
+    The `bump()` operation provides a mechanism for the market making system to increase the BLV, securing a higher token floor price. 
+  </Tabs.Tab>
+  
   <Tabs.Tab>
     When the price is trending upwards the protocol calls: `sweep()`
 
@@ -152,24 +171,7 @@ liquidity to their holders.
     Every `sweep()` operation serves as a checkpoint, updating the `discovery tick` to the current price.
     </Callout>
   </Tabs.Tab>
- <Tabs.Tab>
-    When the Floor can be moved higher the protocol calls: `bump()`
 
-    <video controls autoplay>
-  <source src="/assets/Bump.mp4" type="video/mp4" />
-</video>
-
-    **Description**  
-    A `bump()` operation shifts the highly concentrated liquidity within the Floor to a slightly higher price range. 
-    A `bump()` is a permanent change and cannot be reversed.
-
-    **Condition**  
-    A `bump()` can be initiated when there is sufficient reserve capacity (e.g., ETH or USD) to purchase the entire 
-    floating supply at the new, elevated price point. This new price point is one tick spacing above the current Floor.
-
-    **Purpose**  
-    The `bump()` operation provides a mechanism for the market making system to increase the BLV, securing a higher token floor price. 
-  </Tabs.Tab>
   
   <Tabs.Tab>
     When the price is trending downwards the protocol calls: `slide()`

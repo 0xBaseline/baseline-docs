@@ -29,6 +29,13 @@
             "breadcrumb": true
         }
     },
+    "launching": {
+        "title": "Launching a bToken",
+        "theme": {
+            "breadcrumb": false
+        }
+    },
+    
     "contracts": {
         "title": "Smart Contracts",
         "theme": {
@@ -41,11 +48,6 @@
         "theme": {
             "breadcrumb": false   
         }
-    },
-    "launching": {
-        "title": "Launching a bToken",
-        "theme": {
-            "breadcrumb": false
-        }
     }
+  
 }

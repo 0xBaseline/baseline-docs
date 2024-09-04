@@ -21,19 +21,17 @@ more authentic and reliable than what you traditionally see on token screeners a
 
 ## The Solvency Invariant
 
-By being the sole issuer of bTokens, Baseline also gains certain guarantees in its liquidity accounting: 
-because bTokens cannot be minted externally, the protocol knows the circulating supply at any given time.
+Since bTokens cannot be minted externally, the protocol knows the circulating supply at any given time. 
 
-To ensure that the liquidity structure remains solvent across rebalances, Baseline uses the invariant 
+To ensure that the liquidity structure remains solvent across rebalances, Baseline uses the invariant `Capacity > Circulating Supply`. 
+The invariant checks to make sure the liquidity in the pool can buy back all of the tokens in circulation.
 
-`Capacity > Circulating Supply`  
-
-to ensure that the liquidity structure can support the outstanding supply. 
-In this invariant, `Capacity` is calculated as the total amount of bTokens purchasable across all of the 
-protocol-owned liquidity positions. `Circulating Supply` represents the total amount of bTokens purchased from the liquidity pool.
+- `Capacity` is calculated as the total amount of bTokens purchasable across all of the 
+protocol-owned liquidity positions. 
+- `Circulating Supply` represents the total amount of bTokens purchased from the liquidity pool.
 
 <Callout>
-  The `Circulating Supply` is not the total token supply of the contract; additional bTokens sitting 
+  The `Circulating Supply` is net amount of tokens purchased from the protocol. Additional bTokens sitting 
   inside Baseline's liquidity positions are not counted in the supply, and therefore do not affect the total market cap 
   of the bToken.
 </Callout>
