@@ -1,0 +1,14 @@
+{
+  "loans": {
+    "title": "Loans",
+    "theme": { "breadcrumb": true }
+  },
+  "loops": {
+    "title": "Loops",
+    "theme": { "breadcrumb": true }
+  },
+  "lps": {
+    "title": "Leveraged LPs",
+    "theme": { "breadcrumb": true }
+  } 
+}
