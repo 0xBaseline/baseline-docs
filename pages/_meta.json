@@ -4,18 +4,7 @@
         "theme": {
             "breadcrumb": false
         }
-    },
-    "trader": {
-        "title": " For Traders",
-        "theme": {
-            "breadcrumb": false
-        }
-    },
-    "founders": {
-        "title": "For Founders",
-        "theme": {
-            "breadcrumb": false
-        }
+  
     },
     "concepts": {
         "title": "bTokenomics",
