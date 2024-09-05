@@ -35,13 +35,11 @@
             "breadcrumb": false
         }
     },
-
     "contracts": {
         "title": "Smart Contracts",
         "theme": {
             "breadcrumb": false
-        }
-        
+        }  
     },
     "resources": {
         "title": "Resources",
