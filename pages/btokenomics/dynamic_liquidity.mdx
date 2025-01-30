@@ -164,6 +164,9 @@ In previous versions, these two liquidity pools were highly interdependent. Now,
     The Discovery occupies the price range from the market price and extends considerably higher. The Anchor and Discovery 
     were built with these liquidity profiles in order for the system to take profit during uptrends, and use these profits to initiate an increase in the BLV when all conditions are met.
 
+ </Tabs.Tab>
+
+
 ### Adjusting Anchor Liquidity in Fast Markets
 
 During rapid price declines, the system ensures that anchor liquidity remains efficient by automatically adjusting its position to prevent excess token minting. The `updateTicks` function calculates the spread between the discovery and anchor liquidity depth, and shifts the anchor’s tick placement dynamically, ensuring that liquidity is optimally deployed while avoiding unnecessary dilution.
