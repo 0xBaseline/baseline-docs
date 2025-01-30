@@ -20,58 +20,10 @@ its token holders. In the latest iteration, Baseline introduces **Leveraged Anch
 If you’re interested in how Baseline has evolved from previous versions, you can explore older versions [here](/resources/deprecated).
 
 
-
-### Protocol-Owned Liquidity Positions
-
-{/* How BLV is derived, what does it actually mean? Lower bound of the floor range... */}
-
-Baseline allocates liquidity across three distinct price ranges: Floor, Anchor, and Discovery. 
-
-<Tabs items={['📈 Floor', '⚓️ Anchor', '🔎 Discovery']}>
-  <Tabs.Tab>
-   ![floor](/assets/floor.png)
-
-    The Floor is a narrow price range with highly concentrated liquidity. Its primary function is to ensure that 
-    it can absorb the entire floating supply of a Baseline Token. Think of the Floor as a substantial buy wall 
-    that allows every bToken holder to exit their position at the [Baseline Value (BLV)](/btokenomics).
-
-    You may be wondering where the system sources the initial capital to guarantee the floor price. The liquidity is 
-    sourced from the presale of the Baseline Token (bToken). Unlike traditional token launches, where presale 
-    funds are typically distributed to the project team, Baseline token launches keep the liquidity in the market 
-    making system. See the [IBLV](/launching#presale) section to learn how the initial liquidity is provisioned.
-
-
-  </Tabs.Tab>
-
-  <Tabs.Tab>
-
-  ![anchor](/assets/anchor.png)
-
-    The Anchor is a price range with lower liquidity depth compared to the Floor, but covers a broader price span. 
-    Unlike the Floor which is designed to hold price, the Anchor is designed to encourage price discovery and support 
-    trading activity. 
-
-    The Anchor is a dynamic price range that is updated after a [liquidity rebalance](/btokenomics/dynamic_liquidity#rebalancing-strategies). 
-    The Anchor occupies the price range from the market price and extends towards the Floor.
-
-
-  </Tabs.Tab>
-
-  <Tabs.Tab>
-
-    ![discovery](/assets/discovery.png)
-
-    The Discovery is a price range with thicker liquidity compared to the Anchor, and spans an even broader price range. 
-    Similar to Anchor, the Discovery is a dynamic price range that is updated after a [liquidity rebalance](/btokenomics/dynamic_liquidity#rebalancing-strategies). 
-    The Discovery occupies the price range from the market price and extends considerably higher. The Anchor and Discovery 
-    were built with these liquidity profiles in order for the system to take profit during uptrends, and move these profits to the Floor in 
-    order to initiate an increase in the BLV.
-
-
   </Tabs.Tab>
 
 </Tabs>
-
+___
 {/*&nbsp;*/}
 
 {/* ### Metrics
@@ -137,12 +89,9 @@ The buffer is the portion of reserves that the system can apply leverage to, all
 
 The amount of leverage that can be applied to the buffer liquidity is impacted by the position of the anchor, and can be calculated by using Anchor Capacity Units (ACU). ACU represents the number of tokens that can be bought per unit of reserve in the current anchor range. 
 
-<Callout type="info" emoji="">
-Example: 
-If $1 could buy back 40 tokens in the current anchor structure, then the ACU is 40
-</Callout>
 
-> If $1 could buy back 40 tokens in the current anchor structure, then the ACU is 40
+
+> Example: If $1 could buy back 40 tokens in the current anchor structure, then the ACU is 40
 
 
 Baseline then calculates the BLV of the ACU, which is the floor value of the position, or the amount of the position that can be borrowed from the floor. Baseline then subtracts this value by 1 to find the `bufferLiquidity` of the position, or the amount of buffer spent per ACU deployed in the position. Finally, the system divides  1 / `bufferLiquidity` to find the leverage of the current position, as this is the ratio of total reserves / buffer reserves used.
@@ -153,7 +102,7 @@ Put simply, the system calculates how much leverage can be applied based on the 
 
 By borrowing reserves before buying tokens, the protocol ensures that it can **provide liquidity efficiently while maintaining a robust market structure**.
 
-___
+
 
 ## Automatic BLV Bumping
 
@@ -174,6 +123,46 @@ Baseline deploys liquidity across two key price ranges:
 2. **Discovery Liquidity:** A broader liquidity range that allows **price exploration and trend formation**.
 
 In previous versions, these two liquidity pools were highly interdependent. Now, **they operate independently**, allowing for more flexible and adaptive liquidity management.
+
+### Protocol-Owned Liquidity Positions
+
+{/* How BLV is derived, what does it actually mean? Lower bound of the floor range... */}
+
+
+<Tabs items={['📈 BLV', '⚓️ Anchor', '🔎 Discovery']}>
+  <Tabs.Tab>
+   ![floor](/assets/floor.png)
+
+   BLV is a narrow price range with concentrated liquidity. Think of the Floor as a buy wall for the last bToken holder to exit their position at the [Baseline Value (BLV)](/btokenomics).
+
+    You may be wondering where the system sources the initial capital to guarantee the floor price. The liquidity is 
+    sourced from the presale of the Baseline Token (bToken). Unlike traditional token launches, where presale 
+    funds are typically distributed to the project team, Baseline token launches keep the liquidity in the market 
+    making system. See the [IBLV](/launching#presale) section to learn how the initial liquidity is provisioned.
+
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+  ![anchor](/assets/anchor.png)
+
+    The Anchor is a tightly concentrated price range that ensures **deep liquidity near the current price**, stabilizing market movements. 
+
+    The Anchor is a dynamic price range that is updated after a `rebalance()`. 
+    The Anchor occupies the price range from the market price and extends towards the BLV.
+
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+    ![discovery](/assets/discovery.png)
+
+    The Discovery is broader liquidity price range that allows **price exploration and trend formation**.
+    Similar to Anchor, the Discovery is a dynamic price range that is updated after a `rebalance()`.
+    The Discovery occupies the price range from the market price and extends considerably higher. The Anchor and Discovery 
+    were built with these liquidity profiles in order for the system to take profit during uptrends, and use these profits to initiate an increase in the BLV when all conditions are met.
 
 ### Adjusting Anchor Liquidity in Fast Markets
 
