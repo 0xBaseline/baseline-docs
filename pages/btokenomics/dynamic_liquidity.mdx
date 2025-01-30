@@ -19,9 +19,6 @@ its token holders. In the latest iteration, Baseline introduces **Leveraged Anch
 
 If you’re interested in how Baseline has evolved from previous versions, you can explore older versions [here](/resources/deprecated).
 
-In Baseline, profits from market making and lending are redistributed to token holders, ensuring fair value distribution and supporting 
-positive price trends. This approach is possible because the entire token supply is minted and managed within Baseline’s automated 
-market-making system.
 
 
 ### Protocol-Owned Liquidity Positions
@@ -68,13 +65,13 @@ Baseline allocates liquidity across three distinct price ranges: Floor, Anchor, 
     Similar to Anchor, the Discovery is a dynamic price range that is updated after a [liquidity rebalance](/btokenomics/dynamic_liquidity#rebalancing-strategies). 
     The Discovery occupies the price range from the market price and extends considerably higher. The Anchor and Discovery 
     were built with these liquidity profiles in order for the system to take profit during uptrends, and move these profits to the Floor in 
-    order to initiate a `bump()`. This strategy is explained in greater detail in the [`sweep()`](/btokenomics/dynamic_liquidity#rebalancing-strategies) section.
+    order to initiate an increase in the BLV.
 
 
   </Tabs.Tab>
 
 </Tabs>
-___
+
 {/*&nbsp;*/}
 
 {/* ### Metrics
@@ -121,11 +118,11 @@ Instead of the four previous liquidity operations, Baseline V3 consolidates and 
 
 ## The Rebalancing Function
 
-The rebalance() function is the core operation that adjusts the protocol’s liquidity positions in response to market changes. Rather than using multiple distinct liquidity operations, rebalance() handles everything automatically, ensuring efficient liquidity management. This function dynamically repositions liquidity to strengthen market depth and price support, making trading smoother and more sustainable.
+The `rebalance()` function is the core operation that adjusts the protocol’s liquidity positions in response to market changes. Rather than using multiple distinct liquidity operations, `rebalance()` handles everything automatically, ensuring efficient liquidity management. This function dynamically repositions liquidity to strengthen market depth and support price, making trading smoother and more sustainable.
 
 ## Leveraged Anchor LP: Optimizing Liquidity Deployment
 
-To improve capital efficiency on conditions like huge sell offs, Baseline introduces Leveraged Anchor LP, a liquidity management strategy that ensures deep liquidity in the anchor position to support sell-offs while maintaining overall price stability. This method applies Baseline’s underlying borrow mechanic to increase the liquidity of the anchor position, using the borrowed reserves of the tokens it will buy back with that range. Whereas looping is enabled by buying tokens first and then borrowing the reserves after, leveraged LP is the inverse: borrowing the reserves first and buying the tokens after.
+To improve capital efficiency on conditions like huge sell offs, Baseline introduces **Leveraged Anchor LP**, a liquidity management strategy that ensures deep liquidity in the anchor position to support sell-offs while maintaining overall price stability. This method applies Baseline’s underlying borrow mechanic to increase the liquidity of the anchor position, using the borrowed reserves of the tokens it will buy back with that range. Whereas looping is enabled by buying tokens first and then borrowing the reserves after, leveraged LP is the inverse: borrowing the reserves first and buying the tokens after.
 
 ### Understanding Liquidity Reserves
 
@@ -145,9 +142,12 @@ Example:
 If $1 could buy back 40 tokens in the current anchor structure, then the ACU is 40
 </Callout>
 
-Baseline then calculates the BLV of the ACU, which is the floor value of the position, or the amount of the position that can be borrowed from the floor. Baseline then subtracts this value by 1 to find the bufferLiquidity of the position, or the amount of buffer spent per ACU deployed in the position. Finally, the system divides  1 / bufferLiquidity to find the leverage of the current position, as this is the ratio of total reserves / buffer reserves used.
+> If $1 could buy back 40 tokens in the current anchor structure, then the ACU is 40
 
-Another key component in the anchor liquidity calculation is the utilizationRate. Rather than max leveraging all the available bufferReserves, the market making strategy only deploys a % of the buffer based on the current premium. The higher the premium, the more conservative strategy—with a minimum utilization set to 50%.
+
+Baseline then calculates the BLV of the ACU, which is the floor value of the position, or the amount of the position that can be borrowed from the floor. Baseline then subtracts this value by 1 to find the `bufferLiquidity` of the position, or the amount of buffer spent per ACU deployed in the position. Finally, the system divides  1 / `bufferLiquidity` to find the leverage of the current position, as this is the ratio of total reserves / buffer reserves used.
+
+Another key component in the anchor liquidity calculation is the `utilizationRate`. Rather than max leveraging all the available `bufferReserves`, the market making strategy only deploys a % of the buffer based on the current premium. The higher the premium, the more conservative strategy—with a minimum utilization set to 50%.
 
 Put simply, the system calculates how much leverage can be applied based on the **buffer reserves** available, the premium, and the liquidity needs at different price levels.
 
@@ -216,4 +216,9 @@ In Uniswap V3 pools, prices are determined using a system called ticks. Each tic
 **Tick Spacing**  
 Uniswap V3 pools use [tick spacing](https://support.uniswap.org/hc/en-us/articles/21069524840589-What-is-a-tick-when-providing-liquidity) to define where liquidity can be allocated. The tick spacing spacing is determined by the pool's swap fee percentage. For example, a pool with a 1% swap fee has a tick spacing of 200. This means liquidity can only be allocated in increments of 200 ticks, which covers approximately a 2% price range.
 
-In Baseline pools, the Floor price range is defined within one tick spacing. The BLV represents the lower bound of this tick spacing. When a `rebalance()` operation occurs in a 1% fee pool, the system will attempt to move the Floor price range one tick spacing higher (~2% higher).  */}
+In Baseline pools, the Floor price range is defined within one tick spacing. The BLV represents the lower bound of this tick spacing. When a `rebalance()` operation occurs in a 1% fee pool, the system will attempt to move the Floor price range one tick spacing higher (~2% higher).
+
+In Baseline, profits from market making and lending are redistributed to token holders, ensuring fair value distribution and supporting 
+positive price trends. This approach is possible because the entire token supply is minted and managed within Baseline’s automated 
+market-making system.
+  */}
