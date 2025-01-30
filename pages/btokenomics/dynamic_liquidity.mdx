@@ -20,42 +20,8 @@ its token holders. In the latest iteration, Baseline introduces **Leveraged Anch
 If you’re interested in how Baseline has evolved from previous versions, you can explore older versions [here](/resources/deprecated).
 
 
-  </Tabs.Tab>
-
-</Tabs>
 ___
 {/*&nbsp;*/}
-
-{/* ### Metrics
-- **System Capacity:** The total amount of bTokens that can be absorbed by the system’s reserve assets.
-- **Floating Supply:** The total amount of bTokens outside of the system’s liquidity position a.k.a. the number of 
-bTokens in the hands of potential sellers.
-
-To ensure that all tokens can be redeemed at the BLV, Baseline asserts the condition that `capacity > floating supply` 
-whenever liquidity is deployed.
-
-### Identifying the BLV
-To identify the BLV, Baseline calculates the highest price point at which it can deploy liquidity, while still meeting 
-its solvency requirement (`capacity > floating supply`). 
-
-<Callout type="info" emoji="">
-Capacity is not limited to the Floor price range alone. Capacity can also include the reserve assets available in 
-the Anchor and Discovery price ranges. These reserve assets absorb some of the floating supply, and are also taken into 
-account when calculating the BLV. 
-</Callout>
-
-## Protocol Fees
-
-The protocol generates fees in the following ways:
-
-1. **LP fees** - token is deployed into a 1% Uniswap V3 pool, which means swaps pay 1% when swapping in/out of the pool. 
-This fee goes directly to increasing the BLV. You can learn more about Uniswap fee tiers [here](https://docs.uniswap.org/concepts/protocol/fees).
-2. **Liquidity rebalancing fees** - the protocol rebalances reserves from discovery into floor and anchor when `sweep()` is called. 
-These reserves go toward increasing the BLV.
-3. **Borrow fees** - users pay a one-time per-diem fee when they open or extend a borrow position. This fee goes directly to increasing the BLV. */}
-
-{/* ## Team fees
-During `sweep()` rebalancing, the protocol directs 10% of **surplus** capacity (in bAsset terms) to team multisig. */}
 
 ## Intelligent Liquidity
 
@@ -103,7 +69,6 @@ Put simply, the system calculates how much leverage can be applied based on the 
 By borrowing reserves before buying tokens, the protocol ensures that it can **provide liquidity efficiently while maintaining a robust market structure**.
 
 
-
 ## Automatic BLV Bumping
 
 Baseline’s liquidity model ensures that tokens maintain a **Baseline Value (BLV)**, which represents the guaranteed minimum price at which liquidity is available.
@@ -125,8 +90,6 @@ Baseline deploys liquidity across two key price ranges:
 In previous versions, these two liquidity pools were highly interdependent. Now, **they operate independently**, allowing for more flexible and adaptive liquidity management.
 
 ### Protocol-Owned Liquidity Positions
-
-{/* How BLV is derived, what does it actually mean? Lower bound of the floor range... */}
 
 
 <Tabs items={['📈 BLV', '⚓️ Anchor', '🔎 Discovery']}>
@@ -166,6 +129,7 @@ In previous versions, these two liquidity pools were highly interdependent. Now,
 
  </Tabs.Tab>
 
+</Tabs>
 
 ### Adjusting Anchor Liquidity in Fast Markets
 
