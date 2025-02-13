@@ -92,11 +92,11 @@ In previous versions, these two liquidity pools were highly interdependent. Now,
 ### Protocol-Owned Liquidity Positions
 
 
-<Tabs items={['📈 BLV', '⚓️ Anchor', '🔎 Discovery']}>
+<Tabs items={['📈 Floor', '⚓️ Anchor', '🔎 Discovery']}>
   <Tabs.Tab>
    ![floor](/assets/floor.png)
 
-   BLV is a buy wall for the last bToken holder to exit their position at the [Baseline Value (BLV)](/btokenomics) of Floor.
+   BLV is a buy wall for the last bToken holder to exit their position at the [Baseline Value (BLV)](/btokenomics), located at the top of the Floor tick.
 
     You may be wondering where the system sources the initial capital to guarantee the floor price. The liquidity is 
     sourced from the presale of the Baseline Token (bToken). Unlike traditional token launches, where presale 
