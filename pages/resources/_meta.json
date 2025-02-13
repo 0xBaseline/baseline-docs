@@ -14,5 +14,9 @@
   "links": {
   "title": "Links",
   "theme": { "breadcrumb": true }
+  },
+  "deprecated": {
+  "title": "Deprecated",
+  "theme": { "breadcrumb": true }
   }
 }
