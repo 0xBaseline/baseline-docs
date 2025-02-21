@@ -41,6 +41,12 @@
             "breadcrumb": false
         }
     },
+    "v2": {
+        "title": "V2",
+        "theme": {
+            "breadcrumb": false
+        }
+    },
     "resources": {
         "title": "Resources",
         "theme": {
