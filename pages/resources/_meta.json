@@ -12,11 +12,11 @@
     "theme": { "breadcrumb": true }
   },
   "links": {
-  "title": "Links",
-  "theme": { "breadcrumb": true }
+    "title": "Links",
+    "theme": { "breadcrumb": true }
   },
-  "deprecated": {
-  "title": "Deprecated",
-  "theme": { "breadcrumb": true }
+  "tos": {
+    "title": "Terms of Service",
+    "theme": { "breadcrumb": true }
   }
 }
