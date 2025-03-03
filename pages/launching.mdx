@@ -14,17 +14,21 @@ ___
 
 ### IBLV - Initial Baseline Value Event
 
-Each Baseline token will undergo a fixed-price auction in order to source the initial capital needed to set up the liquidity pool. The presale will have a capital limit and allowlist to ensure fair participation and distribution of tokens.
+Each Baseline token will undergo an originination event in order to source the initial capital needed to set up the liquidity pool. 
+This origination could be coordinated launches that are special Baseline launches, token migrations, or new tokens launched with a project. 
+The presale will have a capital limit and allowlist to ensure fair participation and distribution of tokens.
 
 ___
 
 ### Liquidity Configuration
 
-Each Baseline token will have a unique liquidity configuration that its project team will define. This configuration will affect how the token is traded and managed by its own market making system.
+Each Baseline token will have a unique liquidity configuration that its project team will define. 
+This configuration will affect how the token is traded and managed by its own market making system.
 
 **Liquidity Allocation**
 
-- The raised funds from the presale will be allocated between the Floor, Anchor, and Afterburner. The split in allocation will decide the BLV price, market premium, and amount of leveraged buyback respectively.
+- The raised funds from the presale will be allocated in an automated fashion between the Floor, and Anchor. 
+The system calculates the required amount for the the Floor and Anchor capacities beased on the initial reserves, supply, and BLV. 
 
 **Liquidity Depth**
 
@@ -42,16 +46,6 @@ Unlike traditional vesting, where investors frequently dump their tokens at a sc
 
 Allowing investors to exit their positions immediately after launch might seem risky. However, the BLV’s supporting liquidity structure helps mitigate potential adverse price impacts from early selling. Unlike other tokens, which might experience severe price drops due to early investor exits, the BLV provides a stabilizing effect that allows the token to consistently perform. 
 
-#### Inflation Rate
-
-The inflation rate is the amount of tokens that are minted and sent to the project team’s multisig whenever a `bump()` operation is executed. This feature enables the team to benefit financially when the token is performing well. The inflation rate is a configurable variable that teams can define at the time of deployment. 
-
-Here’s an example of how this works:
-
-1. Suppose the floating supply of a bToken is 1,000 tokens.
-2. When a `bump()` operation is carried out to increase the BLV, the inflation rate comes into play.
-3. For example, if the inflation rate is set at 1%, the system will mint and introduce an additional 10 bTokens into the floating supply, making the total supply 1,010 tokens.
-4. These 10 bTokens are sent to the team’s multisig.
 
 #### $YES IBLV Allocations
 
@@ -65,3 +59,13 @@ Each presale will reserve up to 50% of its participation for YES token holders. 
   - Bob holds 200 spot tokens for 5 days = 1000 points
 - Alice is entitled to 3000/4000 IBLV allocation, or up to $37.5k
 - Bob is entitled to 1000/4000 IBLV allocation, or up to $12.5k
+
+## Creator Incentives
+
+Baseline’s market-making process is the incentives it provides for token creators. Unlike traditional liquidity provisioning models where fees primarily benefit liquidity providers, Baseline allows token creators to directly earn a share of market-making fees.
+
+Through our **leveraged market-making process**, creators benefit from increased capital efficiency and enhanced fee generation. Compared to standard Uniswap V3 LP fees, which are constrained by the liquidity they provide, Baseline’s fees are leveraged—meaning creators can generate higher returns with the same amount of liquidity.
+
+{/*(show chart) */}
+
+For example, Baseline’s structure enables sustained fee accrual, even in volatile market conditions, ensuring that creators are continuously rewarded for their token’s trading activity.

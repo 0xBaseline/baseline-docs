@@ -3,12 +3,8 @@
     "title": "Dynamic Liquidity",
     "theme": { "breadcrumb": true }
   },
-  "elastic_supply": {
-    "title": "Elastic Supply",
-    "theme": { "breadcrumb": true }
-  },
-  "afterburner": {
-    "title": "Leveraged Buybacks",
+  "fixed_supply": {
+    "title": "Fixed Supply",
     "theme": { "breadcrumb": true }
   }
 }

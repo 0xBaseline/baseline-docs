@@ -66,27 +66,11 @@ Similarly, if bToken's price falls to 1.00 USDC, the looped position will have a
 - Looped Value: (2,527.77 bTokens @ 1.00 USDC) - 1,833.33 USDC debt = 694.44 USDC
 
 
-### Funding Decay vs. Interest Rates
+### Origination Fee
 
-Unlike [Baseline loans](/utility/loans), where users have to pay interest based on the amount borrowed, Baseline's 
-looping facility uses a "rebasing" mechanism to charge fees on looped positions. In this system, 
-the protocol automatically "shrinks" both collateral and debt over time, allowing users to maintain non-liquidatable leveraged exposure without 
-any active management of the position.
-
-
-The fee structure in looped positions is based on the net premium value of the position, not the 
-borrowed amount. Fees are proportional to the bToken's premium at position closure, with higher 
-premiums resulting in higher fees and vice versa. This aligns the cost of maintaining a looped 
-position with the bToken's market performance.
- 
-
-### BLV Accrual
-
-Looped positions don't generate direct cash flows to the [Afterburner](/btokenomics/afterburner) for buybacks, but looping still 
-positively impacts the BLV due to the supply reduction from "shrinking" user's collateral. 
-Baseline's looping facility naturally creates deflationary pressure on the token, since its 
-circulating supply is constantly being reduced. As such, the protocol-owned liquidity in the system 
-can be shared across fewer tokens, naturally increasing the BLV of each remaining bToken over time. 
+Like [Baseline loans](/utility/loans), Baseline's 
+looping facility charges an origination fee, and no interest rate. This fee is applied when opening a position 
+or when adding to your loan based on the amount being added.
 
 
 ### Benefits and Risks of Looping
@@ -106,8 +90,7 @@ can be shared across fewer tokens, naturally increasing the BLV of each remainin
     The primary risks of looping include:
     
     1. **Amplified Losses**: If the bToken's price falls relative to the reserve asset, losses are magnified.
-    2. **Loan Default Risk**: Extended price downturns may lead to loan defaults if not managed properly.
-    3. **Complexity**: The mechanics of looped positions can be challenging to understand and manage effectively.
+    2. **Complexity**: The mechanics of looped positions can be challenging to understand and manage effectively.
 
     Users should carefully consider their risk tolerance and market outlook before engaging in looping.
   </Tabs.Tab>
@@ -116,7 +99,7 @@ can be shared across fewer tokens, naturally increasing the BLV of each remainin
     Looping tends to be most advantageous when:
     
     1. The bToken's price is close to its BLV, offering maximum capital efficiency and lower downside risk.
-    2. You have a strong conviction in the bToken's short to medium-term price appreciation.
+    2. You have a strong conviction in the bToken's price appreciation.
     3. You understand the risks involved and have a clear exit strategy.
 
     Remember, while looping near the BLV offers better capital efficiency, it should still be approached 

@@ -3,21 +3,24 @@ import Image from "next/image";
 import { Tabs } from 'nextra/components'
 import { Cards, Card } from 'nextra/components'
 
-## Market-Driven Token Issuance
+## Pre-Determined Token Issuance
 
-While most tokens today operate on a fixed supply and predetermined emissions schedule, bTokens use a dynamic
-issuance model. By not relying on a fixed supply, bTokens remain flexible and adaptive to their surrounding
-market conditions. In Baseline, token supply is a function of liquidity, not the other way around.
+In order for ease of integration, bTokens today operate on a fixed supply. By relying on a fixed supply, 
+bTokens are more easily integrated into third party protocols and metrics reported by 3rd parties are able 
+to be reported much more accurately. While token supply is fixed, circulating supply is dependent on market activity. 
+In Baseline, the circulating token supply is a function of liquidity, not the other way around.
 
-When buyers deplete the supply of tokens on the market, Baseline will mint new bTokens directly into the 
-liquidity pool to replenish any missing inventory. As these tokens are sold back, the protocol will burn 
-any of the tokens collected in its liquidity positions. As a result, bTokens do not have a fixed supply cap; 
-they grow and shrink in response to market demand.
 
-Due to Baseline's market making, bTokens are more naturally resilient to common market manipulation. Tactics 
-such as cornering the supply ("bundling"), spoofing volume, and pushing price in a specific direction now 
-require significantly higher capital expenditure than for traditional tokens. As a result, bToken markets are
-more authentic and reliable than what you traditionally see on token screeners and centralized exchanges.
+When buyers deplete the circulating supply of tokens on the market, Baseline will unlock bTokens directly into 
+the liquidity pool to replenish any missing inventory. As these tokens are sold back, the protocol will remove any 
+of the tokens collected in its liquidity positions from circulating supply. As a result, bTokens do have a fixed supply 
+cap; but circulating supply can grow and shrink in response to market demand.
+
+
+Due to Baseline's market making, bTokens are more naturally resilient to common market manipulation. Tactics such 
+as cornering the supply ("bundling"), spoofing volume, and pushing price in a specific direction now require significantly 
+higher capital expenditure than for traditional tokens. As a result, bToken markets are more authentic and reliable than 
+what you traditionally see on token screeners and centralized exchanges.
 
 ## The Solvency Invariant
 

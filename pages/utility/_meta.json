@@ -6,9 +6,10 @@
   "loops": {
     "title": "Loops",
     "theme": { "breadcrumb": true }
-  },
-  "lps": {
-    "title": "Leveraged LPs",
+  }
+  ,
+  "staking": {
+    "title": "Staking",
     "theme": { "breadcrumb": true }
-  } 
+  }
 }

@@ -5,20 +5,19 @@ import { Cards, Card } from 'nextra/components'
 
 ## BLV: The Baseline Value
 
-One of the most recognizable features of a Baseline Token is the distinctive yellow line on the chart,
-representing the bToken's **Baseline Value (BLV)**: the guaranteed minimum price of a Baseline token.
+One of the most recognizable features of a Baseline Token is the bToken's **Baseline Value (BLV)**: the guaranteed minimum price of a Baseline token.
 
 ![blvup](/assets/blvup.png)
 
 {/* content fill: why is the BLV important to users? - known maximum downside when entering a trade, used as a
 general hueristic for the amount of liquidity permanently accumulated by the system */}
 
-The BLV is set by reserving enough liquidity in the pool to buy back the entire floating supply of the token. Put simply, 
+The BLV is set by reserving enough liquidity in the pool to ensure the entire floating supply of the token can be bought back across the anchor and blv liquidity. Put simply, 
 the BLV is the price at which the last token could be sold if all holders exit.
 
 
 This makes the BLV a directly redeemable value on the public market, unlike the "backing" commonly found in other protocols.
-Baseline uses protocol-owned liquidity managed by smart contracts within Uniswap V3 concentrated positions to 
+Baseline uses protocol-owned liquidity managed by smart contracts within Uniswap V4 concentrated positions to 
 guarantee a bToken's BLV. This means the BLV can never decrease when priced against the backed asset. 
 
 
