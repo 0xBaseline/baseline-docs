@@ -3,10 +3,6 @@
     "title": "FAQ",
     "theme": { "breadcrumb": true }
   },
-  "migration_faq": {
-    "title": "Migration FAQ",
-    "theme": { "breadcrumb": true }
-  },
   "glossary": {
     "title": "Glossary",
     "theme": { "breadcrumb": true }
