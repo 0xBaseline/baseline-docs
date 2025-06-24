@@ -1,60 +1,12 @@
 import { Callout } from "nextra/components";
 
 ## How Baseline Works
-
 Most tokens still rely on external market makers to keep trading alive, systems that are often opaque, 
-extractive, and prone to failure during volatility. At the core of every Baseline token is Baseline Market Maker (BMM), an autonomous, on-chain liquidity system that controls liquidity, pricing, and 
-flow across the entire token lifecycle.
+extractive, and prone to failure during volatility. 
 
-### Key Features
+Baseline tokens (or bTokens) are ERC-20 tokens with superpowers. Every bToken come with a guaranteed price floor and dynamic liquidity managed by an algorithmic market maker. 
+These superpowers unlock immediate utility with interest-free loans, leverage without liquidation, and staking (soon ™).
 
-- **Autonomous & onchain** – Operates entirely on-chain using configurable rules, no human intervention needed.
-- **Volatility-Aware** – Adjusts bid/ask depth in real time using trend-based volatility signals.
-- **BLV-Integrated** – Strengthens the token's price floor with every trade via Baseline Value (BLV).
-- **Capital-Efficient** – Liquidity allocation responds to size, price, and system solvency—making more out of every dollar in the pool.
-- **Direct Pool Interventions** – Executes trades to counter extreme volatility using real-time VWAP-based price signals.
-
-
-### How It Works
-BMM is an on-chain market maker built on Uniswap V4 as a general purpose liquidity solution for token creators. 
-By accounting for tokenomics, Baseline provides liquidity for the full FDV of its tokens, guaranteeing liquidity 
-for the entire supply at all times.
-
-BMM deploys liquidity across three distinct ranges:
-- **Floor Liquidity:** BLV is a buy wall for the last bToken holder to exit their position at the Baseline Value (BLV), 
-located at the top of the Floor tick.
-- **Anchor Liquidity:** A tightly concentrated range around the current price, ensuring deep liquidity and strong price 
-support — especially during volatility or sell-offs.
-- **Discovery Liquidity:** A wider range that facilitates upward or downward price exploration, enabling trend formation 
-and smoother price discovery.
-
-These liquidity ranges operate independently, giving the system more flexibility to respond to different market conditions.
-
-BMM uses real-time trading data and volatility trends to rebalance liquidity across the three ranges:
-- Storage (long-term price floor)
-- Bid (buy-side support)
-- Ask (sell-side supply)
-
-Liquidity is dynamically adjusted based on volatility regimes, cost basis, and token flows. When demand increases, 
-BMM deepens bid-side liquidity and raises support levels. During sell-offs, it cushions impact by reducing slippage 
-and preventing downward spirals.
-
-BMM incentivizes value capture over time by optimizing the spread between average buy and sell prices (ABP / ASP), 
-guiding the market toward healthy price discovery.
-
-### What Makes BMM Different?
-**Traditional Market Making:**
-- Off-chain actors, special access, opaque incentives
-- Profit-driven spreads that extract value from token holders
-- Fails under pressure due to human error or conflicting incentives
-
-**Baseline Market Making:**
-- Fully transparent and algorithmic
-- Grows with volume—value flows back into the system
-- Designed to scale and stabilize even during high volatility
-
-
-<Callout type="info" emoji="💡">
-  **Key Takeaway:** 
-  Baseline's dynamic liquidity system is intelligent. By concentrating liquidity where it's needed, applying leverage when it's safe, and adjusting floors only when fully supported, Baseline creates a market that is deep, efficient, and self-sustaining — without ever needing a centralized market maker.
-</Callout>
+- [BLV](/theory/blv) - a minimum price that is always backed by on-chain liquidity
+- [BMM](/theory/bmm) - an algorithmic market maker that provides continuous liquidity and price discovery
+- [Loans & Leverage](/theory/loans_leverage) - access capital without selling

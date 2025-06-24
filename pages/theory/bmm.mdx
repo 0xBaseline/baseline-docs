@@ -1,129 +1,59 @@
-# Autonomous Liquidity Engine (ALE)
+import { Callout } from "nextra/components";
 
-The Autonomous Liquidity Engine is the core innovation that makes Baseline unique. It provides continuous liquidity without relying on external market makers or manual intervention.
+## Baseline Market Maker (BMM)
 
-## What is the ALE?
+BMM is the core component of Baseline's dynamic liquidity system. It's an on-chain market maker built on Uniswap V4 as a general purpose liquidity solution for token creators. 
+By accounting for tokenomics, Baseline provides liquidity for the full FDV of its tokens, guaranteeing liquidity 
+for the entire supply at all times.
 
-The Autonomous Liquidity Engine is a smart contract system that:
+### Key Features
+- **Autonomous & onchain** – Operates entirely on-chain using configurable rules, no human intervention needed.
+- **Volatility-Aware** – Adjusts bid/ask depth in real time using trend-based volatility signals.
+- **BLV-Integrated** – Strengthens the token's price floor with every trade via Baseline Value (BLV).
+- **Capital-Efficient** – Liquidity allocation responds to size, price, and system solvency—making more out of every dollar in the pool.
+- **Direct Pool Interventions** – Executes trades to counter extreme volatility using real-time VWAP-based price signals.
 
-- **Automatically provides liquidity** for bTokens 24/7
-- **Adjusts bid/ask spreads** based on market conditions
-- **Maintains price floors** through protocol-owned liquidity
-- **Optimizes capital efficiency** through intelligent rebalancing
 
-## How It Works
+### How It Works
+BMM is an on-chain market maker built on Uniswap V4 as a general purpose liquidity solution for token creators. 
+By accounting for tokenomics, Baseline provides liquidity for the full FDV of its tokens, guaranteeing liquidity 
+for the entire supply at all times.
 
-### Core Components
+BMM deploys liquidity across three distinct ranges:
+- **Floor Liquidity:** BLV is a buy wall for the last bToken holder to exit their position at the Baseline Value (BLV), 
+located at the top of the Floor tick.
+- **Anchor Liquidity:** A tightly concentrated range around the current price, ensuring deep liquidity and strong price 
+support — especially during volatility or sell-offs.
+- **Discovery Liquidity:** A wider range that facilitates upward or downward price exploration, enabling trend formation 
+and smoother price discovery.
 
-#### 1. Liquidity Pool Management
-The ALE maintains pools of both the bToken and the underlying asset (usually ETH or USDC). These pools are used to:
-- Execute buy and sell orders
-- Maintain price stability
-- Generate trading fees
+These liquidity ranges operate independently, giving the system more flexibility to respond to different market conditions.
 
-#### 2. Dynamic Spread Adjustment
-Unlike traditional DEXs with fixed spreads, the ALE:
-- **Monitors market conditions** in real-time
-- **Adjusts spreads automatically** based on volume and volatility
-- **Optimizes for capital efficiency** while maintaining liquidity
+BMM uses real-time trading data and volatility trends to rebalance liquidity across the three ranges:
+- Storage (long-term price floor)
+- Bid (buy-side support)
+- Ask (sell-side supply)
 
-#### 3. Price Floor Protection
-The ALE implements the BLV (Baseline Liquidity Vault) by:
-- **Reserving a portion** of liquidity for floor price support
-- **Automatically adjusting** the floor based on trading activity
-- **Preventing price collapse** through algorithmic intervention
+Liquidity is dynamically adjusted based on volatility regimes, cost basis, and token flows. When demand increases, 
+BMM deepens bid-side liquidity and raises support levels. During sell-offs, it cushions impact by reducing slippage 
+and preventing downward spirals.
 
-### The Algorithm
+BMM incentivizes value capture over time by optimizing the spread between average buy and sell prices (ABP / ASP), 
+guiding the market toward healthy price discovery.
 
-The ALE uses a sophisticated algorithm that:
+### What Makes BMM Different?
+**Traditional Market Making:**
+- Off-chain actors, special access, opaque incentives
+- Profit-driven spreads that extract value from token holders
+- Fails under pressure due to human error or conflicting incentives
 
-1. **Monitors Trading Activity**
-   - Tracks buy/sell volume
-   - Measures price volatility
-   - Analyzes market sentiment
+**Baseline Market Making:**
+- Fully transparent and algorithmic
+- Grows with volume—value flows back into the system
+- Designed to scale and stabilize even during high volatility
 
-2. **Calculates Optimal Parameters**
-   - Determines appropriate spread levels
-   - Adjusts liquidity allocation
-   - Updates price floor values
 
-3. **Executes Adjustments**
-   - Rebalances liquidity pools
-   - Updates trading parameters
-   - Maintains system stability
-
-## Key Advantages
-
-### For Traders
-- **Always Liquid**: No waiting for market makers
-- **Predictable Pricing**: Transparent fee structures
-- **No Slippage**: Consistent execution regardless of trade size
-- **Price Protection**: Built-in floor prevents catastrophic losses
-
-### For Creators
-- **Instant Liquidity**: No need to find market makers
-- **Reduced Costs**: No expensive liquidity mining programs
-- **Automatic Optimization**: System improves over time
-- **Community Benefits**: All participants share in success
-
-### For the Protocol
-- **Capital Efficiency**: Optimal use of available liquidity
-- **Resilience**: Resistant to manipulation and MEV
-- **Scalability**: Can handle multiple tokens simultaneously
-- **Transparency**: All operations visible on-chain
-
-## Technical Implementation
-
-### Smart Contract Architecture
-
-The ALE consists of several interconnected contracts:
-
-1. **Liquidity Manager**: Handles pool rebalancing and optimization
-2. **Price Oracle**: Provides accurate price feeds
-3. **Spread Calculator**: Determines optimal bid/ask spreads
-4. **Floor Manager**: Maintains and adjusts price floors
-
-### Mathematical Models
-
-The ALE uses advanced mathematical models including:
-
-- **PID Control Loops**: For spread modulation
-- **Inventory Management**: For optimal liquidity allocation
-- **Risk Models**: For position sizing and exposure management
-- **Volatility Models**: For dynamic parameter adjustment
-
-## Comparison to Traditional Systems
-
-### Traditional DEXs
-- **Manual Market Making**: Requires human intervention
-- **Fixed Spreads**: Don't adapt to market conditions
-- **Liquidity Mining**: Expensive and unsustainable
-- **MEV Vulnerable**: Susceptible to front-running
-
-### Baseline ALE
-- **Fully Automated**: No manual intervention needed
-- **Dynamic Spreads**: Adapt to market conditions
-- **Protocol-Owned Liquidity**: Sustainable and aligned
-- **MEV Resistant**: Built-in protection mechanisms
-
-## Future Developments
-
-### Planned Enhancements
-- **Cross-Chain Liquidity**: Extend to multiple blockchains
-- **Advanced Algorithms**: Machine learning integration
-- **Institutional Features**: Large trade optimization
-- **DeFi Integration**: Seamless connection to other protocols
-
-### Research Areas
-- **Optimal Control Theory**: Advanced mathematical models
-- **Game Theory**: Incentive alignment mechanisms
-- **Network Effects**: Multi-token optimization
-- **Regulatory Compliance**: Institutional adoption
-
-## Conclusion
-
-The Autonomous Liquidity Engine represents a fundamental shift in how decentralized trading works. By eliminating the need for external market makers and providing continuous, optimized liquidity, it creates a more efficient, fair, and sustainable trading environment.
-
-The ALE is not just a technical innovation—it's a new paradigm for decentralized finance that prioritizes user experience, capital efficiency, and long-term sustainability.
-
-Ready to learn more? Explore the [BLV](/theory/blv) to understand how the price floor mechanism works. 
+<Callout type="info" emoji="💡">
+  **Key Takeaway:** 
+  Baseline's dynamic liquidity system is intelligent. By concentrating liquidity where it's needed, applying leverage when it's safe, and adjusting floors only when fully supported, Baseline creates a market that is deep, efficient, and self-sustaining — without ever needing a centralized market maker.
+</Callout>
