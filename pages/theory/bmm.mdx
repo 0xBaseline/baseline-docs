@@ -1,0 +1,129 @@
+# Autonomous Liquidity Engine (ALE)
+
+The Autonomous Liquidity Engine is the core innovation that makes Baseline unique. It provides continuous liquidity without relying on external market makers or manual intervention.
+
+## What is the ALE?
+
+The Autonomous Liquidity Engine is a smart contract system that:
+
+- **Automatically provides liquidity** for bTokens 24/7
+- **Adjusts bid/ask spreads** based on market conditions
+- **Maintains price floors** through protocol-owned liquidity
+- **Optimizes capital efficiency** through intelligent rebalancing
+
+## How It Works
+
+### Core Components
+
+#### 1. Liquidity Pool Management
+The ALE maintains pools of both the bToken and the underlying asset (usually ETH or USDC). These pools are used to:
+- Execute buy and sell orders
+- Maintain price stability
+- Generate trading fees
+
+#### 2. Dynamic Spread Adjustment
+Unlike traditional DEXs with fixed spreads, the ALE:
+- **Monitors market conditions** in real-time
+- **Adjusts spreads automatically** based on volume and volatility
+- **Optimizes for capital efficiency** while maintaining liquidity
+
+#### 3. Price Floor Protection
+The ALE implements the BLV (Baseline Liquidity Vault) by:
+- **Reserving a portion** of liquidity for floor price support
+- **Automatically adjusting** the floor based on trading activity
+- **Preventing price collapse** through algorithmic intervention
+
+### The Algorithm
+
+The ALE uses a sophisticated algorithm that:
+
+1. **Monitors Trading Activity**
+   - Tracks buy/sell volume
+   - Measures price volatility
+   - Analyzes market sentiment
+
+2. **Calculates Optimal Parameters**
+   - Determines appropriate spread levels
+   - Adjusts liquidity allocation
+   - Updates price floor values
+
+3. **Executes Adjustments**
+   - Rebalances liquidity pools
+   - Updates trading parameters
+   - Maintains system stability
+
+## Key Advantages
+
+### For Traders
+- **Always Liquid**: No waiting for market makers
+- **Predictable Pricing**: Transparent fee structures
+- **No Slippage**: Consistent execution regardless of trade size
+- **Price Protection**: Built-in floor prevents catastrophic losses
+
+### For Creators
+- **Instant Liquidity**: No need to find market makers
+- **Reduced Costs**: No expensive liquidity mining programs
+- **Automatic Optimization**: System improves over time
+- **Community Benefits**: All participants share in success
+
+### For the Protocol
+- **Capital Efficiency**: Optimal use of available liquidity
+- **Resilience**: Resistant to manipulation and MEV
+- **Scalability**: Can handle multiple tokens simultaneously
+- **Transparency**: All operations visible on-chain
+
+## Technical Implementation
+
+### Smart Contract Architecture
+
+The ALE consists of several interconnected contracts:
+
+1. **Liquidity Manager**: Handles pool rebalancing and optimization
+2. **Price Oracle**: Provides accurate price feeds
+3. **Spread Calculator**: Determines optimal bid/ask spreads
+4. **Floor Manager**: Maintains and adjusts price floors
+
+### Mathematical Models
+
+The ALE uses advanced mathematical models including:
+
+- **PID Control Loops**: For spread modulation
+- **Inventory Management**: For optimal liquidity allocation
+- **Risk Models**: For position sizing and exposure management
+- **Volatility Models**: For dynamic parameter adjustment
+
+## Comparison to Traditional Systems
+
+### Traditional DEXs
+- **Manual Market Making**: Requires human intervention
+- **Fixed Spreads**: Don't adapt to market conditions
+- **Liquidity Mining**: Expensive and unsustainable
+- **MEV Vulnerable**: Susceptible to front-running
+
+### Baseline ALE
+- **Fully Automated**: No manual intervention needed
+- **Dynamic Spreads**: Adapt to market conditions
+- **Protocol-Owned Liquidity**: Sustainable and aligned
+- **MEV Resistant**: Built-in protection mechanisms
+
+## Future Developments
+
+### Planned Enhancements
+- **Cross-Chain Liquidity**: Extend to multiple blockchains
+- **Advanced Algorithms**: Machine learning integration
+- **Institutional Features**: Large trade optimization
+- **DeFi Integration**: Seamless connection to other protocols
+
+### Research Areas
+- **Optimal Control Theory**: Advanced mathematical models
+- **Game Theory**: Incentive alignment mechanisms
+- **Network Effects**: Multi-token optimization
+- **Regulatory Compliance**: Institutional adoption
+
+## Conclusion
+
+The Autonomous Liquidity Engine represents a fundamental shift in how decentralized trading works. By eliminating the need for external market makers and providing continuous, optimized liquidity, it creates a more efficient, fair, and sustainable trading environment.
+
+The ALE is not just a technical innovation—it's a new paradigm for decentralized finance that prioritizes user experience, capital efficiency, and long-term sustainability.
+
+Ready to learn more? Explore the [BLV](/theory/blv) to understand how the price floor mechanism works. 
