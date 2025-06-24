@@ -1,0 +1,176 @@
+# 🧾 Contract ABIs
+
+This page contains the Application Binary Interfaces (ABIs) for all Baseline smart contracts. These are essential for developers building on top of Baseline.
+
+## Core Contracts
+
+### Baseline Factory
+The factory contract that deploys new bTokens.
+
+```json
+[
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "symbol",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "initialSupply",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "priceFloor",
+        "type": "uint256"
+      }
+    ],
+    "name": "createToken",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
+```
+
+### BLV (Baseline Liquidity Vault)
+The vault that manages liquidity for each bToken.
+
+```json
+[
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "buy",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "sell",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
+```
+
+### YES Token
+The governance token of the Baseline ecosystem.
+
+```json
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "spender",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "approve",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "stake",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
+```
+
+## Using These ABIs
+
+### Web3.js
+```javascript
+const factoryContract = new web3.eth.Contract(factoryABI, factoryAddress);
+const tokenAddress = await factoryContract.methods.createToken(
+  "My Token",
+  "MTK",
+  web3.utils.toWei("1000000", "ether"),
+  web3.utils.toWei("0.1", "ether")
+).send({ from: userAddress });
+```
+
+### Ethers.js
+```javascript
+const factory = new ethers.Contract(factoryAddress, factoryABI, signer);
+const tx = await factory.createToken(
+  "My Token",
+  "MTK",
+  ethers.utils.parseEther("1000000"),
+  ethers.utils.parseEther("0.1")
+);
+```
+
+## Contract Addresses
+
+- **Factory**: `0x...` (Mainnet)
+- **YES Token**: `0x...` (Mainnet)
+- **Multicall**: `0x...` (Mainnet)
+
+## Verification
+
+All contracts are verified on Etherscan. You can view the full source code and ABIs there as well.
+
+## Support
+
+For questions about integrating with these contracts, join our [Discord](https://discord.gg/baseline) or check the [Developer Documentation](https://docs.baseline.com). 

@@ -1,0 +1,46 @@
+{
+  "core-concepts": {
+    "title": "📖 Core Concepts",
+    "theme": { "breadcrumb": true }
+  },
+  "autonomous-liquidity-engine": {
+    "title": "Autonomous Liquidity Engine (ALE)",
+    "theme": { "breadcrumb": true }
+  },
+  "blv": {
+    "title": "BLV (Baseline Liquidity Vault)",
+    "theme": { "breadcrumb": true }
+  },
+  "liquidity-skew": {
+    "title": "Liquidity Skew (Bid/Ask Shaping)",
+    "theme": { "breadcrumb": true }
+  },
+  "inventory-ratios": {
+    "title": "Inventory Ratios & Reflexivity",
+    "theme": { "breadcrumb": true }
+  },
+  "yes-ecosystem": {
+    "title": "The Role of YES in the Ecosystem",
+    "theme": { "breadcrumb": true }
+  },
+  "advanced-mechanics": {
+    "title": "🧠 Advanced Mechanics",
+    "theme": { "breadcrumb": true }
+  },
+  "protocol-owned-liquidity": {
+    "title": "Protocol-Owned Liquidity (POL)",
+    "theme": { "breadcrumb": true }
+  },
+  "pid-control": {
+    "title": "PID Control & Spread Modulation",
+    "theme": { "breadcrumb": true }
+  },
+  "pricing-coordination": {
+    "title": "Pricing as Coordination Game",
+    "theme": { "breadcrumb": true }
+  },
+  "mev-protection": {
+    "title": "How Baseline Avoids MEV Extraction",
+    "theme": { "breadcrumb": true }
+  }
+} 

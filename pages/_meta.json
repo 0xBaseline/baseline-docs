@@ -1,30 +1,36 @@
 {
     "index": {
-        "title": "Introduction",
+        "title": "📌 What is Baseline?",
         "theme": {
             "breadcrumb": false
         }
     },
-    "btokenomics": {
-        "title": "bTokens",
+    "how-baseline-works": {
+        "title": "🔁 How Baseline Works",
+        "theme": {
+            "breadcrumb": true
+        }
+    },
+    "what-can-i-do": {
+        "title": "🧭 What Can I Do With Baseline?",
+        "theme": {
+            "breadcrumb": true
+        }
+    },
+    "creator": {
+        "title": "Launch",
         "theme": {
             "breadcrumb": false
         }
     },
-    "utility": {
-        "title": "bToken Economics",
+    "trader": {
+        "title": "Trade",
         "theme": {
             "breadcrumb": false
         }
     },
-    "bmm": {
-        "title": "BMM",
-        "theme": {
-            "breadcrumb": false
-        }
-    },
-    "gettingstarted": {
-        "title": "Getting Started",
+    "theory": {
+        "title": "Theory",
         "theme": {
             "breadcrumb": false
         }
