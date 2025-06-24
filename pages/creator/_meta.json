@@ -1,10 +1,6 @@
 {
-  "tutorials": {
-    "title": "🧰 Tutorials",
-    "theme": { "breadcrumb": true }
-  },
   "launch-first-btoken": {
-    "title": "Launch Your First bToken",
+    "title": "Launch a bToken",
     "theme": { "breadcrumb": true }
   },
   "custom-parameters": {
