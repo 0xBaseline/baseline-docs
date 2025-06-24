@@ -8,7 +8,7 @@
     "how-baseline-works": {
         "title": "🔁 How Baseline Works",
         "theme": {
-            "breadcrumb": true
+            "breadcrumb": false
         }
     },
     "what-can-i-do": {
