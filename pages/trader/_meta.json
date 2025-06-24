@@ -1,62 +1,18 @@
 {
-  "tutorials": {
-    "title": "🧰 Tutorials",
+  "index": {
+    "title": "Trading bTokens",
     "theme": { "breadcrumb": true }
   },
-  "connect-wallet": {
-    "title": "Connect Wallet & Start Trading",
-    "theme": { "breadcrumb": true }
+  "borrow": {
+    "title": "Borrowing against bTokens",
+    "theme": { "breadcrumb": false }
   },
-  "earn-staking-borrowing": {
-    "title": "Earn with Staking or Borrowing",
-    "theme": { "breadcrumb": true }
+  "leverage": {
+    "title": "Leveraging bTokens",
+    "theme": { "breadcrumb": false }
   },
-  "how-to": {
-    "title": "🛠️ How-To Guides",
-    "theme": { "breadcrumb": true }
-  },
-  "trade-terminal": {
-    "title": "Trade bTokens via Baseline Terminal",
-    "theme": { "breadcrumb": true }
-  },
-  "stake-unstake": {
-    "title": "Stake & Unstake bTokens",
-    "theme": { "breadcrumb": true }
-  },
-  "leverage-loops": {
-    "title": "Use Leverage & Loops",
-    "theme": { "breadcrumb": true }
-  },
-  "monitor-positions": {
-    "title": "Monitor Your Positions",
-    "theme": { "breadcrumb": true }
-  },
-  "explanations": {
-    "title": "📖 Explanations",
-    "theme": { "breadcrumb": true }
-  },
-  "how-loops-work": {
-    "title": "How Loops Work",
-    "theme": { "breadcrumb": true }
-  },
-  "leverage-risk-reward": {
-    "title": "Risk/Reward of Leverage",
-    "theme": { "breadcrumb": true }
-  },
-  "liquidity-skew": {
-    "title": "Liquidity Skew & Price Impact",
-    "theme": { "breadcrumb": true }
-  },
-  "reference": {
-    "title": "📘 Reference",
-    "theme": { "breadcrumb": true }
-  },
-  "trade-glossary": {
-    "title": "Trade UX Glossary",
-    "theme": { "breadcrumb": true }
-  },
-  "vault-abi": {
-    "title": "Vault Contract ABI",
-    "theme": { "breadcrumb": true }
+  "stake": {
+    "title": "Staking bTokens",
+    "theme": { "breadcrumb": false }
   }
 } 
