@@ -1,54 +1,6 @@
 {
-  "launch-first-btoken": {
+  "index": {
     "title": "Launch a bToken",
-    "theme": { "breadcrumb": true }
-  },
-  "custom-parameters": {
-    "title": "Create a Token with Custom Parameters",
-    "theme": { "breadcrumb": true }
-  },
-  "how-to": {
-    "title": "🛠️ How-To Guides",
-    "theme": { "breadcrumb": true }
-  },
-  "set-price-floor": {
-    "title": "Set a Price Floor (BLV)",
-    "theme": { "breadcrumb": true }
-  },
-  "fee-mechanisms": {
-    "title": "Add a Fee or Incentive Mechanism",
-    "theme": { "breadcrumb": true }
-  },
-  "stake-yes": {
-    "title": "Stake YES to Boost Your Token",
-    "theme": { "breadcrumb": true }
-  },
-  "explanations": {
-    "title": "📖 Explanations",
-    "theme": { "breadcrumb": true }
-  },
-  "what-is-btoken": {
-    "title": "What is a bToken?",
-    "theme": { "breadcrumb": true }
-  },
-  "price-floors": {
-    "title": "Why Price Floors Matter",
-    "theme": { "breadcrumb": true }
-  },
-  "staking-effects": {
-    "title": "How Staking Affects Supply/Demand",
-    "theme": { "breadcrumb": true }
-  },
-  "reference": {
-    "title": "📘 Reference",
-    "theme": { "breadcrumb": true }
-  },
-  "factory-api": {
-    "title": "Baseline Factory API",
-    "theme": { "breadcrumb": true }
-  },
-  "creator-abi": {
-    "title": "Creator Contract ABI",
     "theme": { "breadcrumb": true }
   }
 } 

@@ -1,14 +1,16 @@
 {
-  "core-concepts": {
-    "title": "📖 Core Concepts",
-    "theme": { "breadcrumb": true }
-  },
   "blv": {
     "title": "BLV",
     "theme": { "breadcrumb": true }
   },
   "bmm": {
     "title": "BMM",
+    "theme": {
+      "breadcrumb": true
+    }
+  },
+  "loans_leverage": {
+    "title": "Loans & Leverage",
     "theme": {
       "breadcrumb": true
     }

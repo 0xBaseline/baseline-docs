@@ -61,7 +61,7 @@ const config: DocsThemeConfig = {
       titleTemplate: "%s – Baseline"
     }
   },
-  sidebar: { defaultMenuCollapseLevel: 2,  // Collapses items beyond level 1
+  sidebar: { defaultMenuCollapseLevel: 1,  // Collapses items beyond level 1
    
 
   },
