@@ -1,0 +1,26 @@
+{
+  "launch": {
+    "title": "Launch bTokens ",
+    "theme": { "breadcrumb": true }
+  },
+  "trade": {
+    "title": "Trade bTokens",
+    "theme": { "breadcrumb": true }
+  },
+  "stake": {
+    "title": "Stake bTokens",
+    "theme": { "breadcrumb": true }
+  },
+  "borrow": {
+    "title": "Borrow bTokens",
+    "theme": { "breadcrumb": true }
+  },
+  "leverage": {
+    "title": "Leverage bTokens",
+    "theme": { "breadcrumb": true }
+  },
+  "monitor": {
+    "title": "Monitor bTokens",
+    "theme": { "breadcrumb": true }
+  }
+}

@@ -5,44 +5,32 @@
             "breadcrumb": false
         }
     },
-    "trader": {
-        "title": "For Traders",
-        "theme": {
-            "breadcrumb": false
-        }
-    },
-    "founders": {
-        "title": "For Founders",
-        "theme": {
-            "breadcrumb": false
-        }
-    },
     "btokenomics": {
-        "title": "bTokenomics",
+        "title": "bTokens",
         "theme": {
-            "breadcrumb": true
+            "breadcrumb": false
         }
     },
     "utility": {
-        "title": "bToken Utility",
+        "title": "bToken Economics",
         "theme": {
-            "breadcrumb": true
+            "breadcrumb": false
         }
     },
-    "launching": {
-        "title": "Launching a bToken",
+    "bmm": {
+        "title": "BMM",
+        "theme": {
+            "breadcrumb": false
+        }
+    },
+    "gettingstarted": {
+        "title": "Getting Started",
         "theme": {
             "breadcrumb": false
         }
     },
     "contracts": {
         "title": "Smart Contracts",
-        "theme": {
-            "breadcrumb": false
-        }
-    },
-    "v2": {
-        "title": "V2",
         "theme": {
             "breadcrumb": false
         }

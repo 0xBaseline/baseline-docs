@@ -3,76 +3,62 @@ import Image from "next/image";
 import { Tabs } from 'nextra/components'
 import { Cards, Card } from 'nextra/components'
 
-## BLV: The Baseline Value
+## bTokens are Better Tokens
 
-One of the most recognizable features of a Baseline Token is the bToken's **Baseline Value (BLV)**: the guaranteed minimum price of a Baseline token.
+Baseline tokens are better because they guarantee a price floor, unlock borrowing and leverage and have an 
+algorithmic market maker working behind the scenes.
 
-![blvup](/assets/blvup.png)
+(graphic)
+{/* insert graphic */}
 
-{/* content fill: why is the BLV important to users? - known maximum downside when entering a trade, used as a
-general hueristic for the amount of liquidity permanently accumulated by the system */}
+### The Role of BLV (Baseline Value) & Floor Prices
 
-The BLV is set by reserving enough liquidity in the pool to ensure the entire floating supply of the token can be bought back across the anchor and blv liquidity. Put simply, 
-the BLV is the price at which the last token could be sold if all holders exit.
+**Explaining Baseline’s Value Foundation**
 
-
-This makes the BLV a directly redeemable value on the public market, unlike the "backing" commonly found in other protocols.
-Baseline uses protocol-owned liquidity managed by smart contracts within Uniswap V4 concentrated positions to 
-guarantee a bToken's BLV. This means the BLV can never decrease when priced against the backed asset. 
+Every Baseline token has a **floor price** — a minimum price that is always backed by on-chain liquidity. 
+This floor is not arbitrary. It’s determined by a core mechanic called **Baseline Value**, or **BLV**. 
 
 
-<Callout type="warning" emoji="⚠️"> 
-  BLV price is denominated in the underlying liquidity token, called the ["reserve asset"](/resources/glossary#ra). 
-  For example, if the bToken is paired with ETH, its BLV is priced in ETH, not USD. Therefore,  
-  if ETH's price falls against USD, the bToken's BLV stays the same in ETH but drops in USD. 
-</Callout>
+The BLV acts as the **guaranteed exit price**, regardless of market conditions. The BLV is the center of Baseline’s 
+mechanics, enabling efficient liquidity provisioning and 0% interest, unliquidatable lending.
 
-The BLV of a Baseline Token doesn't just remain stable; it actually increases over time. This growth occurs because, 
-with each trade, a small liquidity surplus is accrued and added to the floor. As more bTokens are bought and sold, this 
-surplus continues to grow, permanently raising the BLV.
+#### How It Works
+Each Baseline token (bToken) starts off with a defined BLV value when it is created. This acts as the minimum 
+price that the Baseline market maker (BMM) is willing to buy every circulating token at. Every subsequent incoming 
+buy will be at this BLV or above, and same with every sell. 
 
-This mechanism ensures that the BLV is not only a guaranteed minimum price but also a price that gradually increases over 
-time. The more trading activity there is, the more liquidity accumulates, which in turn strengthens the BLV. This continuous 
-upward adjustment of the BLV provides ongoing value to bToken holders, ensuring that their tokens are backed by an 
-ever-growing reserve.
+When someone buys a Baseline token, part of their trade goes into a locked reserve that increases the token’s BLV. 
+Over time, as more people buy and trade, BLV grows — lifting the token’s **floor price**.
 
-## Why BLV Matters to Traders
-From a trader's perspective, the increasing BLV is crucial for several reasons:
+BLV ensures that there is always buy-side liquidity available. Anyone can sell their tokens into the BLV at any time, 
+even if there are no active buyers on the other side. This mechanism offers a level of downside protection that most 
+tokens lack.
 
-- **Known Maximum Downside:** When entering a trade, the BLV gives traders a clear understanding of the maximum potential loss. 
-Since the BLV represents the guaranteed minimum price, traders know that the token's value won't fall below this level when 
-priced against the reserve asset, providing a built-in safety net.
-- **Gradual Value Appreciation:** As the BLV rises over time due to trading activity, the downside risk continues to decrease. 
-This means that holding onto bTokens not only carries less risk but also becomes more valuable as the BLV increases, making 
-it a more attractive long-term investment.
-- **Market Confidence:** The upward trajectory of the BLV fosters confidence in the market. Traders can be more assured that their 
-investments are backed by a growing reserve, reducing the fear of sudden, drastic losses and encouraging more participation in the market.
-
-TLDR: the rising BLV provides traders with a known safety net, the potential for value appreciation, and greater confidence 
-in the stability and reliability of their investment.
-
-## Why BLV Matters to Project Founders
-
-For project founders launching a token, the increasing Baseline BLV offers several significant advantages:
-
-- **Lower Risk of Market Manipulation:** With a guaranteed minimum price and increasing BLV, the token is less susceptible to market manipulation, such as 
-pump-and-dump schemes. The value generated by trading activity stays within the system, and liquidity is guaranteed. This stability helps protect the project’s reputation and ensures that the token remains a reliable asset for traders and investors.
-- **Investor Confidence:** A rising BLV builds trust among potential investors, as it shows that the token is backed by a growing 
-reserve and has a built-in mechanism to prevent its value from dropping below a certain point. This can make the token more attractive 
-to both retail and institutional investors, leading to greater initial adoption and ongoing participation.
-- **Long-Term Sustainability:** The BLV ensures that the token’s value is supported by real liquidity, reducing the risk of severe market 
-downturns. This stability helps foster a long-term vision for the project, allowing founders to focus on growth and innovation without the 
-constant pressure of market volatility.
-- **Differentiation from Other Projects:** In a crowded market, launching a token with a BLV sets the project apart from others that may rely on 
-less transparent or less secure methods of backing their tokens. The BLV offers a unique selling point, making it easier to attract attention and 
-differentiate the project from competitors.
-- **Aligned Incentives:** As the BLV increases with trading activity, it aligns the interests of the project founders and the token holders. Both parties 
-benefit from the token’s success, as increased trading leads to a stronger BLV and, in turn, a more valuable and stable token. This alignment can create 
-a more engaged and loyal community around the project.
+#### Why It Matters
+- **Downside Protection:** BLV guarantees a sell price, reducing the risk of catastrophic losses and making tokens safer to hold.
+- **Market Integrity:** Because BLV is on-chain and cannot be manipulated or removed, it eliminates common risks like 
+liquidity rug-pulls.
+- **Aligned Incentives:** As more users interact with the token — through trading, staking, or looping — the BLV 
+increases, reinforcing a shared incentive to grow the token’s value.
+- **Unlocking DeFi Utility:** BLV is not just a floor — it’s collateral. Token holders can borrow against their BLV 
+at 0% interest, creating liquidity without selling or risking liquidation. 
 
 
-TLDR: Baseline's increasing BLV provides project founders with a powerful tool to attract investors, ensure long-term sustainability, differentiate their token in 
-the market, align incentives with their community, and protect against market manipulation.
+### Key Takeaway
+BLV transforms how token value is created and preserved. Rather than relying on volatile market 
+forces or centralized liquidity providers, Baseline gives every token an autonomous and transparent system 
+for building value over time — from the bottom up.
 
 
-{/* add unruggable liquidity here? prevents scams, rugpulls, and other weird shit */}
+| Initial Trade | More Buys + Loops | Long-Term Growth |
+| -------- | -------- | -------- |
+| -------> | -------> | -------> |
+| $100 Buy | +$200 Buy | +$500 Volume |
+| $20 to Floor | 40 to Floor | $100 to Floor |
+| BLV: $0.01/token | BLV: $0.03/token | BLV: $0.10/token |
+
+- Each trade allocates a portion to BLV.
+- Floor price steadily rises as more volume enters.
+- BLV acts as a value anchor that scales with demand.
+(Note: Percentages are configurable per token; this is just an example.)
+
