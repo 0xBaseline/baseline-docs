@@ -1,14 +1,10 @@
 {
-  "deployments": {
-    "title": "🔐 Deployments",
+  "index": {
+    "title": "Deployments",
     "theme": { "breadcrumb": true }
   },
   "security": {
-    "title": "🔍 Security Model",
-    "theme": { "breadcrumb": true }
-  },
-  "abis": {
-    "title": "🧾 Contract ABIs",
+    "title": "Audits",
     "theme": { "breadcrumb": true }
   }
 } 
