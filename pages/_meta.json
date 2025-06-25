@@ -1,48 +1,42 @@
 {
     "index": {
-        "title": "Introduction",
+        "title": "📌 What is Baseline?",
+        "theme": {
+            "breadcrumb": false
+        }
+    },
+    "how-baseline-works": {
+        "title": "⚙️ How Baseline Works",
+        "theme": {
+            "breadcrumb": false
+        }
+    },
+    "what-can-i-do": {
+        "title": "👤 What Can I Do?",
+        "theme": {
+            "breadcrumb": true
+        }
+    },
+    "creator": {
+        "title": "Launch",
         "theme": {
             "breadcrumb": false
         }
     },
     "trader": {
-        "title": "For Traders",
+        "title": "Invest",
         "theme": {
             "breadcrumb": false
         }
     },
-    "founders": {
-        "title": "For Founders",
-        "theme": {
-            "breadcrumb": false
-        }
-    },
-    "btokenomics": {
-        "title": "bTokenomics",
-        "theme": {
-            "breadcrumb": true
-        }
-    },
-    "utility": {
-        "title": "bToken Utility",
-        "theme": {
-            "breadcrumb": true
-        }
-    },
-    "launching": {
-        "title": "Launching a bToken",
+    "theory": {
+        "title": "Theory",
         "theme": {
             "breadcrumb": false
         }
     },
     "contracts": {
         "title": "Smart Contracts",
-        "theme": {
-            "breadcrumb": false
-        }
-    },
-    "v2": {
-        "title": "V2",
         "theme": {
             "breadcrumb": false
         }

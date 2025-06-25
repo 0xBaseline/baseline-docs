@@ -1,0 +1,18 @@
+{
+  "index": {
+    "title": "Trade bTokens",
+    "theme": { "breadcrumb": true }
+  },
+  "borrow": {
+    "title": "Borrow against bTokens",
+    "theme": { "breadcrumb": false }
+  },
+  "leverage": {
+    "title": "Leverage bTokens",
+    "theme": { "breadcrumb": false }
+  },
+  "stake": {
+    "title": "Stake bTokens",
+    "theme": { "breadcrumb": false }
+  }
+} 

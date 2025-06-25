@@ -1,0 +1,20 @@
+import { Callout } from "nextra/components";
+
+# Fees
+bTokens generate trading fees with a dynamic fee mechanic that adjusts to market conditions. In addition, the bToken contract comes with a flexible fee routing, 
+allowing you to direct fees to multiple destinations:
+- Stakers - automatically distributed by Baseline to token stakers
+- Creator
+- Baseline Protocol
+- Custom - roll your own contract and create custom reward mechanisms
+
+By default, fees are collected in reserve asset (e.g. ETH) instead of bToken.
+
+## Example
+A typical fee structure might look like:
+- 50% to stakers
+- 0% to custom address
+- 25% to creator's wallet
+- 25% to Baseline protocol
+
+

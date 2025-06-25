@@ -1,10 +1,10 @@
 {
-  "links": {
-    "title": "Links",
+  "index": {
+    "title": "Deployments",
     "theme": { "breadcrumb": true }
   },
-  "tos": {
-    "title": "Terms of Service",
+  "security": {
+    "title": "Audits",
     "theme": { "breadcrumb": true }
   }
-}
+} 

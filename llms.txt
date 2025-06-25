@@ -1,0 +1,187 @@
+# Baseline Protocol Documentation
+
+## Project Overview
+
+Baseline is a new standard for launching and trading tokens — one where liquidity works for the token, not against it. Most tokens today launch into markets that drain value: inefficient liquidity, predatory market makers, and misaligned incentives. Baseline flips that model by building tokens that generate and retain value.
+
+By replacing extractive practices with an autonomous liquidity engine, Baseline protects long-term value, rewards participation, and aligns creators, traders, and holders. With a guaranteed price floor (BLV), native DeFi mechanics like borrowing and looping, and liquidity that scales with demand, Baseline builds tokens designed to grow.
+
+## Key Features
+
+### Better Tokens Built for Growth
+Baseline is more than a set of DeFi features — it's token infrastructure engineered for sustainable, compounding growth. By combining a guaranteed price floor (BLV) with capital-efficient borrowing and non-liquidatable leverage, Baseline automatically scales liquidity to support higher prices, deeper markets, and fairer participation. This enables higher volumes and better price action throughout a token's entire lifetime.
+
+### Aligned Incentives by Design
+Everyone in the ecosystem interacts with the same mechanics — and benefits from doing so:
+- Traders amplify exposure and enjoy deep liquidity and visible price floors
+- Holders benefit as floor price rises through trading activity
+- Creators earn sustainable fees from token volume
+There are no backdoors, no insider privileges, and no zero-sum dynamics. Everyone's incentives point in the same direction: long-term strength.
+
+### Efficient Capital Formation
+Everything in Baseline flows from one core idea: Getting more value out of every dollar. This unlocks value to both sides of the market:
+- For projects: more volume, stronger price charts, greater ecosystem wealth, less overhead, and lower counterparty risk
+- For investors: more upside, less risk, and a system that doesn't rely on insiders to move
+
+### Intelligent Market Making
+Baseline removes the need for human market makers. Instead, the system itself handles price discovery and liquidity adjustment through deterministic, on-chain logic. This means no custom deals, no private spreads, and no silent value extraction. Baseline Market Maker is the liquidity engine working for holders, and manipulated by none.
+
+## Core Concepts
+
+### Baseline Value (BLV)
+Every Baseline token has a floor price — a minimum price that is always backed by on-chain liquidity. This floor is not arbitrary. It's determined by a core mechanic called Baseline Value, or BLV. The BLV acts as the guaranteed exit price, regardless of market conditions. The BLV is the center of Baseline's mechanics, enabling efficient liquidity provisioning and 0% interest, unliquidatable lending.
+
+#### Why BLV Matters:
+- Downside Protection: BLV guarantees a sell price, reducing the risk of catastrophic losses and making tokens safer to hold
+- Market Integrity: Because BLV is on-chain and cannot be manipulated or removed, it eliminates common risks like liquidity rug-pulls
+- Aligned Incentives: As more users interact with the token — through trading, staking, or looping — the BLV increases, reinforcing a shared incentive to grow the token's value
+- Unlocking DeFi Utility: BLV is not just a floor — it's collateral. Token holders can borrow against their BLV at 0% interest, creating liquidity without selling or risking liquidation
+
+#### How BLV Works:
+Each Baseline token (bToken) starts off with a defined BLV value when it is created. This acts as the minimum price that the Baseline market maker (BMM) is willing to buy every circulating token at. Every subsequent incoming buy will be at this BLV or above, and same with every sell. When someone buys a Baseline token, part of their trade goes into a locked reserve that increases the token's BLV. Over time, as more people buy and trade, BLV grows — lifting the token's floor price.
+
+### Baseline Market Maker (BMM)
+BMM is an on-chain market maker built on Uniswap V4 as a general purpose liquidity solution for token creators. By accounting for tokenomics, Baseline provides liquidity for the full FDV of its tokens, guaranteeing liquidity for the entire supply at all times.
+
+#### BMM Features:
+- Autonomous & onchain: Operates entirely on-chain using configurable rules, no human intervention needed
+- Volatility-Aware: Adjusts bid/ask depth in real time using trend-based volatility signals
+- BLV-Integrated: Strengthens the token's price floor with every trade via Baseline Value (BLV)
+- Capital-Efficient: Liquidity allocation responds to size, price, and system solvency—making more out of every dollar in the pool
+- Direct Pool Interventions: Executes trades to counter extreme volatility using real-time VWAP-based price signals
+
+#### How BMM Works:
+BMM deploys liquidity across three distinct ranges:
+- Floor Liquidity: BLV is a buy wall for the last bToken holder to exit their position at the Baseline Value (BLV), located at the top of the Floor tick
+- Anchor Liquidity: A tightly concentrated range around the current price, ensuring deep liquidity and strong price support — especially during volatility or sell-offs
+- Discovery Liquidity: A wider range that facilitates upward or downward price exploration, enabling trend formation and smoother price discovery
+
+BMM uses real-time trading data and volatility trends to rebalance liquidity across the three ranges: Storage (long-term price floor), Bid (buy-side support), and Ask (sell-side supply). Liquidity is dynamically adjusted based on volatility regimes, cost basis, and token flows.
+
+### Loans: Access Capital Without Selling
+Holders of Baseline tokens can borrow against their BLV — the guaranteed floor value — with 0% interest. This means they can access liquidity without selling their tokens, without risking liquidation, and without giving up future upside. Borrowing is non-custodial and on-demand. The loan amount is determined by how much floor value the user has (based on their token holdings and the BLV). Repayment is optional.
+
+### Leverage without Liquidation Risk
+Users can choose to leverage — borrowing and using that capital to buy more of the token. This increases their token holdings, creating a form of self-reinforcing leverage. Unlike traditional leveraged products, loops in Baseline do not carry forced liquidation risk. Users are only limited by system parameters and the available floor liquidity.
+
+## User Guides
+
+### For Creators: Launch a Token with Superpowers
+As a founder, creator, or even an AI agent, Baseline Factory lets you deploy a Baseline-powered token permissionlessly.
+
+Features:
+- Supports all EVM chains
+- Accommodates any tokenomics requirements, including fair launches, presales, vesting terms and airdrops
+- Every bToken comes with a guaranteed price floor and dynamic liquidity managed by an algorithmic market maker
+- Holders get access to interest-free loans, leverage without liquidation, and staking
+
+Who this is for:
+- Creators who want to avoid down only price chart
+- Founders looking for better tokenomics, supply emissions and value capture
+- Projects building internet-native products (Internet Capital Markets)
+- Launchpads looking to differentiate in a saturated market
+
+Note: Baseline Factory is currently in active development.
+
+### For Traders: Trade bTokens
+Baseline tokens include more than just a market price — they have a built-in floor (BLV), dynamic liquidity structure, and trading volume that impacts rewards and market behavior.
+
+What makes bTokens different:
+- Visible floor price: Every bToken has a public, on-chain minimum price. You can always exit at (or above) this price, even if no one else is buying
+- Access to capital: You can borrow your bToken's BLV value at 0% interest, accessing capital without having to sell your position
+- Leverage: You can use borrowed funds to buy more bTokens, amplifying your gains
+- Fees grow the system: The trading fee of each trade goes toward the stakers
+
+Key Metrics to Watch:
+- Market Price: The current trading price based on protocol liquidity
+- BLV (Baseline Value): The guaranteed price floor, backed by reserves
+- Premium: The % difference between market price and BLV
+- Volume: Drives staking rewards and BLV growth. More volume = more system value
+
+How to Trade:
+1. Connect Your Wallet at app.baseline.markets
+2. Browse Available Tokens
+3. Make Your First Trade by selecting a token, choosing "Buy", entering the amount, and confirming
+
+After trading, you can:
+- Access capital by borrowing
+- Amplify gains (and losses) through leverage
+- Earn trading fees by staking
+
+### Borrowing Against bTokens
+Baseline allows you to borrow against your bTokens at 0% interest, using the protocol's floor value (BLV) as collateral. This gives you access to capital without needing to sell your position or risk liquidation.
+
+Benefits:
+- Access capital without selling
+- No liquidation risk
+- Maintain exposure to future upside
+- Earn trading fees from protocol activity
+- Get leveraged exposure by re-buying with borrowed funds
+
+How It Works:
+- Each bToken has a BLV (floor price), backed by the reserves
+- You can borrow the floor value of your bToken directly from the protocol
+- Loans are non-liquidatable and interest-free
+- You can repay anytime to restore full exposure
+
+### Leveraging bTokens
+You can amplify token exposure, or leverage, by re-buying with borrowed funds.
+
+How It Works:
+1. Borrow your bToken's BLV
+2. Use the borrowed funds to buy more bTokens
+3. Repeat N number of times to compound your position
+4. Maximum leverage is limited by the token's premium, defined as the difference between the token's market price and the BLV
+
+Key Differences from Borrowing:
+- Borrowing gives you capital without selling
+- Leverage uses that capital to re-enter the market — amplifying gains (and risks) when price moves
+- Users who borrow receive funds in their wallet whereas users who leverage use all available borrowed funds to increase bToken exposure
+
+Risks to Consider:
+- Price Exposure: Larger positions mean bigger gains and losses when price moves
+- Slippage and Gas Costs: Each buy-borrow loop incurs slippage and gas costs
+- Market Timing: Poor timing (buying high, selling low) can amplify losses
+
+## Smart Contract Deployments
+
+### Baseline Mercury contracts
+Note: Baseline Mercury is currently in development.
+
+### Baseline Legacy contracts (Base mainnet)
+- YES (v3): 0x1B68244B100A6713ca7F540697b1bE12148a8bf9
+- MARKET_MAKING (v3): 0xe9B2fa00e24310f712aFFD9C00EC8c2C42c0c34F
+- CREDIT_FACILITY (v3): 0xc9329Cb681d1338219B9e21E5E99754853436C8D
+- LOOP_FACILITY (v3): 0x7bA0Fc5542Fad1931A5b765c220dB2ECF3E09a4F
+- LOOPS (v3): 0x6B129C94eE04Ff4d989B0a0B2784Fc8bcFe777eF
+- CREDT (v3): 0xa35E4Ac9565Fb006812755C30c369314be3511D9
+- RESERVE (v3): 0x4200000000000000000000000000000000000006
+- UniswapV3Pool (v3): 0xdFCFDf5dd0569d591E0Bce28B5dA3b13dE09E3CB
+
+### Baseline Legacy contracts (Blast mainnet)
+- YES (v2): 0x1a49351bdB4BE48C0009b661765D01ed58E8C2d8
+- Afterburner (v2): 0xFE49B8F38130d3B3fb0A2AD0697D81Df4f18dd84
+- ThrusterPool (v2): 0xD0F1e1243c9FfB11100eFd25f1C9Ef7Ca956dC13
+- YES (v1): 0x20fE91f17ec9080E3caC2d688b4EcB48C5aC3a9C
+- Baseline (v1): 0x14eB8d9b6e19842B5930030B18c50B0391561f27
+- BaselineFactory (v1): 0x0C056B34F2AFa70Ee1351e3659DFBD2097765275
+- PreAsset (v1): 0x60BF64CCAa52da304d456892dC0A8f1C5B159f61
+- YEV (v1): 0xC7b96D7f622e0a3A24cf333e84C29e36955f25BB
+- Yescension (v1): 0xba1578e20578e0ad57e0430f241c9fcd76acd026
+- ThrusterPool (v1): 0x1d16788b97eDB7d9a6aE66D5C5C16469037Faa00
+
+### Operational Contracts (Blast mainnet)
+- Team multisig: 0x8044f710c58B6eA6a178CC540f9F1Cd758F7d1B2
+- Community multisig: 0xb4b9106fe909E9354A19842a31ffB611D48A92d0
+- JimmyStimmy: 0x9092a444a92e38F28f28dE49dA3FF6C760d9E568
+- JimmyStimmy: 0x92c567E67C42fC9c2Df46D4fa944BD62C166d661
+
+## Website and Applications
+- Main application: app.baseline.markets
+- Data analytics: data.baseline.markets
+- Documentation: docs for comprehensive guides and API references
+
+## Key Takeaways
+Baseline's core innovation is creating a system where value recirculates, incentives align, and everyone plays by the same rules — autonomously. To Baseline, sustainable tokenomics isn't about locking tokens or writing clever emissions schedules. It's about building a system where value recirculates, incentives align, and everyone plays by the same rules.
+
+Baseline turns token liquidity into a productive asset through borrowing (which allows users to unlock liquidity without selling, preserving their position and exposure) and leveraging (which lets users compound their exposure by using borrowed liquidity to buy more — increasing demand and floor value). Together, these mechanics create a positive-sum system where tokens grow in utility and value, and users have more ways to participate without relying on external DeFi tools.

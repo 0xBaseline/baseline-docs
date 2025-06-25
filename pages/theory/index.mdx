@@ -1,0 +1,40 @@
+import { Callout } from "nextra/components";
+import Image from "next/image";
+import { Tabs } from 'nextra/components'
+import { Cards, Card } from 'nextra/components'
+
+
+# Baseline Value (BLV)
+
+Every Baseline token has a **floor price** — a minimum price that is always backed by on-chain liquidity. 
+This floor is not arbitrary. It’s determined by a core mechanic called **Baseline Value**, or **BLV**. 
+
+The BLV acts as the **guaranteed exit price**, regardless of market conditions. The BLV is the center of Baseline’s 
+mechanics, enabling efficient liquidity provisioning and 0% interest, unliquidatable lending.
+
+## Why It Matters
+BLV transforms how token value is created and preserved. Rather than relying on volatile market 
+forces or centralized liquidity providers, Baseline gives every token an autonomous and transparent system 
+for building value over time — from the bottom up.
+
+- **Downside Protection:** BLV guarantees a sell price, reducing the risk of catastrophic losses and making tokens safer to hold.
+- **Market Integrity:** Because BLV is on-chain and cannot be manipulated or removed, it eliminates common risks like 
+liquidity rug-pulls.
+- **Aligned Incentives:** As more users interact with the token — through trading, staking, or looping — the BLV 
+increases, reinforcing a shared incentive to grow the token’s value.
+- **Unlocking DeFi Utility:** BLV is not just a floor — it’s collateral. Token holders can borrow against their BLV 
+at 0% interest, creating liquidity without selling or risking liquidation. 
+
+
+
+## How It Works
+Each Baseline token (bToken) starts off with a defined BLV value when it is created. This acts as the minimum 
+price that the Baseline market maker (BMM) is willing to buy every circulating token at. Every subsequent incoming 
+buy will be at this BLV or above, and same with every sell. 
+
+When someone buys a Baseline token, part of their trade goes into a locked reserve that increases the token’s BLV. 
+Over time, as more people buy and trade, BLV grows — lifting the token’s **floor price**.
+
+BLV ensures that there is always buy-side liquidity available. Anyone can sell their tokens into the BLV at any time, 
+even if there are no active buyers on the other side. This mechanism offers a level of downside protection that most 
+tokens lack.

@@ -1,0 +1,24 @@
+import { Callout } from "nextra/components";
+
+# Leverage without Liquidation Risk
+
+Users can choose to leverage — borrowing and using that capital to buy more of the token.
+This increases their token holders, creating a form of **self-reinforcing leverage**.
+
+Unlike traditional leveraged products, loops in Baseline do not carry forced liquidation risk. Users are 
+only limited by system parameters and the available floor liquidity.
+
+## Example
+To illustrate impact of leverage, suppose Jim uses 1 ETH to buy YES
+- Buying spot: Jim buys 737 YES for 1 ETH (at ~0.001357 eth per token)
+- Leverage borrow: Jim buys 737 YES and then proceeds to repeatedly borrow and buy more YES with it. Because YES trades at low premiums, 1 ETH translates to 6,780 YES. Notice that instead of 737 YES, 
+the user now holds 9.2x more YES than if they simply bought.
+
+<Callout type="info" emoji="💡">
+**Key Takeaway:** Baseline turns token liquidity into a productive asset.
+- **Borrowing** allows users to unlock liquidity without selling, preserving their position and exposure.
+- **Leveraging** lets users compound their exposure by using borrowed liquidity to buy more — increasing demand and floor value.
+
+Together, these mechanics create a positive-sum system where tokens grow in utility and value, and users have 
+more ways to participate without relying on external DeFi tools.
+</Callout>

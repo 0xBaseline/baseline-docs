@@ -1,0 +1,55 @@
+import { Callout } from "nextra/components";
+
+# Leverage bTokens
+
+Baseline allows you to borrow against your bTokens at 0% interest, using the protocol's floor value 
+(BLV) as collateral. You can amplify token exposure, or leverage, by re-buying with borrowed funds.
+
+## How It Works
+1. Borrow your bToken's BLV
+2. Use the borrowed funds to buy more bTokens
+3. Repeat N number of times to compound your position
+4. Maximum leverage is limited by the token's premium, defined as the difference between the token's market price and the BLV.
+
+## Key Differences from Borrowing
+- Borrowing gives you capital without selling.
+- Leverage uses that capital to re-enter the market — amplifying gains (and risks) when price moves.
+- Users who borrow receive funds in their wallet whereas users who leverage use all available borrowed funds to increase bToken exposure.
+
+## Risks to Consider
+- **Price Exposure**: Larger positions mean bigger gains and losses when price moves
+- **Slippage and Gas Costs**: Each buy-borrow loop incurs slippage and gas costs
+- **Market Timing**: Poor timing (buying high, selling low) can amplify losses
+
+## How to Leverage
+### Step 1: Connect Your Wallet
+1. Navigate to [app.baseline.markets](https://app.baseline.markets)
+2. Click "Connect Wallet" in the top right
+3. Choose your preferred wallet (e.g. MetaMask, Rabby, etc.)
+4. Approve the connection
+
+### Step 2: Open your first position
+1. Navigate to a token page, and click "Loop"
+2. Select amount of reserve asset you want to spend
+3. You'll see your position change:
+   - **Position Value**: Total value of bToken minus debt
+   - **Collateral**: Your bTokens used as collateral
+   - **Debt**: Amount borrowed against your position
+   - **Leverage**: Maximum leverage possible based on token premium
+4. Click "Loop" to execute the transaction
+5. Your position will be listed in the "My Loops" section of your portfolio
+
+<Callout type="info" emoji="💡">
+  **Note:** Future versions of Baseline app will allow users to configure their leverage multiplier.
+</Callout>
+
+
+## Close your Position
+1. Go to "My Loops"
+2. Select the position you want to close
+3. Choose "Close Position" and confirm the transaction
+4. Receive the reserves in your wallet
+
+<Callout type="warning" emoji="⚠️">
+  Leverage trading amplifies both gains and losses. Only trade with funds you can afford to lose and understand the risks involved.
+</Callout>
