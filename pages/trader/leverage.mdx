@@ -1,150 +1,55 @@
-## Leveraging with Loops
+import { Callout } from "nextra/components";
 
+# Leverage bTokens
 
-### Amplify Exposure by Re-Buying with Borrowed Funds
+Baseline allows you to borrow against your bTokens at 0% interest, using the protocol's floor value 
+(BLV) as collateral. You can amplify token exposure, or leverage, by re-buying with borrowed funds.
 
-Looping lets you borrow against your bToken, then use that borrowed liquidity to buy more of the same 
-token — increasing your exposure and growing your floor position.
+## How It Works
+1. Borrow your bToken's BLV
+2. Use the borrowed funds to buy more bTokens
+3. Repeat N number of times to compound your position
+4. Maximum leverage is limited by the token's premium, defined as the difference between the token's market price and the BLV.
 
-It’s a way to go leveraged long without liquidation risk.
+## Key Differences from Borrowing
+- Borrowing gives you capital without selling.
+- Leverage uses that capital to re-enter the market — amplifying gains (and risks) when price moves.
+- Users who borrow receive funds in their wallet whereas users who leverage use all available borrowed funds to increase bToken exposure.
 
-
-### How It Works
-- Borrow against your bToken’s BLV.
-- Use the borrowed funds to buy more bTokens.
-- Repeat to compound your position.
-
-Each loop adds buy pressure and increases BLV, benefiting both you and the broader holder base.
-
-
-### Key Differences from Borrowing
-- Borrowing gives you liquidity without selling.
-- Looping uses that liquidity to re-enter the market — amplifying gains (and risks).
-
-
-There’s no liquidation, but the token price still matters: looping increases exposure, so you're still 
-affected by market movement.
-
-
-
-
-
-
-
-
-
-
-# (CHATGPT) Leveraging bTokens
-
-Learn how to amplify your positions using Baseline's looping mechanism.
-
-## Leveraging with Loops
-
-### Amplify Exposure by Re-Buying with Borrowed Funds
-
-Looping lets you borrow against your bToken, then use that borrowed liquidity to buy more of the same 
-token — increasing your exposure and growing your floor position.
-
-It's a way to go leveraged long without liquidation risk.
-
-### How It Works
-- Borrow against your bToken's BLV.
-- Use the borrowed funds to buy more bTokens.
-- Repeat to compound your position.
-
-Each loop adds buy pressure and increases BLV, benefiting both you and the broader holder base.
-
-### Key Differences from Borrowing
-- Borrowing gives you liquidity without selling.
-- Looping uses that liquidity to re-enter the market — amplifying gains (and risks).
-
-There's no liquidation, but the token price still matters: looping increases exposure, so you're still 
-affected by market movement.
-
-## Understanding Looping Mechanics
-
-### The Loop Process
-
-1. **Initial Position**: You hold bTokens with a certain BLV value
-2. **Borrow**: Use your bTokens as collateral to borrow against their BLV
-3. **Reinvest**: Use borrowed funds to buy more of the same bToken
-4. **Repeat**: Continue the process to compound your position
-
-### Benefits of Looping
-
-- **Amplified Gains**: Increase your exposure to token price movements
-- **No Liquidation Risk**: Unlike traditional leverage, there's no forced selling
-- **BLV Growth**: Each loop contributes to the token's price floor
-- **Community Benefit**: Looping creates positive price pressure for all holders
-
-### Risks to Consider
-
-- **Increased Exposure**: Larger positions mean bigger gains and losses
+## Risks to Consider
+- **Price Exposure**: Larger positions mean bigger gains and losses when price moves
 - **Gas Costs**: Each loop requires multiple transactions
-- **Market Timing**: Poor timing can amplify losses
-- **Complexity**: Requires understanding of the mechanics
+- **Market Timing**: Poor timing (buying high, selling low) can amplify losses
 
-## Getting Started with Looping
+## How to Leverage
+### Step 1: Connect Your Wallet
+1. Click "Connect Wallet" in the top right corner
+2. Select your preferred wallet (MetaMask, WalletConnect, etc.)
+3. Ensure you're on the correct network (Base, Blast, etc.)
+4. Have sufficient ETH for gas fees and initial purchase
 
-### Prerequisites
+### Step 2: Open your first position
+1. Navigate to a token page, and click "Loop"
+2. Select amount of reserve asset you want to spend
+3. You'll see your position change:
+   - **Position Value**: Total value of bToken minus debt
+   - **Collateral**: Your bTokens used as collateral
+   - **Debt**: Amount borrowed against your position
+   - **Leverage**: Maximum leverage possible based on token premium
+4. Click "Loop" to execute the transaction
+5. Your position will be listed in the "My Loops" section of your portfolio
 
-- Hold bTokens with staking enabled
-- Understand the risks involved
-- Have ETH for gas fees
+<Callout type="info" emoji="💡">
+  **Note:** Future versions of Baseline app will allow users to configure their leverage multiplier.
+</Callout>
 
-### Step-by-Step Process
 
-1. **Stake Your Tokens**: First, stake your bTokens to earn rewards
-2. **Check Borrowing Capacity**: Verify how much you can borrow against your stake
-3. **Execute Loop**: Borrow funds and immediately buy more tokens
-4. **Monitor Position**: Track your amplified position and manage risk
+## Close your Position
+1. Go to "My Loops"
+2. Select the position you want to close
+3. Choose "Close Position" and confirm the transaction
+4. Receive the reserves in your wallet
 
-### Best Practices
-
-1. **Start Small**: Begin with small loops to understand the mechanics
-2. **Monitor Closely**: Keep track of your position size and market conditions
-3. **Have Exit Strategy**: Plan how you'll unwind positions if needed
-4. **Consider Gas Costs**: Factor in transaction fees when calculating returns
-
-## Advanced Looping Strategies
-
-### Compound Looping
-- Reinvest borrowed funds multiple times
-- Maximize exposure while managing risk
-- Requires careful position sizing
-
-### Partial Looping
-- Loop only a portion of your position
-- Maintain some unleveraged exposure
-- Balance risk and reward
-
-### Dynamic Looping
-- Adjust loop size based on market conditions
-- Increase loops during bullish periods
-- Reduce exposure during uncertainty
-
-## Risk Management
-
-### Position Sizing
-- Never loop more than you can afford to lose
-- Consider the maximum downside scenario
-- Maintain adequate reserves for gas fees
-
-### Market Monitoring
-- Watch for significant price movements
-- Be prepared to adjust positions quickly
-- Understand the relationship between price and BLV
-
-### Exit Strategies
-- Plan how to unwind positions
-- Consider partial exits to lock in gains
-- Have emergency procedures for market stress
-
-## Next Steps
-
-After learning about leverage and loops:
-- Practice with small positions
-- Learn about position monitoring
-- Explore advanced strategies
-
-Ready to monitor your positions? Learn about [position monitoring](/trader/monitor-positions). 
+<Callout type="warning" emoji="⚠️">
+  Leverage trading amplifies both gains and losses. Only trade with funds you can afford to lose and understand the risks involved.
+</Callout>

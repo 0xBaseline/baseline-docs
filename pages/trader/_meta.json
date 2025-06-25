@@ -1,18 +1,18 @@
 {
   "index": {
-    "title": "Trading bTokens",
+    "title": "Trade bTokens",
     "theme": { "breadcrumb": true }
   },
   "borrow": {
-    "title": "Borrowing against bTokens",
+    "title": "Borrow against bTokens",
     "theme": { "breadcrumb": false }
   },
   "leverage": {
-    "title": "Leveraging bTokens",
+    "title": "Leverage bTokens",
     "theme": { "breadcrumb": false }
   },
   "stake": {
-    "title": "Staking bTokens",
+    "title": "Stake bTokens",
     "theme": { "breadcrumb": false }
   }
 } 

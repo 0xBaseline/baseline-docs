@@ -1,6 +1,10 @@
 {
   "index": {
-    "title": "Launch a bToken",
-    "theme": { "breadcrumb": true }
+    "title": "Launching a bToken",
+    "theme": { "breadcrumb": false }
+  },
+  "fees": {
+    "title": "Fees",
+    "theme": { "breadcrumb": false }
   }
 } 

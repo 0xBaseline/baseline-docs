@@ -12,7 +12,7 @@
         }
     },
     "what-can-i-do": {
-        "title": "🤓 What Can I Do?",
+        "title": "👤 What Can I Do?",
         "theme": {
             "breadcrumb": true
         }
@@ -24,7 +24,7 @@
         }
     },
     "trader": {
-        "title": "Trade",
+        "title": "Invest",
         "theme": {
             "breadcrumb": false
         }

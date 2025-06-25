@@ -2,7 +2,7 @@ import { Callout } from "nextra/components";
 
 # Leverage without Liquidation Risk
 
-Users can choose to “**loop**” — borrowing again and using that loan to buy more of the same token. 
+Users can choose to "loop" — borrowing again and using that loan to buy more of the same token. 
 This increases their holdings, creating a form of **self-reinforcing leverage**.
 
 Each loop adds more volume, which grows the BLV further. This dynamic creates a flywheel effect:
@@ -11,12 +11,11 @@ Each loop adds more volume, which grows the BLV further. This dynamic creates a 
 Unlike traditional leveraged products, loops in Baseline do not carry forced liquidation risk. Users are 
 only limited by system parameters and the available floor liquidity.
 
-<Callout type="info" emoji="" >
-**Example:** 
-Jim has 1 ETH and decides to get exposure to YES. At current prices (0.001357 per token), 
-Jim can buy 737 YES. What if Jim decided to loop? Using the Loop UI, 1 ETH translates to 6,780 YES. Notice that instead of 737 YES, 
+## Example
+To illustrate impact of leverage, suppose Jim uses 1 ETH to buy YES
+- Buying spot: Jim buys 737 YES for 1 ETH (at ~0.001357 eth per token)
+- Leverage borrow: Jim buys 737 YES and then proceeds to repeatedly borrow and buy more YES with it. Because YES trades at low premiums, 1 ETH translates to 6,780 YES. Notice that instead of 737 YES, 
 the user now holds 9.2x more YES than if they simply bought.
-</Callout>
 
 
 <Callout type="info" emoji="💡">
