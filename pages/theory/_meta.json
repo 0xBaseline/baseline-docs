@@ -1,18 +1,24 @@
 {
-  "blv": {
+  "index": {
     "title": "BLV",
-    "theme": { "breadcrumb": true }
+    "theme": { "breadcrumb": false }
   },
   "bmm": {
     "title": "BMM",
     "theme": {
-      "breadcrumb": true
+      "breadcrumb": false
     }
   },
-  "loans_leverage": {
-    "title": "Loans & Leverage",
+  "loans": {
+    "title": "Loans",
     "theme": {
-      "breadcrumb": true
+      "breadcrumb": false
+    }
+  },
+  "leverage": {
+    "title": "Leverage",
+    "theme": {
+      "breadcrumb": false
     }
   }
 } 
