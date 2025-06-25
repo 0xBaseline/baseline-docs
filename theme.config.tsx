@@ -28,11 +28,11 @@ const config: DocsThemeConfig = {
     <>
       <meta name="msapplication-TileColor" content="#000" />
       <meta httpEquiv="Content-Language" content="en" />
-      <meta name="description" content="Baseline: Docs" />
+      <meta name="description" content="Intelligent liquidity to fuel your growth" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@baselinemarkets" />
       <meta property="og:title" content="Baseline: Docs" />
-      <meta property="og:description" content="Baseline: Docs" />
+      <meta property="og:description" content="Intelligent liquidity to fuel your growth" />
       <meta name="apple-mobile-web-app-title" content="Baseline Docs" />
     </>
   ),
