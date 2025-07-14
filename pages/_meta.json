@@ -14,7 +14,7 @@
     "what-can-i-do": {
         "title": "👤 What Can I Do?",
         "theme": {
-            "breadcrumb": true
+            "breadcrumb": false
         }
     },
     "creator": {
