@@ -16,7 +16,7 @@ const config: DocsThemeConfig = {
   footer: {
     text: 'Baseline docs',
   },
-  // primaryHue: 89,
+  primaryHue: 89,
   nextThemes: {
     defaultTheme: 'dark',
     storageKey: 'theme'

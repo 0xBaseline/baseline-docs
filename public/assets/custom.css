@@ -1,5 +1,66 @@
 /* custom.css */
 
+/* Radix UI Lime Color Palette */
+:root {
+  --lime1: #fcfdfa;
+  --lime2: #f8faf3;
+  --lime3: #eef6d6;
+  --lime4: #e2f0bd;
+  --lime5: #d3e7a6;
+  --lime6: #c2da91;
+  --lime7: #abc978;
+  --lime8: #8db654;
+  --lime9: #bdee63;
+  --lime10: #b0e64c;
+  --lime11: #5c7c2f;
+  --lime12: #37401c;
+}
+
+/* Dark theme Radix UI Lime colors */
+.dark {
+  --lime1: #0d1912;
+  --lime2: #0f1e13;
+  --lime3: #132819;
+  --lime4: #16301d;
+  --lime5: #193921;
+  --lime6: #1d4427;
+  --lime7: #245530;
+  --lime8: #2f6e3b;
+  --lime9: #46a758;
+  --lime10: #55b467;
+  --lime11: #63c174;
+  --lime12: #e5fbeb;
+}
+
+/* Apply lime colors to key elements */
+:root {
+  --nextra-primary-hue: 89;
+  --nextra-primary-saturation: 65%;
+}
+
+/* Custom accent color using Radix UI Lime */
+.nextra-nav-container {
+  border-bottom-color: var(--lime6);
+}
+
+/* Links and interactive elements */
+a {
+  color: var(--lime11);
+}
+
+a:hover {
+  color: var(--lime10);
+}
+
+.dark a {
+  color: var(--lime11);
+}
+
+.dark a:hover {
+  color: var(--lime10);
+}
+
+/* Sidebar styling */
 .sidebar-group {
   display: none;
 }
